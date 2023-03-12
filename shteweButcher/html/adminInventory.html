@@ -25,7 +25,7 @@
       <i class='bx bx-group profiles '>מידע על העובדים</i>
     </a>
     <a href="/allorders">
-      <i>צפייה בכל ההזמנות</i>
+      <i class="orders">צפייה בכל ההזמנות</i>
     </a>
     <a href="/income">
       <i>צפייה ברווחי העסק</i>
@@ -65,7 +65,7 @@
     <!-- <button class="open-button" onclick="openForm()">Open Form</button> -->
     <input type="button" class="delete-button" value="מחיקת מוצר מסויים" onclick="openFormForDelete()">
     <input type="button" class="changeprice-button" value="עדכון מחיר מוצר" onclick="openFormForChange()">
-
+    <input type="button" class="changeprice-button" value="הוספת מוצר חדש" onclick="openFormForAdd()">
   </div>
   <div class="form-popup" id="myForm">
     <form class="form-container">
@@ -109,6 +109,19 @@
       <button type="button" class="btn cancel" onclick="closeFormForChange()">סגור</button>
     </form>
   </div>
+  <div class="form-foradd" id="productsForAdd">
+    <form class="form-container">
+      <label><b>תיאור למוצר חדש</b></label>
+      <input id="desc" type="text" placeholder="תאר מוצר" required>
+      <label><b>תכניס מחיר למוצר החדש</b></label>
+      <input id="price" type="number" placeholder="תכניס מחיר" required>
+      <label><b>תכניס כמות למוצר החדש</b></label>
+      <input id="quantity" type="number" placeholder="תכניס כמות" required>
+      <!-- type="submit" -->
+      <button type="button" class="btn" onclick="add()">הוסף</button>
+      <button type="button" class="btn cancel" onclick="closeFormForAdd()">סגור</button>
+    </form>
+  </div>
   <!-- <input type="text"> -->
   <!-- <button class="button">עדכון כמות מוצר מסויים</button> -->
   <script>
@@ -117,14 +130,19 @@
       document.getElementById("myForm").style.display = "block";
       closeFormDelete();
       closeFormForChange();
-
+      closeFormForAdd();
     }
     function openFormForDelete() {
       document.getElementById("myFormDelete").style.display = "block";
       closeFormForChange();
+      closeFormForAdd();
     }
     function openFormForChange() {
       document.getElementById("myFormForUpdate").style.display = "block";
+      closeFormForAdd();
+    }
+    function openFormForAdd() {
+      document.getElementById("productsForAdd").style.display = "block";
     }
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
@@ -135,7 +153,9 @@
     function closeFormForChange() {
       document.getElementById("myFormForUpdate").style.display = "none";
     }
-
+    function closeFormForAdd() {
+      document.getElementById("productsForAdd").style.display = "none";
+    }
     window.onload = async function () {
       // Some code
       body = { num: '1' }

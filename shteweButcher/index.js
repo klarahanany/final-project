@@ -383,6 +383,9 @@ app.get("/signup", (req, res) => {
 app.get("/allorders", (req, res) => {
     res.sendFile(__dirname + "/html/allorders.html")
 })
+app.get("/feedback", (req, res) => {
+    res.sendFile(__dirname + "/html/feedback.html")
+})
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/html', express.static(__dirname + '/html'))
 app.use('/js', express.static(__dirname + '/js'))

@@ -227,6 +227,21 @@ div.updateinventory {
   margin-top: 165px;
   margin-left: 90px;
 }
+.form-foradd{
+  display: none;
+  position: fixed;
+  /* bottom: 0; */
+  left: 200px;
+  right: 30px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  float: left;
+  position: absolute;
+  left: 150px;
+  width: 300px;
+  margin-top: 210px;
+  margin-left: 90px;
+}
 /* Add styles to the form container */
 .form-container {
   max-width: 300px;

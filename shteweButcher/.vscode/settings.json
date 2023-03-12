@@ -12,5 +12,6 @@
             "database": "butcher",
             "username": "admin"
         }
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
