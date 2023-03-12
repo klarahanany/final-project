@@ -344,6 +344,98 @@ app.post("/allorders", async (req, res) => {
         res.json([result.rows, resultx.rows])
     }
 });
+app.post("/income", async (req, res) => {
+    if (req.body.num == '1') {
+        var chicken = 0;
+        var lamb = 0;
+        var calf = 0
+        const result = await db.query(`SELECT od.ordersid, p.productid,p.type FROM orderdetail od INNER JOIN products p  ON od.productid = p.productid;`);
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result.rows[i].type == 'CHICKEN') {
+                chicken++;
+            }
+            else if (result.rows[i].type == 'LAMB') {
+                lamb++;
+            }
+            else {
+                calf++;
+            }
+        }
+        res.json([lamb, calf, chicken])
+        console.log(result.rows);
+    }
+    else if (req.body.num == '2') {
+        const monthcount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var count = 0;
+        const d = new Date();
+        let name = month[d.getMonth()];
+        const Year = new Date().getFullYear();
+        console.log(Year)
+        const result = await db.query(`select orderdate from orders;`);
+        const result1 = await db.query(`select extract(year from orderdate) from orders;`);
+        const result2 = await db.query(`select extract(month from orderdate) from orders;`);
+        const result3 = await db.query(`select extract(day from orderdate) from orders;`);
+
+        console.log(result1.rows)
+        console.log(result2.rows)
+        console.log(result3.rows)
+        for (var i = 0; i < result.rows.length; i++) {
+            if (result1.rows[i].extract == Year) {
+                if(result2.rows[i].extract == '1')
+                {
+                    monthcount[0]++;
+                }
+                else if(result2.rows[i].extract == '2')
+                {
+                    monthcount[1]++;
+                }
+                else if(result2.rows[i].extract == '3')
+                {
+                    monthcount[2]++;
+                }
+                else if(result2.rows[i].extract == '4')
+                {
+                    monthcount[3]++;
+                }
+                else if(result2.rows[i].extract == '5')
+                {
+                    monthcount[4]++;
+                }
+                else if(result2.rows[i].extract == '6')
+                {
+                    monthcount[5]++;
+                }
+                else if(result2.rows[i].extract == '7')
+                {
+                    monthcount[6]++;
+                }
+                else if(result2.rows[i].extract == '8')
+                {
+                    monthcount[7]++;
+                }
+                else if(result2.rows[i].extract == '9')
+                {
+                    monthcount[8]++;
+                }
+                else if(result2.rows[i].extract == '10')
+                {
+                    monthcount[9]++;
+                }
+                else if(result2.rows[i].extract == '11')
+                {
+                    monthcount[10]++;
+                }
+                else if(result2.rows[i].extract == '12')
+                {
+                    monthcount[11]++;
+                }
+            }
+        }
+        res.json(monthcount)
+
+    }
+});
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
 })

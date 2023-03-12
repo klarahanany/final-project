@@ -44,55 +44,79 @@
     <canvas id="myChart2" style="width:50%;max-width:300px;height: 300px;"></canvas>
 
     <script>
-        var xValues = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        var yValues = [1000, 2000, 1500, 4000, 2888, 5000, 1055, 1551, 1455, 5514, 5155, 6666];
+        window.onload = async function () {
+            var xValues = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            body = { num: '2' }
+            const income = await fetch("http://localhost:4000/income", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                body: JSON.stringify(body),
+            });
+            const result1 = await income.json();
+            var yValues = [result1[0], result1[1], result1[2], result1[3], result1[4], result1[5], result1[6], result1[7], result1[8], result1[9], result1[10], result1[11]];
 
-        new Chart("myChart", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: yValues
-                }]
-            },
-            options: {
-                legend: { display: false },
-                scales: {
-                    yAxes: [{ ticks: { min: 0, max: 10000 } }],
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,0,255,1.0)",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "ציור זה מראה כמה הזמנות בוצעו בכל חודש בשנה הנוכחית "
+                    },
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { min: 0, max: 100 } }],
+                    }
+                   
                 }
-            }
-        });
+            });
 
-        var xValues = ["בשר טלה", "בשר עגל", "עוף"];
-        var yValues = [40, 40, 70];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-            "#2b5797",
-            "#e8c3b9",
-            "#1e7145"
-        ];
+            var xValues = ["בשר טלה", "בשר עגל", "עוף"];
 
-        new Chart("myChart2", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "אחוז המכירות לכל סוג בשר בחודש זה "
+            body = { num: '1' }
+            const incomepie = await fetch("http://localhost:4000/income", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                body: JSON.stringify(body),
+            });
+            const result = await incomepie.json();
+            var yValues = [result[0], result[1], result[2]];
+            var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("myChart2", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "אחוז המכירות לכל סוג בשר בחודש זה "
+                    }
                 }
-            }
-        });
+            });
+        }
     </script>
 </body>
 

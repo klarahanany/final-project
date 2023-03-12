@@ -215,6 +215,15 @@ function getMonth(month) {
     if (month === 'March') {
         return '03';
     }
+    else if (month === 'April') {
+        return '04';
+    }
+    else if (month === 'May') {
+        return '05';
+    }
+    else if (month === 'June') {
+        return '06';
+    }
     else {
         console.log("getMonth function")
     }

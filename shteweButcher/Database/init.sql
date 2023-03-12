@@ -18,6 +18,11 @@ CREATE TABLE customers (
     productid SERIAL UNIQUE,
     description varchar(255),
     price VARCHAR(225),
+    type varchar(255) CHECK(
+        type = 'CHICKEN'
+        OR type = 'LAMB'
+        OR type = 'CALF'
+    ),
     quantity INT,
     img VARCHAR(255) UNIQUE,
     PRIMARY KEY (productid)
@@ -74,120 +79,140 @@ CREATE TABLE shift(
 INSERT INTO products (
         description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'סטייק בשר בקר x4',
         '7$',
+        'LAMB',
         20,
         '/img/beef1.png'
     );
 INSERT INTO products (
-        description,
+      description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'סטייק בקר חתוך עבה מפולפל',
         '5.8$',
+        'LAMB',
         20,
         '/img/beef2.png'
     );
 INSERT INTO products (
-        description,
+       description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'חזה עוף חתוך לקוביות רזה במיוחד',
         '5.6$',
+        'CHICKEN',
         20,
         '/img/ch2.png'
     );
 INSERT INTO products (
-        description,
+      description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'ירכי עוף ללא עצמות וללא עור (1 ק"ג)',
         '5.2$',
+        'CHICKEN',
         20,
         '/img/ch1.png'
     );
     INSERT INTO products (
-        description,
+       description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'פילה (1 ק"ג)',
         '5.2$',
+        'CALF',
         20,
         '/img/phele.jpg'
     );
 INSERT INTO products (
-        description,
+       description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'שווארמה בשר (1 ק"ג)',
         '5.2$',
+        'CALF',
         20,
         '/img/shawarma3egel.jpg'
     );
 INSERT INTO products (
-        description,
+   description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'שווארמה עוף (1 ק"ג)',
         '5.2$',
+        'CHICKEN',
         20,
         '/img/shawarmachicken.jpg'
     );
 INSERT INTO products (
-        description,
+       description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'סנטה (1 ק"ג)',
         '5.2$',
+        'LAMB',
         20,
         '/img/senta3egel.jpg'
     );
 INSERT INTO products (
-        description,
+      description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'כנפי עוף (1 ק"ג)',
         '5.2$',
+        'LAMB',
         20,
         '/img/knafe3of.jpg'
     );
 INSERT INTO products (
-        description,
+     description,
         price,
+        type,
         quantity,
         img
     )
 values(
         'אנטריקות (1 ק"ג)',
         '5.2$',
+        'LAMB',
         20,
         '/img/antrekot.jpg'
     );
@@ -359,6 +384,30 @@ values(
         'acre',
         'WORKER',
         '0543455555'
+    );
+            INSERT INTO workers (
+        employeeId,
+        LastName,
+        FirstName,
+        UserName,
+        Email,
+        Password,
+        Address,
+        City,
+        Catagory,
+        phone
+    )
+values(
+        8,
+        'hanany',
+        'so3',
+        'r3',
+        'r3.hanany@gmail.com',
+        '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
+        'maker',
+        'acre',
+        'WORKER',
+        '0543725555'
     );
 -- INSERT INTO shift (
 --         shiftDate,

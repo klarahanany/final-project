@@ -1,7 +1,14 @@
 * {
     box-sizing: border-box;
-}
+    font-family: "Times New Roman", Times, serif;
 
+}
+body{
+    text-align: right;
+    margin-left: 300px;
+    justify-content: right;
+    /* background-color: #45a049; */
+}
 input[type=text],
 select,
 textarea {
@@ -10,6 +17,9 @@ textarea {
     border: 1px solid rgb(70, 68, 68);
     border-radius: 4px;
     resize: vertical;
+    text-align: right;
+    font-size: 20px;
+    background-color: #F5DFDF;
 }
 
 input[type=email],
@@ -20,6 +30,9 @@ textarea {
     border: 1px solid rgb(70, 68, 68);
     border-radius: 4px;
     resize: vertical;
+    text-align: right;
+    font-size: 20px;
+    background-color: #F5DFDF;
 }
 
 label {
@@ -43,20 +56,27 @@ input[type=submit]:hover {
 
 .container {
     border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+    /* background-color: #4A7339; */
+    /* padding: 20px; */
+    margin-right: 0;
+    /* float: right; */
 }
+
 
 .col-25 {
     float: right;
     width: 25%;
     margin-top: 6px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #F5DFDF;
 }
 
 .col-75 {
     float: right;
     width: 75%;
     margin-top: 6px;
+
 }
 
 /* Clear floats after the columns */
