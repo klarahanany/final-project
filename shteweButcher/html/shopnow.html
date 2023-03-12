@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shtewe butcher</title>
+    <link rel="stylesheet" href="/css/shopnow.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        
+    </style>
+</head>
+<body>    
+    <section class="high">
+        
+            <img src="/img/meat.jpg" alt="" class="logo">
+            
+    </section>
+    <nav>
+
+         <i class='bx bx-cart-alt' id="cart-icon"></i>
+         <p id="customerName">hello klara</p>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bx bx-list-ul"></i>
+        </label>
+          
+        <ul >
+            <li ><a class="home" href="home.html" >HOME</a></li>
+            <li ><a class="shopNow" href="/shopnow" >SHOP NOW</a></li>
+            <li ><a class="aboutUs" href="aboutus" >ABOUT US</a></li>
+            <li ><a class="logIn" href="/login" >LOGIN</a></li>
+            <li ><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+        </ul>
+    </nav>
+    <section class="shop-container">
+        <h2 class="section-title"> Shop Product</h2>
+        <div class="shop-content" id="shop-content">
+           <!-- <div class="product-box">
+                <img src="/img/beef1.png" alt="" class="product-img">
+                <h2 class="product-title">Beef Rump Steaks x4</h2>
+                <span class="price">7$</span>
+                <i class='bx bx-cart-alt add-cart'></i>
+                
+            </div> -->
+            <!--
+            <div class="product-box">
+                <img src="/img/beef2.png" alt="" class="product-img">
+                <h2 class="product-title">Peppered Thick Cut Beef Steak</h2>
+                <span class="price">5.8$</span>
+                <i class='bx bx-cart-alt add-cart'></i>
+            </div>
+            <div class="product-box">
+                <img src="/img/ch1.png" alt="" class="product-img">
+                <h2 class="product-title">Chicken Thighs boneless & skinless (1kg)</h2>
+                <span class="price">5.2$$</span>
+                <i class='bx bx-cart-alt add-cart'></i>
+            </div>
+            <div class="product-box">
+                <img src="/img/ch2.png" alt="" class="product-img">
+                <h2 class="product-title">Chicken Breast Diced Extra Lean</h2>
+                <span class="price">5.6$</span>
+                <i class='bx bx-cart-alt add-cart'></i>
+            </div> -->
+          
+        </div>
+        <div class="cart">
+            <h3 class="cart-title"> Shopping List</h3>
+            <!-- content -->
+            <div class="cart-content" id="cart-content">
+            </div>
+            <!-- total -->
+            <div class="total">
+                <div class="total-title">Total</div>
+                <div class="total-price">0$</div>
+            </div>
+            <!-- buy Button -->
+            <button type="button" class="btn-buy">
+                Buy Now
+            </button>
+            <!-- cart close -->
+            <i class='bx bx-x' id="close-cart"></i>
+
+        </div>
+    </section>
+    <!-- link to js -->
+    <script src="/js/app.js"></script>
+</body>
+</html> 

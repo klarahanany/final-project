@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>log in</title>
+    <link rel="stylesheet" href="/css/workerLogin.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+</head>
+
+<body>
+    <div class="center">
+        <h1>Log In</h1>
+        <form action="post" id="form">
+            <div class="text_field">
+                <input type="text" id="name" required>
+                <span> </span>
+                <label>Username</label>
+            </div>
+            <div class="text_field">
+                <input type="password" id="pass" required>
+                <span> </span>
+                <label>Password</label>
+            </div>
+            <div class="pass" id="what">Forgot Password?</div>
+            <input type="submit" value="Login">
+
+        </form>
+    </div>
+    
+    <script>
+
+        const form = document.getElementById('form');
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var name = document.getElementById("name").value
+            var pass = document.getElementById("pass").value
+            if (name.length == 0 || pass.length == 0) {
+                console.log("Something went wrong")
+            }
+            else {
+                const body = { UserName: name, password: pass }
+                const fetchWorker = await fetch("http://localhost:4000/", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result = await fetchWorker.json();
+                if (result === "successWorker") {
+                    
+                    var url = 'http://localhost:4000/profile';
+                    location.href = url;
+                }
+                else if(result === "successAdmin"){
+                    var url = 'http://localhost:4000/allEmployes';
+                    location.href = url;
+                }
+
+
+            }
+        });
+
+    </script>
+    <!-- link to js -->
+
+</body>
+
+</html>

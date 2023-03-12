@@ -1,0 +1,99 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="/css/income.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="/inventory">
+            <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+        </a>
+        <a href="/adminCalendar">
+            <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+        </a>
+        <a href="/allEmployes">
+            <i class='bx bx-group profiles '>מידע על העובדים</i>
+        </a>
+
+        <a href="/allorders">
+            <i>צפייה בכל ההזמנות</i>
+        </a>
+        <a href="/income">
+            <i class="income">צפייה ברווחי העסק</i>
+        </a>
+        <a href="/employeesSalary">
+            <i class="salary">משכורות העובדים</i>
+        </a>
+        <a href="/customersfeedback">
+            <i class="salary"> משובי לקוחות</i>
+        </a>
+
+    </div>
+    <canvas id="myChart" style="width:50%;max-width:500px;height: 300px;"></canvas>
+    <canvas id="myChart2" style="width:50%;max-width:300px;height: 300px;"></canvas>
+
+    <script>
+        var xValues = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var yValues = [1000, 2000, 1500, 4000, 2888, 5000, 1055, 1551, 1455, 5514, 5155, 6666];
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 0, max: 10000 } }],
+                }
+            }
+        });
+
+        var xValues = ["בשר טלה", "בשר עגל", "עוף"];
+        var yValues = [40, 40, 70];
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145"
+        ];
+
+        new Chart("myChart2", {
+            type: "pie",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "אחוז המכירות לכל סוג בשר בחודש זה "
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

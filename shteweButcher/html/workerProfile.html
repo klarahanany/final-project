@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>worker</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="/css/workerProfile.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body >
+
+    <div id="mySidenav" class="sidenav">
+        <a href="/profile" onclick="first()">
+            <i class='bx bx-user profile'></i>
+        </a>
+        <a href="/calendar">
+            <i class='bx bx-calendar calen'></i>
+        </a>
+        <a href="#">
+            <i class='bx bxs-cog'></i>
+        </a>
+    </div>
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card user-card-full">
+                        <div class="row m-l-0 m-r-0">
+                            <div class="col-sm-4 bg-c-lite-green user-profile">
+                                <div class="card-block text-center text-white">
+                                    <div class="m-b-25">
+                                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius"
+                                            alt="User-Profile-Image">
+                                    </div>
+                                    <h6 class="f-w-600" id="nameworker"></h6>
+                                    <p id="job"></p>
+                                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="card-block">
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Email</p>
+                                            <h6 class="text-muted f-w-400" id="emailworker"></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">Phone</p>
+                                            <h6 class="text-muted f-w-400" id="phone"></h6>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-b-10 f-w-600">City</p>
+                                            <h6 class="text-muted f-w-400" id="city"></h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script >
+      window.onload= async function startFun(){
+        const fetchProfileWorker = await fetch("http://localhost:4000/profile", {
+            method: "POST",
+            Credentials: "include",
+            headers: { "Content-Type": "application/JSON" },
+        });
+        const result = await fetchProfileWorker.json();
+        const nameW = document.getElementById('nameworker');
+        nameW.textContent=result.firstname +" " + result.lastname;
+        const emaliW = document.getElementById('emailworker');
+        emaliW.textContent=result.email;
+        const jobW = document.getElementById('job');
+        jobW.textContent=result.catagory;
+        const phoneW = document.getElementById('phone');
+        phoneW.textContent=result.phone;
+        const cityW = document.getElementById('city');
+        cityW.textContent=result.city;
+    }
+    </script>
+</body>
+
+</html>

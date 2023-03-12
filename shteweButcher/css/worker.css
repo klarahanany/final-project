@@ -1,0 +1,217 @@
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  /* background: linear-gradient(to right, #f8bac6, #7d9ccf); */
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.sidenav {
+  height: 100%;
+  width: 100px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #34568b;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  /* border: #aeabab solid 1px; */
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #aeabab;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  font-size: 30px;
+  color: white;
+}
+
+
+
+#main {
+  margin-left: 200px;
+  transition: margin-left .5s;
+  padding: 16px;
+
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+.wrapper {
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.wrapper header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+
+header .icons {
+  display: flex;
+}
+
+header .icons span {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+
+.icons span:last-child {
+  margin-right: -10px;
+}
+
+header .icons span:hover {
+  background: #dae3f1;
+}
+
+header .current-date {
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.calendar {
+  padding: 20px;
+}
+
+.calendar ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+
+.calendar .days {
+  margin-bottom: 20px;
+}
+
+.calendar li {
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+
+.calendar .weeks li {
+  font-weight: 500;
+  cursor: default;
+}
+
+.calendar .days li {
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+
+.days li.inactive {
+  color: #aaa;
+  pointer-events: none;
+  display: block;
+  cursor: not-allowed;
+}
+
+.days li.active {
+  color: #fff;
+}
+
+.days li::before {
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.days li.active::before {
+  background: #34568b;
+}
+
+.days li:not(.active):hover::before {
+  background: #dae3f1;
+}
+
+
+.window {
+  /* visibility: hidden; */
+  top: 0;
+   right: -100%;
+  background-color: #b5c7e3;
+  height: 300px;
+  width: 300px;
+  transition: .3s;
+  position: absolute;
+  z-index: 10;
+  margin-top: 120px;
+}
+
+#shiftKind {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.window.active {
+  
+  right: 0;
+  
+}
+
+#close-shiftDetails {
+  position: absolute;
+  top: 1rem;
+  left: 0.8rem;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.calen {
+  color: white;
+  font-size: 30px;
+  left: 0px;
+}

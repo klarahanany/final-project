@@ -1,0 +1,94 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="/css/allorders.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="/inventory">
+      <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+    </a>
+    <a href="/adminCalendar">
+      <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+    </a>
+    <a href="/allEmployes">
+      <i class='bx bx-group profiles '>מידע על העובדים</i>
+    </a>
+    <a href="/allEmployes">
+      <i >הוספת מוצר חדש</i>
+    </a>
+    <a href="/allorders" >
+      <i class="orders">צפייה בכל ההזמנות</i>
+    </a>
+  </div>
+  <div class="table">
+    <h2 class="title"> כל ההזמנות באינטרנט מאטליז</h2>
+    <table class="styled-table" id="firsttable">
+      <thead>
+        <tr>
+          <th>שם המזמין</th>
+          <th>מזהה המזמין</th>
+          <th>תאריך הזמנה</th>
+          <th>מזה</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+<script>
+    window.onload = async function () {
+      // Some code
+      console.log(1)
+      body = { num: '1' }
+      const allorders = await fetch("http://localhost:4000/allorders", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+      });
+      const result = await allorders.json();
+      var element = document.getElementById("firsttable");
+      for (var i = 0; i < result[0].length; i++) {
+
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        for(var j=0 ; j <result[1].length;j++){
+            if(result[0][i].personid == result[1][j].personid){
+                td4.textContent = result[1][j].username;
+            }
+        }
+       
+        td3.textContent = result[0][i].personid;
+        td2.textContent = result[0][i].orderdate;
+        td1.textContent = result[0][i].ordersid;
+        tr.append(td4);
+        tr.append(td3);
+        tr.append(td2);
+        tr.append(td1);
+        element.append(tr)
+      }
+    //   var tr = document.createElement("th");
+    //   var th1 = document.createElement("th");
+    //   var th1 = document.createElement("th");
+
+
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="/css/adminInventory.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <div id="mySidenav" class="sidenav">
+    <a href="/inventory">
+      <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+    </a>
+    <a href="/adminCalendar">
+      <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+    </a>
+    <a href="/allEmployes">
+      <i class='bx bx-group profiles '>מידע על העובדים</i>
+    </a>
+    <a href="/allorders">
+      <i>צפייה בכל ההזמנות</i>
+    </a>
+    <a href="/income">
+      <i>צפייה ברווחי העסק</i>
+    </a>
+    <a href="/employeesSalary">
+      <i class="salary">משכורות העובדים</i>
+    </a>
+    <a href="/customersfeedback">
+      <i class="salary"> משובי לקוחות</i>
+    </a>
+
+
+  </div>
+
+  <div class="table">
+    <h2 class="title"> כל המוצרים באטליז</h2>
+    <table class="styled-table" id="firsttable">
+      <thead>
+        <tr>
+          <th>מחיר</th>
+          <th>כמות</th>
+          <th>תיאור</th>
+
+
+          <th>מזה</th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="updateinventory">
+    <input type="button" class="open-button" value="עדכון כמות מוצר מסויים" onclick="openForm()">
+    <!-- <button class="open-button" onclick="openForm()">Open Form</button> -->
+    <input type="button" class="delete-button" value="מחיקת מוצר מסויים" onclick="openFormForDelete()">
+    <input type="button" class="changeprice-button" value="עדכון מחיר מוצר" onclick="openFormForChange()">
+
+  </div>
+  <div class="form-popup" id="myForm">
+    <form class="form-container">
+
+      <label><b>תבחר מוצר להוסיף כמות</b></label>
+      <select form="products" id="products">
+        <option value="select">תבחר מוצר</option>
+      </select>
+      <label><b>תכניס כמות חדשה</b></label>
+      <input id="quantity" type="number" placeholder="תכניס כמות" value="0" onchange="onchange()" required>
+      <!-- type="submit" -->
+      <button type="button" class="btn" onclick="update()">עדכן</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+    </form>
+  </div>
+  <div class="form-fordelete" id="myFormDelete">
+    <form class="form-container">
+
+      <label><b>תבחר מוצר למחוק</b></label>
+      <select form="products" id="productsForDelete">
+        <option value="select">תבחר מוצר</option>
+      </select>
+      <!-- <label><b>תכניס כמות חדשה</b></label>
+      <input id="quantity" type="number" placeholder="תכניס כמות" value="0" onchange="onchange()" required> -->
+      <!-- <button type="button" class="btn" onclick="update()">עדכן</button> -->
+      <button type="button" class="btn" onclick="Delete()">מחק</button>
+      <button type="button" class="btn cancel" onclick="closeFormDelete()">סגור</button>
+    </form>
+  </div>
+  <div class="form-forUpdatePrice" id="myFormForUpdate">
+    <form class="form-container">
+
+      <label><b>תבחר מוצר לשנות מחיר</b></label>
+      <select form="products" id="productsForChange">
+        <option value="select">תבחר מוצר</option>
+      </select>
+      <label><b>תכניס מחיר חדש</b></label>
+      <input id="price" type="number" placeholder="תכניס מחיר" value="0" required>
+      <!-- type="submit" -->
+      <button type="button" class="btn" onclick="updatePrice()">עדכן</button>
+      <button type="button" class="btn cancel" onclick="closeFormForChange()">סגור</button>
+    </form>
+  </div>
+  <!-- <input type="text"> -->
+  <!-- <button class="button">עדכון כמות מוצר מסויים</button> -->
+  <script>
+    // const body = { UserName: name, password: pass }
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+      closeFormDelete();
+      closeFormForChange();
+
+    }
+    function openFormForDelete() {
+      document.getElementById("myFormDelete").style.display = "block";
+      closeFormForChange();
+    }
+    function openFormForChange() {
+      document.getElementById("myFormForUpdate").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    function closeFormDelete() {
+      document.getElementById("myFormDelete").style.display = "none";
+    }
+    function closeFormForChange() {
+      document.getElementById("myFormForUpdate").style.display = "none";
+    }
+
+    window.onload = async function () {
+      // Some code
+      body = { num: '1' }
+      const allproducts = await fetch("http://localhost:4000/inventory", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+      });
+      const result = await allproducts.json();
+      console.log(result)
+      // < th > header1</th >
+      //   <th>header2</th>
+      //   <th>header3</th>
+      var element = document.getElementById("firsttable");
+      var element2 = document.getElementById("products");
+      var element3 = document.getElementById("productsForDelete");
+      var element4 = document.getElementById("productsForChange");
+
+      for (var i = 0; i < result.length; i++) {
+        var tag = document.createElement("option");
+        tag.value = result[i].description;
+        tag.textContent = result[i].description
+        var tag2 = document.createElement("option");
+        tag2.value = result[i].description;
+        tag2.textContent = result[i].description
+        var tag3 = document.createElement("option");
+        tag3.value = result[i].description;
+        tag3.textContent = result[i].description
+        element2.append(tag)
+        element3.append(tag2)
+        element4.append(tag3)
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        td4.textContent = result[i].productid;
+        td3.textContent = result[i].description;
+        td2.textContent = result[i].quantity;
+        if (result[i].quantity < 10) {
+          td2.style.color = 'red'
+        }
+        td1.textContent = result[i].price;
+        tr.append(td1);
+        tr.append(td2);
+        tr.append(td3);
+        tr.append(td4);
+        element.append(tr)
+      }
+      var tr = document.createElement("th");
+      var th1 = document.createElement("th");
+      var th1 = document.createElement("th");
+
+
+    };
+    async function update() {
+      var element1 = document.getElementById("products");
+      var element2 = document.getElementById("quantity");
+      if (element1.value == 'select') {
+        alert("תבחר מוצר")
+      }
+      else if (element2.value <= 0) {
+        alert("תשנה כמות")
+      }
+      else {
+        body = { value: element1.value, quantity: element2.value, num: '2' }
+        const allproducts = await fetch("http://localhost:4000/inventory", {
+          method: "POST",
+          Credentials: "include",
+          headers: { "Content-Type": "application/JSON" },
+          body: JSON.stringify(body),
+        });
+        const result = await allproducts.json();
+        closeForm();
+      }
+    }
+    function onchange() {
+      var input = event.target
+      if (isNaN(input.value) || input.value < 0) {
+        input.value = 0
+      }
+    }
+    async function Delete() {
+      var element1 = document.getElementById("productsForDelete");
+      if (element1.value == 'select') {
+        alert("תבחר מוצר")
+      }
+      else {
+        body = { value: element1.value, num: '3' }
+        const allproducts = await fetch("http://localhost:4000/inventory", {
+          method: "POST",
+          Credentials: "include",
+          headers: { "Content-Type": "application/JSON" },
+          body: JSON.stringify(body),
+        });
+        const result = await allproducts.json();
+        closeFormDelete();
+      }
+    }
+    async function updatePrice() {
+      var element1 = document.getElementById("productsForChange");
+      var element2 = document.getElementById("price");
+      if (element1.value == 'select') {
+        alert("תבחר מוצר")
+      }
+      else if (element2.value <= 0) {
+        alert("תשנה מחיר")
+      }
+      else {
+        body = { value: element1.value, price: element2.value, num: '4' }
+        const allproducts = await fetch("http://localhost:4000/inventory", {
+          method: "POST",
+          Credentials: "include",
+          headers: { "Content-Type": "application/JSON" },
+          body: JSON.stringify(body),
+        });
+        const result = await allproducts.json();
+        closeFormForChange();
+      }
+    }
+  </script>
+</body>
+
+</html>

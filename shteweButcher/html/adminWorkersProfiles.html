@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="/css/adminWorkersProfiles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+    
+</head>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="/inventory">
+            <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+        </a>
+        <a href="/adminCalendar">
+            <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+        </a>
+        <a href="/allEmployes">
+            <i class='bx bx-group profiles '>מידע על העובדים</i>
+        </a>
+
+        <a href="/allorders">
+            <i>צפייה בכל ההזמנות</i>
+        </a>
+        <a href="/income">
+            <i class="income">צפייה ברווחי העסק</i>
+        </a>
+        <a href="/employeesSalary">
+            <i class="salary">משכורות העובדים</i>
+        </a>
+        <a href="/customersfeedback">
+            <i class="salary"> משובי לקוחות</i>
+        </a>
+
+    </div>
+
+    <div id="allWorkers">
+
+    </div>
+    <script>
+        window.onload = async function startFun() {
+            const fetchProfileWorker = await fetch("http://localhost:4000/allEmployes", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+            });
+            const result = await fetchProfileWorker.json();
+            var element = document.getElementById("allWorkers");
+            for (i = 0; i < result.length; i++) {
+
+                console.log(result[i]);
+                var tag = document.createElement("div");
+                tag.id = "worker";
+                var img = document.createElement("img");
+                var name = document.createElement("h3");
+                var email = document.createElement("h4");
+                var phone = document.createElement("h4");
+                var city = document.createElement("h4");
+                // var br1 = document.createElement("br");
+                // var br2 = document.createElement("br");
+                // var br3 = document.createElement("br");
+                img.src = "https://img.icons8.com/bubbles/100/000000/user.png"
+                name.textContent = result[i].firstname + " " + result[i].lastname;
+                email.textContent = "Email: " + result[i].email;
+                phone.textContent = "Phone: " + result[i].phone;
+                city.textContent = "City: " + result[i].city;
+                
+                tag.append(img)
+                // tag.append(br1)
+                tag.append(name)
+                tag.append(city)
+                tag.append(phone)
+                tag.append(email)
+                // tag.append(br2)
+
+
+                element.appendChild(tag);
+                // element.append(br3)
+                // tag.innerHTML+="email: "+result[i].email
+
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

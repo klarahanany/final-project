@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+
+}
+
+#worker {
+  border-radius: 5px;
+  border: 3px solid #34568b;
+}
+
+h3 {
+
+  color: #f2f2f2;
+}
+
+h4 {
+  color: #ffffff;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background: linear-gradient(to right, #f8bac6, #7d9ccf);
+  display: flex;
+  margin-top: 10px;
+ 
+  padding: 10px 10px;
+  margin-right: 200px;
+  /* justify-content: center; */
+  min-height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #34568b;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align: right;
+  margin-left: 300px;
+}
+
+.sidenav a {
+  border: #aeabab solid 1px;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #aeabab;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  font-size: 21px;
+  color: white;
+}
+
+.profiles {
+  color: white;
+  font-size: 20px;
+  left: 0px;
+}
+
+#allworkers {
+width: 50%;
+display:flex; 
+}
+#worker{
+  background: #ce8888;
+  flex-basis: 100px;
+  height: 250px;
+  width: 250px;
+  margin: 5px;
+}

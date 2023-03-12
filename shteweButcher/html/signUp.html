@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="/css/SignUp.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <a href="home.html">
+        <i class='bx bx-x' id="close"></i>
+    </a>
+
+    <div class="center">
+        <h1>Sign Up</h1>
+        <form action="post" class="form" id="form">
+            <div class="text_field">
+                <input type="text" required name="username" id="name">
+                <span> </span>
+                <label>Username</label>
+            </div>
+            <div class="text_field">
+                <input type="email" required name="email" id="email">
+                <span> </span>
+                <label>Email</label>
+            </div>
+            <div class="text_field">
+                <input type="password" required name="password" id="pass">
+                <span> </span>
+                <label>Password</label>
+            </div>
+            <input type="submit" value="SignUp">
+        </form>
+        <div class="signup_link">
+            already a member? <a href="LogIn.html">Login</a>
+        </div>
+    </div>
+    <div class="login_admin">
+        Admin? <a href="#adminlogin">click here</a>
+    </div>
+
+    <script>
+        console.log("1")
+        const form = document.getElementById('form');
+        console.log("2")
+        form.addEventListener('submit', async function (e) {
+            console.log("3")
+            e.preventDefault();
+            console.log("4")
+            var name = document.getElementById("name").value
+            var pass = document.getElementById("pass").value
+            var email = document.getElementById("email").value
+            if (name.length == 0 || pass.length == 0 || email.length == 0) {
+                console.log("Something went wrong")
+            }
+            else {
+                const body = { UserName: name, password: pass, Email: email }
+                const fetchWorker = await fetch("http://localhost:4000/signup", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result = await fetchWorker.json();
+                if (result === "success") {
+                    console.log("did it work?")
+                    console.log(location.href);
+                    var url = 'http://localhost:4000/login';
+                    location.href = url;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
