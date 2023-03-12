@@ -5,7 +5,8 @@ workers,
 shift,
 products,
 orders,
-orderdetail,cartitems;
+orderdetail,
+cartitems;
 CREATE TABLE customers (
     personid SERIAL,
     username varchar(255) UNIQUE,
@@ -13,8 +14,7 @@ CREATE TABLE customers (
     Password varchar(255),
     PRIMARY KEY (personid) -- cartId varchar(255) REFERENCES workers (CartId)
 );
-
- CREATE TABLE products (
+CREATE TABLE products (
     productid SERIAL UNIQUE,
     description varchar(255),
     price VARCHAR(225),
@@ -24,7 +24,7 @@ CREATE TABLE customers (
         OR type = 'CALF'
     ),
     quantity INT,
-    img VARCHAR(255) UNIQUE,
+    img VARCHAR(65535) UNIQUE,
     PRIMARY KEY (productid)
 );
 CREATE TABLE cart (
@@ -36,6 +36,11 @@ CREATE TABLE cartitems(
     cartid INT REFERENCES cart (cartid),
     productid INT REFERENCES products (productid),
     quantity INT
+);
+CREATE TABLE feedback(
+    productid SERIAL UNIQUE,
+    personid INT REFERENCES customers (personid),
+    feedback VARCHAR(255)
 );
 CREATE TABLE orders (
     ordersid SERIAL UNIQUE,
@@ -91,7 +96,7 @@ values(
         '/img/beef1.png'
     );
 INSERT INTO products (
-      description,
+        description,
         price,
         type,
         quantity,
@@ -105,7 +110,7 @@ values(
         '/img/beef2.png'
     );
 INSERT INTO products (
-       description,
+        description,
         price,
         type,
         quantity,
@@ -119,7 +124,7 @@ values(
         '/img/ch2.png'
     );
 INSERT INTO products (
-      description,
+        description,
         price,
         type,
         quantity,
@@ -132,8 +137,8 @@ values(
         20,
         '/img/ch1.png'
     );
-    INSERT INTO products (
-       description,
+INSERT INTO products (
+        description,
         price,
         type,
         quantity,
@@ -147,7 +152,7 @@ values(
         '/img/phele.jpg'
     );
 INSERT INTO products (
-       description,
+        description,
         price,
         type,
         quantity,
@@ -161,7 +166,7 @@ values(
         '/img/shawarma3egel.jpg'
     );
 INSERT INTO products (
-   description,
+        description,
         price,
         type,
         quantity,
@@ -175,7 +180,7 @@ values(
         '/img/shawarmachicken.jpg'
     );
 INSERT INTO products (
-       description,
+        description,
         price,
         type,
         quantity,
@@ -189,7 +194,7 @@ values(
         '/img/senta3egel.jpg'
     );
 INSERT INTO products (
-      description,
+        description,
         price,
         type,
         quantity,
@@ -203,7 +208,7 @@ values(
         '/img/knafe3of.jpg'
     );
 INSERT INTO products (
-     description,
+        description,
         price,
         type,
         quantity,
@@ -216,7 +221,6 @@ values(
         20,
         '/img/antrekot.jpg'
     );
-
 INSERT INTO workers (
         employeeId,
         LastName,
@@ -337,7 +341,7 @@ values(
         'WORKER',
         '0541010101'
     );
-    INSERT INTO workers (
+INSERT INTO workers (
         employeeId,
         LastName,
         FirstName,
@@ -361,7 +365,7 @@ values(
         'WORKER',
         '05455555'
     );
-        INSERT INTO workers (
+INSERT INTO workers (
         employeeId,
         LastName,
         FirstName,
@@ -385,7 +389,7 @@ values(
         'WORKER',
         '0543455555'
     );
-            INSERT INTO workers (
+INSERT INTO workers (
         employeeId,
         LastName,
         FirstName,
@@ -429,5 +433,6 @@ values(
         'klarosh.hanany@gmail.com',
         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi'
     );
-    INSERT INTO cart (Personid) VALUES (1);
+INSERT INTO cart (Personid)
+VALUES (1);
 COMMIT;

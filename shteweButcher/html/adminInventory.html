@@ -114,11 +114,11 @@
       <label><b>תיאור למוצר חדש</b></label>
       <input id="desc" type="text" placeholder="תאר מוצר" required>
       <label><b>תכניס מחיר למוצר החדש</b></label>
-      <input id="price" type="number" placeholder="תכניס מחיר" required>
+      <input id="price1" type="number" placeholder="תכניס מחיר" value='0' required>
       <label><b>תכניס כמות למוצר החדש</b></label>
-      <input id="quantity" type="number" placeholder="תכניס כמות" required>
+      <input id="quantity1" type="number" placeholder="תכניס כמות" value="0" required>
       <label><b>תכניס קישור לתמונת המוצר</b></label>
-      <input id="desc" type="text" placeholder="תאר מוצר" required>
+      <input id="img" type="text" placeholder="תכניס קישור לתמונת המוצר" required>
       <!-- type="submit" -->
       <button type="button" class="btn" onclick="add()">הוסף</button>
       <button type="button" class="btn cancel" onclick="closeFormForAdd()">סגור</button>
@@ -277,6 +277,35 @@
         });
         const result = await allproducts.json();
         closeFormForChange();
+      }
+    }
+    async function add() {
+      var element1 = document.getElementById("desc");
+      var element2 = document.getElementById("price1");
+      var element3 = document.getElementById("quantity1");
+      var element4 = document.getElementById("img");
+      if (element1.value == '') {
+        alert("תתאר את המוצר")
+      }
+      else if (element2.value == 0) {
+        alert("תשנה מחיר")
+      }
+      else if (element3.value <= 0) {
+        alert("תשנה כמות")
+      }
+      else  if (element4.value == '') {
+        alert(" תכניס קישור")
+      }
+      else {
+        body = { desc: element1.value, price: element2.value,quantity:element3.value,img:element4.value, num: '5' }
+        const addproduct = await fetch("http://localhost:4000/inventory", {
+          method: "POST",
+          Credentials: "include",
+          headers: { "Content-Type": "application/JSON" },
+          body: JSON.stringify(body),
+        });
+        const result = await addproduct.json();
+        closeFormForAdd();
       }
     }
   </script>

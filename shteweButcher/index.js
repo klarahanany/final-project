@@ -334,6 +334,39 @@ app.post("/inventory", async (req, res) => {
         db.query(sql);
         res.json('ggs')
     }
+    else if (req.body.num == '5') {
+        var sql1 = `INSERT INTO products (
+            description,
+            price,
+            type,
+            quantity,
+            img
+        )
+    values(
+            '${req.body.desc}',
+            '${req.body.price+"$"}',
+            'LAMB',
+            ${req.body.quantity},
+            '${req.body.img}'
+        );`
+        db.query(sql1);
+        res.json('ggs')
+    }
+});
+app.post("/feedback", async (req, res) => {
+    const username2 = req.cookies.username;
+        const result = await db.query(`SELECT personid FROM shift where username = '${username2}' and shiftdate='${date}';`);
+    if(username2 == undefined){
+        res.log('fhhdh')
+        res.json('faild')
+    }
+    else{
+        console.log('shhs')
+        var sql = `INSERT INTO feedback (personid,feedback) VALUES ('${result.rows[0].personid}','${req.body.feedback} ');`
+        db.query(sql);
+    res.json("gdg")
+    }
+    res.json("gsgsg")
 });
 app.post("/allorders", async (req, res) => {
     if (req.body.num == '1') {

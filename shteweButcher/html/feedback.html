@@ -35,38 +35,42 @@
                     <input type="email" id="email" name="mailid" placeholder="דואר אלקטרוני">
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-25">
-                    <label for="country">Country</label>
-                </div>
-                <div class="col-75">
-                    <select id="country" name="country">
-                        <option value="none">Select Country</option>
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                        <option value="usa">USA</option>
-                        <option value="russia">Russia</option>
-                        <option value="japan">Japan</option>
-                        <option value="india">India</option>
-                        <option value="china">China</option>
-                    </select>
-                </div>
-            </div> -->
+
             <div class="row">
                 <div class="col-25">
                     <label for="feed_back">משוב</label>
                 </div>
-                <div class="col-75">
-                    <textarea id="subject" name="subject" placeholder="תכתוב משהו"
-                        style="height:200px"></textarea>
+                <div class="col-75" id="feedback">
+                    <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="שלח">
+                <input type="submit" value="שלח" onclick="submit()">
             </div>
         </form>
     </div>
-
+    <script>
+        async function submit() {
+            const element = document.getElementById('feedback');
+            console.log(element.value)
+            if (element.value == '') {
+                alert('תמלא משוב לפני שתשלח')
+            }
+            else {
+                body = { feedback: element.value }
+                const feedbackfetch = await fetch("http://localhost:4000/feedback", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result1 = await feedbackfetch.json();
+                if(result1=='faild'){
+                    alert('בבקשה תעשה login')
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

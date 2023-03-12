@@ -382,7 +382,7 @@ a:hover {
 .product-img {
 
     width: 100%;
-    height: auto;
+    height: 200px;
     margin-bottom: 0.5rem;
     border-radius: 15px;
 }
