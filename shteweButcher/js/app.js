@@ -99,6 +99,7 @@ async function ready() {
     for (var i = 0; i < quantityInputs.length; i++) {
         var input = quantityInputs[i]
         input.addEventListener('change', quantityChanged);
+        
     }
     //add to cart
     var addCart = document.getElementsByClassName('add-cart');
@@ -180,6 +181,7 @@ async function quantityChanged(event) {
     var input = event.target
     title = input.parentElement.childNodes[1].textContent;
     quantity = input.parentElement.childNodes[5].value;
+    updatetotal()
     body = { title: title, quantity: quantity, checkifthereisthisquantity: 'checkifthereisthisquantity' }
     const checkifthereisthisquantity = await fetch("http://localhost:4000/shopnow", {
         method: "POST",
@@ -191,6 +193,7 @@ async function quantityChanged(event) {
     if (resulty[0] == 'failed') {
         alert("אין כל הכמות הזאת במלאי")
         input.parentElement.childNodes[5].value = resulty[1]
+        updatetotal()
         // alert("אין כל הכמות הזאת במלאי")
     }
     else {

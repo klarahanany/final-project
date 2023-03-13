@@ -84,10 +84,9 @@ app.post("/calendar", async (req, res) => {
 
         if ((result.rows[0]) !== undefined) {
             res.json(result.rows[0]);
-            console.log("4");
+
         }
         else {
-            console.log("3");
             res.json(" Still Not Determined");
 
         }
@@ -169,8 +168,6 @@ app.post("/adminCalendar", async (req, res) => {
             date = Year + "-" + month + "-" + Day;
             const result1 = db.query(`SELECT * FROM shift where shiftType = 'EVENING' and shiftdate='${date}';`)
             const result2 = db.query(`SELECT * FROM shift where shiftType = 'MORNING' and shiftdate='${date}';`)
-            console.log(date);
-            console.log("1");
             if ((await result1).rows.length == 0 && (await result2).rows.length == 0) {
 
                 var sql1 = `INSERT INTO shift (
@@ -213,7 +210,6 @@ app.post("/shopnow", async (req, res) => {
         const result2 = await db.query(`SELECT cartid FROM cart where personid='${result1.rows[0].personid}' ;`);
         const result3 = await db.query(`SELECT * FROM cartitems where cartid='${result2.rows[0].cartid}' ;`);
         const result4 = await db.query(`SELECT * FROM products`)
-        console.log(result3.rows);
         res.json([result3.rows, result4.rows])
 
 
@@ -234,7 +230,6 @@ app.post("/shopnow", async (req, res) => {
     }
     else if (req.body.updateQuantity == 'updateQuantity') {
         const result = await db.query(`SELECT productid FROM products where description='${req.body.title}' ;`);
-        console.log(req.cookies.customerusername);
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
         const result2 = await db.query(`SELECT cartid FROM cart where personid='${result1.rows[0].personid}' ;`);
         var sql = `UPDATE cartitems SET quantity = '${req.body.quantity}' WHERE productid = ${result.rows[0].productid} AND cartid=${result2.rows[0].cartid};`
@@ -242,11 +237,9 @@ app.post("/shopnow", async (req, res) => {
     }
     else if (req.body.deletecart == 'deletefromcart') {
         const result = await db.query(`SELECT productid FROM products where description='${req.body.title}' ;`);
-        console.log(req.cookies.customerusername);
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
         const result2 = await db.query(`SELECT cartid FROM cart where personid='${result1.rows[0].personid}' ;`);
-        console.log(result2.rows[0].cartid)
-        console.log(result.rows[0].productid)
+
         var sql = `DELETE FROM cartitems WHERE cartid='${result2.rows[0].cartid}' AND productid = '${result.rows[0].productid}';`
         db.query(sql);
 
@@ -268,8 +261,6 @@ app.post("/shopnow", async (req, res) => {
         var sql = `INSERT INTO cartitems (cartid,productid,quantity) VALUES ('${result2.rows[0].cartid}','${result.rows[0].productid}',1);`
         db.query(sql);
 
-        console.log(result.rows[0].productid + " " + result1.rows[0].personid);
-
         res.json("hh")
     }
     else if (req.body.empty == 'empty') {
@@ -280,14 +271,12 @@ app.post("/shopnow", async (req, res) => {
     else {
         var result = [];
         array = req.body.array;
-        console.log(array)
         var j = 0;
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
         var sql2 = `INSERT INTO orders (orderdate,personid) VALUES ('${req.body.date}','${result1.rows[0].personid}');`
         db.query(sql2);
         const resultx = await db.query(`SELECT cartid FROM cart where personid='${result1.rows[0].personid}' ;`);
         const resulty = await db.query(`SELECT * FROM orders ORDER BY ordersid DESC LIMIT 1;`);
-        console.log(resulty.rows[0].ordersid)
         for (var i = 0; i < array.length; i++) {
 
             var array_1 = array[i].split("~");
@@ -296,7 +285,6 @@ app.post("/shopnow", async (req, res) => {
 
             var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${result1.rows[0].productid};`
             db.query(sql);
-            console.log(array_1[1])
             var price = array_1[1].replace('$', '');
             var totalprice = parseFloat(price) * array_1[2]
             totalprice = totalprice.toString() + "$"
@@ -355,9 +343,7 @@ app.post("/inventory", async (req, res) => {
 });
 app.post("/feedback", async (req, res) => {
     const username2 = req.cookies.customerusername;
-    console.log(username2)
     const result = await db.query(`SELECT personid FROM customers where username = '${username2}';`);
-    console.log(username2)
     if (username2 == undefined) {
         res.json('faild')
     }
@@ -383,16 +369,16 @@ app.post("/income", async (req, res) => {
         var chicken = 0;
         var lamb = 0;
         var calf = 0
-        const result = await db.query(`SELECT od.ordersid, p.productid,p.type FROM orderdetail od INNER JOIN products p  ON od.productid = p.productid;`);
+        const result = await db.query(`SELECT od.productquantity, od.ordersid, p.productid,p.type FROM orderdetail od INNER JOIN products p  ON od.productid = p.productid;`);
         for (var i = 0; i < result.rows.length; i++) {
             if (result.rows[i].type == 'CHICKEN') {
-                chicken++;
+                chicken+= parseInt(result.rows[i].productquantity);
             }
             else if (result.rows[i].type == 'LAMB') {
-                lamb++;
+                lamb+=result.rows[i].productquantity;
             }
             else {
-                calf++;
+                calf+=result.rows[i].productquantity;
             }
         }
         res.json([lamb, calf, chicken])
@@ -406,9 +392,9 @@ app.post("/income", async (req, res) => {
         let name = month[d.getMonth()];
         const Year = new Date().getFullYear();
         console.log(Year)
-        const result = await db.query(`select orderdate from orders;`);
-        const result1 = await db.query(`select extract(year from orderdate) from orders;`);
-        const result2 = await db.query(`select extract(month from orderdate) from orders;`);
+        const result = await db.query(`select * from orders o inner join orderdetail od on o.ordersid = od.ordersid;`);
+        const result1 = await db.query(`select extract(year from orderdate) from orders o inner join orderdetail od on o.ordersid = od.ordersid;`);
+        const result2 = await db.query(`select extract(month from orderdate) from orders o inner join orderdetail od on o.ordersid = od.ordersid;`);
         const result3 = await db.query(`select extract(day from orderdate) from orders;`);
 
         console.log(result1.rows)
@@ -423,7 +409,11 @@ app.post("/income", async (req, res) => {
                     monthcount[1]++;
                 }
                 else if (result2.rows[i].extract == '3') {
-                    monthcount[2]++;
+                    var str = result.rows[i].totalprice
+                    console.log(result.rows[i].totalprice)
+                   var totalprice= str.replace('$', '') // str = "this"
+
+                    monthcount[2] += parseFloat(totalprice);
                 }
                 else if (result2.rows[i].extract == '4') {
                     monthcount[3]++;
@@ -483,6 +473,9 @@ app.get("/calendar", (req, res) => {
 })
 app.get("/allEmployes", (req, res) => {
     res.sendFile(__dirname + "/html/adminWorkersProfiles.html")
+})
+app.get("/temporaryshifts", (req, res) => {
+    res.sendFile(__dirname + "/html/temporaryshifts.html")
 })
 app.get("/income", (req, res) => {
     res.sendFile(__dirname + "/html/income.html")

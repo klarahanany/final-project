@@ -6,7 +6,8 @@ shift,
 products,
 orders,
 orderdetail,
-cartitems;
+cartitems,
+feedback;
 CREATE TABLE customers (
     personid SERIAL,
     username varchar(255) UNIQUE,
@@ -68,6 +69,36 @@ CREATE TABLE workers (
         OR Catagory = 'WORKER'
     ),
     phone varchar(15) NOT NULL UNIQUE,
+    Sunday varchar(255) CHECK(
+        Sunday = 'MORNING'
+        OR Sunday = 'EVENING'
+        OR Sunday = 'DAYOFF'
+    ),
+    Monday varchar(255) CHECK(
+        Monday = 'MORNING'
+        OR Monday = 'EVENING'
+        OR Monday = 'DAYOFF'
+    ),
+    Tuesday varchar(255) CHECK(
+        Tuesday = 'MORNING'
+        OR Tuesday = 'EVENING'
+        OR Tuesday = 'DAYOFF'
+    ),
+    Wednesday varchar(255) CHECK(
+        Wednesday = 'MORNING'
+        OR Wednesday = 'EVENING'
+        OR Wednesday = 'DAYOFF'
+    ),
+    Thursday varchar(255) CHECK(
+        Thursday = 'MORNING'
+        OR Thursday = 'EVENING'
+        OR Thursday = 'DAYOFF'
+    ),
+    Friday varchar(255) CHECK(
+        Friday = 'MORNING'
+        OR Friday = 'EVENING'
+        OR Friday = 'DAYOFF'
+    ),
     PRIMARY KEY(employeeId)
 );
 CREATE TABLE shift(
@@ -231,6 +262,12 @@ INSERT INTO workers (
         Address,
         City,
         Catagory,
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
         phone
     )
 values(
@@ -243,8 +280,38 @@ values(
         'maker',
         'acre',
         'WORKER',
+        'MORNING',
+        'MORNING',
+        'EVENING',
+        'MORNING',
+        'MORNING',
+        'MORNING',
         '0545555555'
     );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         2,
+--         'hanany',
+--         'rania',
+--         'raniahanany',
+--         'rania.hanany@gmail.com',
+--         '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
+--         'maker',
+--         'acre',
+--         'WORKER',
+--         '0546666666'
+--     );
 INSERT INTO workers (
         employeeId,
         LastName,
@@ -255,30 +322,12 @@ INSERT INTO workers (
         Address,
         City,
         Catagory,
-        phone
-    )
-values(
-        2,
-        'hanany',
-        'rania',
-        'raniahanany',
-        'rania.hanany@gmail.com',
-        '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
-        'maker',
-        'acre',
-        'WORKER',
-        '0546666666'
-    );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
         phone
     )
 values(
@@ -291,128 +340,134 @@ values(
         'nazareth',
         'nazareth',
         'ADMIN',
+        'DAYOFF',
+        'DAYOFF',
+        'DAYOFF',
+        'DAYOFF',
+        'DAYOFF',
+        'DAYOFF',
         '0547777777'
     );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        phone
-    )
-values(
-        4,
-        'shtewe',
-        'shahdd',
-        'shahdshtewe',
-        'shahdshtewe8@gmail.com',
-        '$2a$12$e8JUvtasb6kPHgtXerkR/Oo4UChdolrq5CZtkf14FBWWWhEM30w9q',
-        'nazareth',
-        'nazareth',
-        'WORKER',
-        '0548888888'
-    );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        phone
-    )
-values(
-        5,
-        'shtewe',
-        'reyad',
-        'reyadshtewe',
-        'reyadshtewe8@gmail.com',
-        '$2a$10$cChh302B29Y.DRZOm2Ra3.akKdo..3y4crsELZ0F..NbNbbqrEu16',
-        'nazareth',
-        'nazareth',
-        'WORKER',
-        '0541010101'
-    );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        phone
-    )
-values(
-        6,
-        'hanany',
-        'soha',
-        'rt',
-        'rt.hanany@gmail.com',
-        '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
-        'maker',
-        'acre',
-        'WORKER',
-        '05455555'
-    );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        phone
-    )
-values(
-        7,
-        'hanany',
-        'so',
-        'r',
-        'r.hanany@gmail.com',
-        '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
-        'maker',
-        'acre',
-        'WORKER',
-        '0543455555'
-    );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        phone
-    )
-values(
-        8,
-        'hanany',
-        'so3',
-        'r3',
-        'r3.hanany@gmail.com',
-        '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
-        'maker',
-        'acre',
-        'WORKER',
-        '0543725555'
-    );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         4,
+--         'shtewe',
+--         'shahdd',
+--         'shahdshtewe',
+--         'shahdshtewe8@gmail.com',
+--         '$2a$12$e8JUvtasb6kPHgtXerkR/Oo4UChdolrq5CZtkf14FBWWWhEM30w9q',
+--         'nazareth',
+--         'nazareth',
+--         'WORKER',
+--         '0548888888'
+--     );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         5,
+--         'shtewe',
+--         'reyad',
+--         'reyadshtewe',
+--         'reyadshtewe8@gmail.com',
+--         '$2a$10$cChh302B29Y.DRZOm2Ra3.akKdo..3y4crsELZ0F..NbNbbqrEu16',
+--         'nazareth',
+--         'nazareth',
+--         'WORKER',
+--         '0541010101'
+--     );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         6,
+--         'hanany',
+--         'soha',
+--         'rt',
+--         'rt.hanany@gmail.com',
+--         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
+--         'maker',
+--         'acre',
+--         'WORKER',
+--         '05455555'
+--     );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         7,
+--         'hanany',
+--         'so',
+--         'r',
+--         'r.hanany@gmail.com',
+--         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
+--         'maker',
+--         'acre',
+--         'WORKER',
+--         '0543455555'
+--     );
+-- INSERT INTO workers (
+--         employeeId,
+--         LastName,
+--         FirstName,
+--         UserName,
+--         Email,
+--         Password,
+--         Address,
+--         City,
+--         Catagory,
+--         phone
+--     )
+-- values(
+--         8,
+--         'hanany',
+--         'so3',
+--         'r3',
+--         'r3.hanany@gmail.com',
+--         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
+--         'maker',
+--         'acre',
+--         'WORKER',
+--         '0543725555'
+--     );
 -- INSERT INTO shift (
 --         shiftDate,
 --         shiftType,
