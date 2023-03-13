@@ -344,7 +344,7 @@ app.post("/inventory", async (req, res) => {
         )
     values(
             '${req.body.desc}',
-            '${req.body.price+"$"}',
+            '${req.body.price + "$"}',
             'LAMB',
             ${req.body.quantity},
             '${req.body.img}'
@@ -354,19 +354,20 @@ app.post("/inventory", async (req, res) => {
     }
 });
 app.post("/feedback", async (req, res) => {
-    const username2 = req.cookies.username;
-        const result = await db.query(`SELECT personid FROM shift where username = '${username2}' and shiftdate='${date}';`);
-    if(username2 == undefined){
-        res.log('fhhdh')
+    const username2 = req.cookies.customerusername;
+    console.log(username2)
+    const result = await db.query(`SELECT personid FROM customers where username = '${username2}';`);
+    console.log(username2)
+    if (username2 == undefined) {
         res.json('faild')
     }
-    else{
+    else {
         console.log('shhs')
         var sql = `INSERT INTO feedback (personid,feedback) VALUES ('${result.rows[0].personid}','${req.body.feedback} ');`
         db.query(sql);
-    res.json("gdg")
+        res.json("gdg")
     }
-    res.json("gsgsg")
+    // res.json("gsgsg")
 });
 app.post("/allorders", async (req, res) => {
     if (req.body.num == '1') {
@@ -415,52 +416,40 @@ app.post("/income", async (req, res) => {
         console.log(result3.rows)
         for (var i = 0; i < result.rows.length; i++) {
             if (result1.rows[i].extract == Year) {
-                if(result2.rows[i].extract == '1')
-                {
+                if (result2.rows[i].extract == '1') {
                     monthcount[0]++;
                 }
-                else if(result2.rows[i].extract == '2')
-                {
+                else if (result2.rows[i].extract == '2') {
                     monthcount[1]++;
                 }
-                else if(result2.rows[i].extract == '3')
-                {
+                else if (result2.rows[i].extract == '3') {
                     monthcount[2]++;
                 }
-                else if(result2.rows[i].extract == '4')
-                {
+                else if (result2.rows[i].extract == '4') {
                     monthcount[3]++;
                 }
-                else if(result2.rows[i].extract == '5')
-                {
+                else if (result2.rows[i].extract == '5') {
                     monthcount[4]++;
                 }
-                else if(result2.rows[i].extract == '6')
-                {
+                else if (result2.rows[i].extract == '6') {
                     monthcount[5]++;
                 }
-                else if(result2.rows[i].extract == '7')
-                {
+                else if (result2.rows[i].extract == '7') {
                     monthcount[6]++;
                 }
-                else if(result2.rows[i].extract == '8')
-                {
+                else if (result2.rows[i].extract == '8') {
                     monthcount[7]++;
                 }
-                else if(result2.rows[i].extract == '9')
-                {
+                else if (result2.rows[i].extract == '9') {
                     monthcount[8]++;
                 }
-                else if(result2.rows[i].extract == '10')
-                {
+                else if (result2.rows[i].extract == '10') {
                     monthcount[9]++;
                 }
-                else if(result2.rows[i].extract == '11')
-                {
+                else if (result2.rows[i].extract == '11') {
                     monthcount[10]++;
                 }
-                else if(result2.rows[i].extract == '12')
-                {
+                else if (result2.rows[i].extract == '12') {
                     monthcount[11]++;
                 }
             }
@@ -468,6 +457,14 @@ app.post("/income", async (req, res) => {
         res.json(monthcount)
 
     }
+});
+app.post("/customerfeedback", async (req, res) => {
+
+    const result = await db.query(`select * from feedback f INNER JOIN customers c ON f.personid=c.personid;`)
+    console.log(result.rows)
+
+    res.json(result.rows)
+
 });
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
@@ -510,6 +507,9 @@ app.get("/allorders", (req, res) => {
 })
 app.get("/feedback", (req, res) => {
     res.sendFile(__dirname + "/html/feedback.html")
+})
+app.get("/customerfeedback", (req, res) => {
+    res.sendFile(__dirname + "/html/admincustomerfeedback.html")
 })
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/html', express.static(__dirname + '/html'))

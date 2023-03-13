@@ -115,6 +115,8 @@ a:hover {
 
 #check {
     display: none;
+    position:absolute;
+    z-index: 10000;
 }
 
 @media(max-width: 975px) {

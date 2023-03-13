@@ -1,63 +1,59 @@
 <!DOCTYPE html>
 <html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+
 <body>
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-<canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+    <section class="high">
 
-<script>
-var xValues = ['january','February','March','April','May','June','July','August','September','October','November','December'];
-var yValues = [1000,2000,1500,4000,2888,5000,1055,1551,1455,5514,5155,6666];
+        <img src="/img/meat.jpg" alt="" class="logo">
 
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      fill: false,
-      lineTension: 0,
-      backgroundColor: "rgba(0,0,255,1.0)",
-      borderColor: "rgba(0,0,255,0.1)",
-      data: yValues
-    }]
-  },
-  options: {
-    legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 0, max:10000}}],
-    }
-  }
-});
+    </section>
+    <nav>
 
-var xValues = [ "בשר טלה", "בשר עגל", "עוף"];
-var yValues = [40,40,70 ];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
+        <i class='bx bx-cart-alt' id="cart-icon"></i>
+        <p id="customerName"></p>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bx bx-list-ul"></i>
+        </label>
 
-new Chart("myChart2", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "אחוז המכירות לכל סוג בשר בחודש זה " 
-    }
-  }
-});
-</script>
+        <ul>
+            <li><a class="home" href="home.html">HOME</a></li>
+            <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
+            <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
+            <li><a class="logIn" href="/login">LOGIN</a></li>
+            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+        </ul>
+    </nav>
+
+      
+      <div class="container">
+        <div class="title">
+          <h2 class="title">טופס משוב</h2>
+        </div>
+       
+
+          <form>
+              <div class="row">
+                  <div class="col-25">
+                      <label for="feed_back">משוב</label>
+                  </div>
+                  <div class="col-75">
+                      <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                  <input type="button" onclick="submitfun()" value="שלח">
+              </div>
+          </form>
+      </div>
 
 </body>
 </html>
-
-

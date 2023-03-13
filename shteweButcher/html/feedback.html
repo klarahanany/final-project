@@ -2,57 +2,63 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/feedback.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
-    <h2>טופס משוב</h2>
-    <h1></h1>
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="col-25">
-                    <label for="fname">שם</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="fname" name="firstname" placeholder="שם שלך">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="lname">משפחה</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="lname" name="lastname" placeholder="שם משפחה">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="email">דואר אלקטרוני</label>
-                </div>
-                <div class="col-75">
-                    <input type="email" id="email" name="mailid" placeholder="דואר אלקטרוני">
-                </div>
-            </div>
+    <section class="high">
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="feed_back">משוב</label>
-                </div>
-                <div class="col-75" id="feedback">
-                    <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <input type="submit" value="שלח" onclick="submit()">
-            </div>
-        </form>
-    </div>
+        <img src="/img/meat.jpg" alt="" class="logo">
+
+    </section>
+    <nav>
+
+        <i class='bx bx-cart-alt' id="cart-icon"></i>
+        <p id="customerName"></p>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bx bx-list-ul"></i>
+        </label>
+
+        <ul>
+            <li><a class="home" href="home.html">HOME</a></li>
+            <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
+            <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
+            <li><a class="logIn" href="/login">LOGIN</a></li>
+            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+        </ul>
+    </nav>
+
+      
+      <div class="container">
+        <div class="title">
+          <h2 class="title">טופס משוב</h2>
+        </div>
+       
+
+          <form>
+              <div class="row">
+                  <div class="col-25">
+                      <label for="feed_back">משוב</label>
+                  </div>
+                  <div class="col-75">
+                      <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
+                  </div>
+              </div>
+              <div class="row">
+                  <input type="button" onclick="submitfun()" value="שלח">
+              </div>
+          </form>
+      </div>
     <script>
-        async function submit() {
+        async function submitfun() {
             const element = document.getElementById('feedback');
-            console.log(element.value)
             if (element.value == '') {
                 alert('תמלא משוב לפני שתשלח')
             }
@@ -65,8 +71,8 @@
                     body: JSON.stringify(body),
                 });
                 const result1 = await feedbackfetch.json();
-                if(result1=='faild'){
-                    alert('בבקשה תעשה login')
+                if (result1 == 'faild') {
+                    alert('בבקשה תעשה login קודם')
                 }
             }
         }

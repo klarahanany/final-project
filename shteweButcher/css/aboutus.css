@@ -107,6 +107,7 @@ a:hover {
 
 #check {
     display: none;
+    position:relative;
 }
 
 @media(max-width: 952px) {
