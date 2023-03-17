@@ -299,13 +299,13 @@ function updatetotal() {
         var cartBox = cartBoxes[i];
         var priceEle = cartBox.getElementsByClassName('cart-price')[0];
         var quanEle = cartBox.getElementsByClassName('cart-quantity')[0];
-        var price = parseFloat(priceEle.innerText.replace("$", ""));
+        var price = parseFloat(priceEle.innerText.replace("ILS", ""));
         var quan = quanEle.value;
         total = total + (price * quan);
     }
     //if cart contain some cent value
     total = Math.round(total * 100) / 100;
-    document.getElementsByClassName('total-price')[0].innerText = total + '$';
+    document.getElementsByClassName('total-price')[0].innerText = total + 'ILS';
 
 }
 function signup() {

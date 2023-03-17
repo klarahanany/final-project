@@ -64,3 +64,8 @@ body {
   font-size: 20px;
   left: 0px;
 }
+#feedback{
+  display: inline-block;
+  margin-right: 10px;
+  margin-top:20px ;
+}

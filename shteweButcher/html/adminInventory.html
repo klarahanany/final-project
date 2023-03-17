@@ -16,13 +16,13 @@
 
   <div id="mySidenav" class="sidenav">
     <a href="/inventory">
-      <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+      <i class="inventory"> ניהול מלאי</i>
     </a>
     <a href="/adminCalendar">
-      <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+      <i class='calen'>שיבוץ משמרות</i>
     </a>
     <a href="/allEmployes">
-      <i class='bx bx-group profiles '>מידע על העובדים</i>
+      <i class='profiles '>מידע על העובדים</i>
     </a>
     <a href="/allorders">
       <i class="orders">צפייה בכל ההזמנות</i>
@@ -37,7 +37,10 @@
       <i class="salary"> משובי לקוחות</i>
     </a>
     <a href="/temporaryshifts">
-      <i class="salary"> אישור משמירות</i>
+      <i class="salary"> אישור משמרות</i>
+    </a>
+    <a href="/addnewemployee">
+      <i class="salary"> הוספת עובד חדש</i>
     </a>
 
 
@@ -52,13 +55,11 @@
           <th>מחיר</th>
           <th>כמות</th>
           <th>תיאור</th>
-
-
           <th>מזה</th>
-
         </tr>
+        
       </thead>
-      <tbody>
+      <tbody id="tbody">
 
       </tbody>
     </table>
@@ -176,7 +177,7 @@
       // < th > header1</th >
       //   <th>header2</th>
       //   <th>header3</th>
-      var element = document.getElementById("firsttable");
+      var element = document.getElementById("tbody");
       var element2 = document.getElementById("products");
       var element3 = document.getElementById("productsForDelete");
       var element4 = document.getElementById("productsForChange");

@@ -7,7 +7,8 @@ products,
 orders,
 orderdetail,
 cartitems,
-feedback;
+feedback,
+temporaryshifts;
 CREATE TABLE customers (
     personid SERIAL,
     username varchar(255) UNIQUE,
@@ -101,6 +102,20 @@ CREATE TABLE workers (
     ),
     PRIMARY KEY(employeeId)
 );
+-- CREATE TABLE temporaryshifts (
+--     temporaryshift SERIAL,
+--     morning1 varchar(255) REFERENCES workers (UserName),
+--     morning2 varchar(255) REFERENCES workers (UserName),
+--     evening1 varchar(255) REFERENCES workers (UserName),
+--     evening2 varchar(255) REFERENCES workers (UserName) 
+-- );
+CREATE TABLE temporaryshifts (
+    temporaryshift SERIAL,
+    morning1 varchar(255),
+    morning2 varchar(255),
+    evening1 varchar(255),
+    evening2 varchar(255)
+);
 CREATE TABLE shift(
     shiftid SERIAL,
     shiftDate DATE,
@@ -121,133 +136,70 @@ INSERT INTO products (
     )
 values(
         'סטייק בשר בקר x4',
-        '7$',
+        '7ILS',
         'LAMB',
         20,
         '/img/beef1.png'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+    (
         'סטייק בקר חתוך עבה מפולפל',
-        '5.8$',
+        '5.8ILS',
         'LAMB',
         20,
         '/img/beef2.png'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+    (
         'חזה עוף חתוך לקוביות רזה במיוחד',
-        '5.6$',
+        '5.6ILS',
         'CHICKEN',
         20,
         '/img/ch2.png'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+    (
         'ירכי עוף ללא עצמות וללא עור (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'CHICKEN',
         20,
         '/img/ch1.png'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'פילה (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'CALF',
         20,
         '/img/phele.jpg'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'שווארמה בשר (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'CALF',
         20,
         '/img/shawarma3egel.jpg'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'שווארמה עוף (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'CHICKEN',
         20,
         '/img/shawarmachicken.jpg'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'סנטה (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'LAMB',
         20,
         '/img/senta3egel.jpg'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'כנפי עוף (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'LAMB',
         20,
         '/img/knafe3of.jpg'
-    );
-INSERT INTO products (
-        description,
-        price,
-        type,
-        quantity,
-        img
-    )
-values(
+    ),
+(
         'אנטריקות (1 ק"ג)',
-        '5.2$',
+        '5.2ILS',
         'LAMB',
         20,
         '/img/antrekot.jpg'
@@ -280,57 +232,33 @@ values(
         'maker',
         'acre',
         'WORKER',
-        'MORNING',
+        'DAYOFF',
         'MORNING',
         'EVENING',
         'MORNING',
         'MORNING',
-        'MORNING',
+        'EVENING',
         '0545555555'
-    );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         2,
---         'hanany',
---         'rania',
---         'raniahanany',
---         'rania.hanany@gmail.com',
---         '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
---         'maker',
---         'acre',
---         'WORKER',
---         '0546666666'
---     );
-INSERT INTO workers (
-        employeeId,
-        LastName,
-        FirstName,
-        UserName,
-        Email,
-        Password,
-        Address,
-        City,
-        Catagory,
-        Sunday,
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        phone
-    )
-values(
+    ),
+    (
+        2,
+        'hanany',
+        'rania',
+        'raniahanany',
+        'rania.hanany@gmail.com',
+        '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
+        'maker',
+        'acre',
+        'WORKER',
+        'MORNING',
+        'DAYOFF',
+        'EVENING',
+        'MORNING',
+        'MORNING',
+        'EVENING',
+        '0546666666'
+    ),
+    (
         3,
         'shtewe',
         'nada',
@@ -347,137 +275,61 @@ values(
         'DAYOFF',
         'DAYOFF',
         '0547777777'
+    ),
+    (
+        4,
+        'shtewe',
+        'nona',
+        'nonashtewe',
+        'nonashtewe8@gmail.com',
+        '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
+        'nazareth',
+        'nazareth',
+        'WORKER',
+        'MORNING',
+        'EVENING',
+        'MORNING',
+        'EVENING',
+        'EVENING',
+        'DAYOFF',
+        '0547777377'
+    ),
+(
+        5,
+        'shtewe',
+        '---',
+        '---shtewe',
+        '---shtewe8@gmail.com',
+        '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
+        'nazareth',
+        'nazareth',
+        'WORKER',
+        'EVENING',
+        'EVENING',
+        'MORNING',
+        'EVENING',
+        'DAYOFF',
+        'MORNING',
+        '0544977377'
+    ),
+(
+        6,
+        'shtewe',
+        'aaa',
+        'aaashtewe',
+        'aaashtewe8@gmail.com',
+        '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
+        'nazareth',
+        'nazareth',
+        'WORKER',
+        'MORNING',
+        'EVENING',
+        'MORNING',
+        'EVENING',
+        'DAYOFF',
+        'MORNING',
+        '054497337'
     );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         4,
---         'shtewe',
---         'shahdd',
---         'shahdshtewe',
---         'shahdshtewe8@gmail.com',
---         '$2a$12$e8JUvtasb6kPHgtXerkR/Oo4UChdolrq5CZtkf14FBWWWhEM30w9q',
---         'nazareth',
---         'nazareth',
---         'WORKER',
---         '0548888888'
---     );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         5,
---         'shtewe',
---         'reyad',
---         'reyadshtewe',
---         'reyadshtewe8@gmail.com',
---         '$2a$10$cChh302B29Y.DRZOm2Ra3.akKdo..3y4crsELZ0F..NbNbbqrEu16',
---         'nazareth',
---         'nazareth',
---         'WORKER',
---         '0541010101'
---     );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         6,
---         'hanany',
---         'soha',
---         'rt',
---         'rt.hanany@gmail.com',
---         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
---         'maker',
---         'acre',
---         'WORKER',
---         '05455555'
---     );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         7,
---         'hanany',
---         'so',
---         'r',
---         'r.hanany@gmail.com',
---         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
---         'maker',
---         'acre',
---         'WORKER',
---         '0543455555'
---     );
--- INSERT INTO workers (
---         employeeId,
---         LastName,
---         FirstName,
---         UserName,
---         Email,
---         Password,
---         Address,
---         City,
---         Catagory,
---         phone
---     )
--- values(
---         8,
---         'hanany',
---         'so3',
---         'r3',
---         'r3.hanany@gmail.com',
---         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
---         'maker',
---         'acre',
---         'WORKER',
---         '0543725555'
---     );
--- INSERT INTO shift (
---         shiftDate,
---         shiftType,
---         UserName
---     )
--- values(
---         '2023-03-17',
---         'MORNING',
---         'klarahanany'
---     );
 INSERT INTO customers (
         UserName,
         Email,

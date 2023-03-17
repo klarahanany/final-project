@@ -285,9 +285,9 @@ app.post("/shopnow", async (req, res) => {
 
             var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${result1.rows[0].productid};`
             db.query(sql);
-            var price = array_1[1].replace('$', '');
+            var price = array_1[1].replace('ILS', '');
             var totalprice = parseFloat(price) * array_1[2]
-            totalprice = totalprice.toString() + "$"
+            totalprice = totalprice.toString() + "ILS"
             var sql3 = `INSERT INTO orderdetail (ordersid,productid,totalprice,productquantity) VALUES ('${resulty.rows[0].ordersid}','${result1.rows[0].productid}','${totalprice}','${array_1[2]}');`
             db.query(await sql3);
 
@@ -318,7 +318,7 @@ app.post("/inventory", async (req, res) => {
         res.json('ggs')
     }
     else if (req.body.num == '4') {
-        var sql = `UPDATE products SET price = '${parseInt(req.body.price) + "$"}' WHERE description = '${req.body.value}';`
+        var sql = `UPDATE products SET price = '${parseInt(req.body.price) + "ILS"}' WHERE description = '${req.body.value}';`
         db.query(sql);
         res.json('ggs')
     }
@@ -332,7 +332,7 @@ app.post("/inventory", async (req, res) => {
         )
     values(
             '${req.body.desc}',
-            '${req.body.price + "$"}',
+            '${req.body.price + "ILS"}',
             'LAMB',
             ${req.body.quantity},
             '${req.body.img}'
@@ -372,13 +372,13 @@ app.post("/income", async (req, res) => {
         const result = await db.query(`SELECT od.productquantity, od.ordersid, p.productid,p.type FROM orderdetail od INNER JOIN products p  ON od.productid = p.productid;`);
         for (var i = 0; i < result.rows.length; i++) {
             if (result.rows[i].type == 'CHICKEN') {
-                chicken+= parseInt(result.rows[i].productquantity);
+                chicken += parseInt(result.rows[i].productquantity);
             }
             else if (result.rows[i].type == 'LAMB') {
-                lamb+=result.rows[i].productquantity;
+                lamb += result.rows[i].productquantity;
             }
             else {
-                calf+=result.rows[i].productquantity;
+                calf += result.rows[i].productquantity;
             }
         }
         res.json([lamb, calf, chicken])
@@ -411,7 +411,7 @@ app.post("/income", async (req, res) => {
                 else if (result2.rows[i].extract == '3') {
                     var str = result.rows[i].totalprice
                     console.log(result.rows[i].totalprice)
-                   var totalprice= str.replace('$', '') // str = "this"
+                    var totalprice = str.replace('ILS', '') // str = "this"
 
                     monthcount[2] += parseFloat(totalprice);
                 }
@@ -456,8 +456,172 @@ app.post("/customerfeedback", async (req, res) => {
     res.json(result.rows)
 
 });
+app.post("/saveddata", async (req, res) => {
+    const result = await db.query(`select * from temporaryshifts;`)
+    const result2 = await db.query(`select * from workers where Catagory='WORKER';`)
+    res.json([result.rows , result2.rows] );
+    
+});
+app.post("/tem", async (req, res) => {
+    //save in cookies
+    //check if done already there
+    const done = req.cookies.done;
+    if (done == 'done') {
+        res.json("already done");
+    }
+    else {
+        res.cookie("done", "done", { maxage: 72000000 });
+        const allEmployeswants = [];
+        const allEmployes = [];
+        const result = await db.query(`select * from workers where Catagory='WORKER';`)
+
+        for (var i = 0; i < result.rows.length; i++) {
+
+            const array = [];
+            array[0] = result.rows[i].sunday;
+            array[1] = result.rows[i].monday;
+            array[2] = result.rows[i].tuesday;
+            array[3] = result.rows[i].wednesday;
+            array[4] = result.rows[i].thursday;
+            array[5] = result.rows[i].friday;
+
+            allEmployeswants.push(array);
+            allEmployes.push(result.rows[i])
+        }
+        // console.log(allEmployeswants)
+        var morningshifts = []
+        var eveningshifts = []
+        var dayoffshifts = []
+        for (var k = 0; k < 6; k++) {
+
+            var morning = [];
+            var evening = [];
+            var dayoff = [];
+            var morningx = [];
+            var eveningy = [];
+            for (var j = 0; j < allEmployes.length; j++) {
+                if (allEmployeswants[j][k] == 'MORNING') {
+                    morning.push(allEmployes[j]);
+                }
+                else if (allEmployeswants[j][k] == 'EVENING') {
+                    evening.push(allEmployes[j]);
+                }
+                else if (allEmployeswants[j][k] == 'DAYOFF') {
+                    dayoff.push(allEmployes[j]);
+                }
+            }
+            var morning1;
+            var morning2;
+            var evening1;
+            var evening2;
+
+            if (morning.length != 0) {
+                morning1 = morning[Math.floor(Math.random() * morning.length)];
+                var elementToRemoveIndex1 = morning.indexOf(morning1);
+                morning.splice(elementToRemoveIndex1, 1);
+            }
+            else {
+                if (evening.length > 2) {
+                    morning1 = evening[Math.floor(Math.random() * evening.length)];
+                    var elementToRemoveIndex1 = evening.indexOf(morning1);
+                    evening.splice(elementToRemoveIndex1, 1);
+                }
+                else {
+                    morning1 = dayoff[Math.floor(Math.random() * dayoff.length)];
+                    var elementToRemoveIndex1 = dayoff.indexOf(morning1);
+                    dayoff.splice(elementToRemoveIndex1, 1);
+                }
+            }
+            if (morning.length != 0) {
+                morning2 = morning[Math.floor(Math.random() * morning.length)];
+                var elementToRemoveIndex1 = morning.indexOf(morning2);
+                // console.log(randomItem1);
+                morning.splice(elementToRemoveIndex1, 1);
+            }
+            else {
+                if (evening.length > 2) {
+                    morning2 = evening[Math.floor(Math.random() * evening.length)];
+                    var elementToRemoveIndex1 = evening.indexOf(morning2);
+                    // console.log(randomItem1);
+                    evening.splice(elementToRemoveIndex1, 1);
+                }
+                else {
+                    morning2 = dayoff[Math.floor(Math.random() * dayoff.length)];
+                    var elementToRemoveIndex1 = dayoff.indexOf(morning2);
+                    // console.log(randomItem1);
+                    dayoff.splice(elementToRemoveIndex1, 1);
+                }
+            }
+            if (evening.length != 0) {
+                evening1 = evening[Math.floor(Math.random() * evening.length)];
+                var elementToRemoveIndex1 = evening.indexOf(evening1);
+                // console.log(randomItem1);
+                evening.splice(elementToRemoveIndex1, 1);
+            }
+            else {
+                if (morning.length > 0) {
+                    evening1 = morning[Math.floor(Math.random() * morning.length)];
+                    var elementToRemoveIndex1 = morning.indexOf(evening1);
+                    // console.log(randomItem1);
+                    morning.splice(elementToRemoveIndex1, 1);
+                }
+                else {
+                    evening1 = dayoff[Math.floor(Math.random() * dayoff.length)];
+                    var elementToRemoveIndex1 = dayoff.indexOf(evening1);
+                    // console.log(randomItem1);
+                    dayoff.splice(elementToRemoveIndex1, 1);
+                }
+            }
+            if (evening.length != 0) {
+                evening2 = evening[Math.floor(Math.random() * evening.length)];
+                var elementToRemoveIndex1 = evening.indexOf(evening2);
+                // console.log(randomItem1);
+                evening.splice(elementToRemoveIndex1, 1);
+            }
+            else {
+                if (morning.length > 0) {
+                    evening2 = morning[Math.floor(Math.random() * morning.length)];
+                    var elementToRemoveIndex1 = morning.indexOf(evening2);
+                    // console.log(randomItem1);
+                    morning.splice(elementToRemoveIndex1, 1);
+                }
+                else {
+                    evening2 = dayoff[Math.floor(Math.random() * dayoff.length)];
+                    var elementToRemoveIndex1 = dayoff.indexOf(evening2);
+                    // console.log(randomItem1);
+                    dayoff.splice(elementToRemoveIndex1, 1);
+                }
+            }
+            if (morning.length > 0) {
+                for (var c = 0; c < morning.length; c++) {
+                    dayoff.push(morning[c]);
+                }
+            }
+            if (evening.length > 0) {
+                for (var s = 0; s < evening.length; s++) {
+                    dayoff.push(evening[s]);
+                }
+            }
+            morningx.push(morning1)
+            morningx.push(morning2)
+            eveningy.push(evening1)
+            eveningy.push(evening2)
+            morningshifts[k] = morningx;
+            eveningshifts[k] = eveningy;
+            dayoffshifts[k] = dayoff;
+            //add to data base 
+            sql = `INSERT INTO temporaryshifts (morning1,morning2,evening1,evening2) VALUES ('${morning1.firstname+" "+morning1.lastname}','${morning2.firstname+" "+morning2.lastname}','${evening1.firstname+" "+evening1.lastname}','${evening2.firstname+" "+evening2.lastname}');`
+            db.query(sql);
+        }
+      
+        res.json([morningshifts, eveningshifts, dayoffshifts])
+    }
+});
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
+})
+app.get("/addnewemployee", (req, res) => {
+    res.sendFile(__dirname + "/html/addnewemployee.html")
 })
 app.get("/new", (req, res) => {
     res.sendFile(__dirname + "/html/new.html")

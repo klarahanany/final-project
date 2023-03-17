@@ -75,9 +75,9 @@ body {
    width: 90%;
   /*display: flex;
   margin-right: 300px; */
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-  gap: 1rem;
+  gap: 1rem; */
   /* display: flex; */
 }
 
@@ -93,6 +93,7 @@ body {
   /* padding:10px 15px; */
   margin-right: 10px;
   margin-left: 10px;
+  margin-bottom: 10px;
   width: 200px;
-
+  display: inline-block;
 }
