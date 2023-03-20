@@ -215,7 +215,6 @@
       var workerForDelete = document.getElementById("workerForDelete");
       name = workerForDelete.value;
       array = name.split(" ")
-      console.log(array)
       body = { firstname: array[0], lastname: array[1] }
       const fetchDeleteWorker = await fetch("http://localhost:4000/deleteWorker", {
         method: "POST",
@@ -227,8 +226,48 @@
       const result = await fetchDeleteWorker.json();
       window.location.reload()
     }
-    async function addEmployee(){
-      
+    async function addEmployee() {
+      first = document.getElementById("name")
+      last = document.getElementById("fam")
+      username = document.getElementById("username")
+      email = document.getElementById("email")
+      password = document.getElementById("pass")
+      city = document.getElementById("city")
+      phone = document.getElementById("number")
+      worker = document.getElementById("option1")
+      admin = document.getElementById("option2")
+      if (last.textContent == 'תכניס שם משפחה' ||
+        first.textContent == 'תכניס שם פרטי' ||
+        username.textContent == 'תכניס שם משתמש' ||
+        email.textContent == 'תכניס עיר מגיורים ' ||
+        email.textContent == 'תכניס דואר אלקטרוני' ||
+        password.textContent == 'תכניס סיסמה' ||
+        phone.textContent == 'תכניס מספר טלפון' ||
+        (worker.checked == false && admin.checked == false)) {
+        alert("בבקשה תמלא את כל הנתונים")
+      } else {
+        var checkedWorker = 0;
+        if (worker.checked) {
+          checkedWorker = 1;
+        }
+        body = {
+          last: last.value, first: first.value, username: username.value, email: email.value,
+          password: password.value, city: city.value, phone: phone.value, check: checkedWorker
+        }
+        const fetchAddWorker = await fetch("http://localhost:4000/addWorker", {
+          method: "POST",
+          Credentials: "include",
+          headers: { "Content-Type": "application/JSON" },
+          body: JSON.stringify(body),
+        });
+        const result = await fetchAddWorker.json();
+        if (result == 'failed') {
+          alert("שם משתמש זה קיים")
+        } else {
+          window.location.reload();
+        }
+      }
+
     }
   </script>
 </body>

@@ -6,10 +6,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
-
 }
 
 body {
+    overflow-y: hidden;
     background-color: #f9f9fa;
     margin-left: 10px;
 }
@@ -69,7 +69,7 @@ body {
     -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
-    height: 500px;
+    height: 510px;
     margin-bottom: 30px;
     margin-right: 200px;
 }
@@ -84,6 +84,7 @@ body {
 
 .user-card-full .user-profile {
     border-radius: 5px 0 0 5px;
+    height: 200px;
 }
 
 .bg-c-lite-green {
@@ -99,9 +100,10 @@ body {
 }
 
 .m-b-25 {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     float: right;
     margin-right: 20px;
+    margin-top: 0px;
 }
 
 .img-radius {
@@ -126,6 +128,7 @@ h6 {
 
 .card-block {
     padding: 1.25rem;
+    float: right;
 }
 
 .b-b-default {
@@ -149,7 +152,7 @@ h6 {
 }
 
 .text-muted {
-    color: #919aa3 !important;
+    color: #7d9ccf !important;
 }
 
 .b-b-default {
@@ -159,29 +162,33 @@ h6 {
 .f-w-400 {
     margin-right: 100px;
     float: right;
+    color: #f38c9c;
 
 }
 
 #information {
     font-size: large;
+    font-weight: bold;
     float: right;
+    color: #34568b;
+    border-bottom: #34568b solid 2px;
 }
 
 #nameworker {
     font-size: large;
+    margin-right: 34px;
+    color: #f9f9fa;
 }
 
-#c {
+#c ,#p,#s,#e{
     float: right;
+    color: #34568b;
+    font-weight: bold;
+    margin-right: 33px;
+    font-size: 16px;
 }
 
-#p {
-    float: right;
-}
 
-#e {
-    float: right;
-}
 
 
 .f-w-600 {
@@ -218,4 +225,11 @@ h6 {
     margin: 0 10px 0 0;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+li{
+  float: right;
+    margin-right: 60px;
+    color:#7d9ccf;
+    font-weight: bold;
+    font-size: 15px;
 }

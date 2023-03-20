@@ -499,6 +499,31 @@ app.post("/deleteWorker", async (req, res) => {
     res.json("--")
 
 });
+app.post("/addWorker", async (req, res) => {
+    const result1 = await db.query(`select * from workers where UserName = '${req.body.username}'`)
+    console.log("d")
+    if (result1.rowCount == 0) {
+        console.log("d")
+        catagory = '';
+        if (req.body.check == 1) {
+            catagory = 'WORKER'
+        }
+        else {
+            catagory = 'ADMIN'
+        }
+        const result = await db.query(`SELECT max(employeeid) FROM workers;`)
+        bcrypt.genSalt(saltRounds, async function (err, salt) {
+            bcrypt.hash(req.body.password, salt, async function (err, hash) {
+                var sql = `INSERT INTO workers(employeeId,LastName,FirstName,UserName,Email,Password,City,Catagory,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,phone) VALUES ('${result.rows[0].max + 1}','${req.body.last}','${req.body.first}','${req.body.username}','${req.body.email}','${hash}','${req.body.city}','${catagory}','DAYOFF','DAYOFF','DAYOFF','DAYOFF','DAYOFF','DAYOFF','${req.body.phone}');`
+                db.query(sql);
+            });
+        });
+        res.json("gg")
+    }
+    else{
+        res.json("failed")
+    }
+});
 app.post("/saveddatainshifts", async (req, res) => {
     array = req.body.lastarray
     for (var j = 0; j < array.length; j++) {
@@ -803,6 +828,39 @@ app.listen(port, () => {
 function getMonth(month) {
     if (month === 'March') {
         return '03';
+    }
+    else if (month === 'February') {
+        return '02';
+    }
+    else if (month === 'April') {
+        return '04';
+    }
+    else if (month === 'May') {
+        return '05';
+    }
+    else if (month === 'January') {
+        return '01';
+    }
+    else if (month === 'June') {
+        return '06';
+    }
+    else if (month === 'July') {
+        return '07';
+    }
+    else if (month === 'August') {
+        return '08';
+    }
+    else if (month === 'September') {
+        return '09';
+    }
+    else if (month === 'October') {
+        return '10';
+    }
+    else if (month === 'November') {
+        return '11';
+    }
+    else if (month === 'December') {
+        return '12';
     }
     else {
         console.log("getMonth function")

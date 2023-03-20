@@ -12,14 +12,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<body >
+<body>
 
     <div id="mySidenav" class="sidenav">
         <a href="/profile" onclick="first()">
             <i class='profile'> פרופיל</i>
         </a>
         <a href="/calendar">
-            <i >משמרות</i>
+            <i>משמרות</i>
         </a>
         <a href="#">
             <i> עדכון מידע</i>
@@ -38,7 +38,6 @@
                                             alt="User-Profile-Image">
                                     </div>
                                     <h6 class="f-w-600" id="nameworker"></h6>
-                                    <p id="job"></p>
                                     <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                 </div>
                             </div>
@@ -60,7 +59,14 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600" id="s">משמרות מועדפת</p>
-                                            <h6 class="text-muted f-w-400" id="shifts"></h6>
+                                            <ol>
+                                                <li id="sh1" dir="rtl"></li>
+                                                <li id="sh2" dir="rtl"></li>
+                                                <li id="sh3" dir="rtl"></li>
+                                                <li id="sh4" dir="rtl"></li>
+                                                <li id="sh5" dir="rtl"></li>
+                                                <li id="sh6" dir="rtl"></li>
+                                            </ol>
                                         </div>
                                     </div>
 
@@ -72,25 +78,35 @@
             </div>
         </div>
     </div>
-    <script >
-      window.onload= async function startFun(){
-        const fetchProfileWorker = await fetch("http://localhost:4000/profile", {
-            method: "POST",
-            Credentials: "include",
-            headers: { "Content-Type": "application/JSON" },
-        });
-        const result = await fetchProfileWorker.json();
-        const nameW = document.getElementById('nameworker');
-        nameW.textContent=result.firstname +" " + result.lastname;
-        const emaliW = document.getElementById('emailworker');
-        emaliW.textContent=result.email;
-        // const jobW = document.getElementById('job');
-        // jobW.textContent=result.catagory;
-        const phoneW = document.getElementById('phone');
-        phoneW.textContent=result.phone;
-        const cityW = document.getElementById('city');
-        cityW.textContent=result.city;
-    }
+    <script>
+        window.onload = async function startFun() {
+            const fetchProfileWorker = await fetch("http://localhost:4000/profile", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+            });
+            const result = await fetchProfileWorker.json();
+            const nameW = document.getElementById('nameworker');
+            const S = document.getElementById('sh1');
+            const M = document.getElementById('sh2');
+            const T = document.getElementById('sh3');
+            const W = document.getElementById('sh4');
+            const TH = document.getElementById('sh5');
+            const F = document.getElementById('sh6');
+            nameW.textContent = result.firstname + " " + result.lastname;
+            const emaliW = document.getElementById('emailworker');
+            emaliW.textContent = result.email;
+            const phoneW = document.getElementById('phone');
+            phoneW.textContent = result.phone;
+            const cityW = document.getElementById('city');
+            cityW.textContent = result.city;
+            S.textContent = result.sunday
+            M.textContent = result.monday
+            T.textContent = result.tuesday
+            W.textContent = result.wednesday
+            TH.textContent = result.thursday
+            F.textContent = result.friday
+        }
     </script>
 </body>
 
