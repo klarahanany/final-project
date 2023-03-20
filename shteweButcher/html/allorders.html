@@ -16,13 +16,13 @@
 
   <div id="mySidenav" class="sidenav">
     <a href="/inventory">
-      <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
+      <i> ניהול מלאי</i>
     </a>
     <a href="/adminCalendar">
-      <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
+      <i>שיבוץ משמרות</i>
     </a>
     <a href="/allEmployes">
-      <i class='bx bx-group profiles '>מידע על העובדים</i>
+      <i>מידע על העובדים</i>
     </a>
     <a href="/allorders">
       <i class="orders">צפייה בכל ההזמנות</i>
@@ -33,8 +33,14 @@
     <a href="/employeesSalary">
       <i class="salary">משכורות העובדים</i>
     </a>
-    <a href="/customersfeedback">
+    <a href="/customerfeedback">
       <i class="salary"> משובי לקוחות</i>
+    </a>
+    <a href="/temporaryshifts">
+      <i class="shifts"> אישור משמרות</i>
+    </a>
+    <a href="/addnewemployee">
+      <i class="salary"> הוספת עובד חדש</i>
     </a>
 
   </div>
@@ -55,7 +61,7 @@
       </tbody>
     </table>
   </div>
-<script>
+  <script>
     window.onload = async function () {
       // Some code
       console.log(1)
@@ -75,12 +81,12 @@
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
         var td4 = document.createElement("td");
-        for(var j=0 ; j <result[1].length;j++){
-            if(result[0][i].personid == result[1][j].personid){
-                td4.textContent = result[1][j].username;
-            }
+        for (var j = 0; j < result[1].length; j++) {
+          if (result[0][i].personid == result[1][j].personid) {
+            td4.textContent = result[1][j].username;
+          }
         }
-       
+
         td3.textContent = result[0][i].personid;
         td2.textContent = result[0][i].orderdate;
         td1.textContent = result[0][i].ordersid;
@@ -90,12 +96,13 @@
         tr.append(td1);
         element.append(tr)
       }
-    //   var tr = document.createElement("th");
-    //   var th1 = document.createElement("th");
-    //   var th1 = document.createElement("th");
+      //   var tr = document.createElement("th");
+      //   var th1 = document.createElement("th");
+      //   var th1 = document.createElement("th");
 
 
     };
-</script>
+  </script>
 </body>
+
 </html>

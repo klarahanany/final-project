@@ -116,3 +116,86 @@ body {
     padding: 10px 10px;
     text-align: center;
 }
+
+.btn {
+    margin-right: 140px;
+    height: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    /* justify-content: center;
+    display: flex; */
+    width: 180px;
+    background: linear-gradient(to right, #f1758d, #34568b);
+    border-radius: 25px;
+    font-size: 15px;
+}
+.btn:hover{
+    opacity: 1;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    /* bottom: 0; */
+    left: 200px;
+    right: 30px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    float: left;
+    position: absolute;
+    left: 150px;
+    width: 300px;
+    /* position: fixed; */
+    margin-top: 990px;
+    margin-left: 90px;
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+select {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    text-align: right;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn1 {
+    background-color: #34568b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    border-radius: 25px;
+    font-size: 15px;
+    width: 180px;
+    height: 30px;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    background-color: #f1758d;
+    border-radius: 25px;
+    font-size: 15px;
+    width: 180px;
+    height: 30px;
+    /* align-items: center;
+    justify-content: center;
+    display: flex; */
+
+}
+
+.form-container .btn1:hover,
+.open-button:hover {
+    opacity: 1;
+}

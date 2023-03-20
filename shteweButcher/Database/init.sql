@@ -8,7 +8,8 @@ orders,
 orderdetail,
 cartitems,
 feedback,
-temporaryshifts;
+temporaryshifts,
+shiftTemp;
 CREATE TABLE customers (
     personid SERIAL,
     username varchar(255) UNIQUE,
@@ -63,7 +64,6 @@ CREATE TABLE workers (
     UserName varchar(255) UNIQUE,
     Email varchar(255),
     Password varchar(255),
-    Address varchar(255),
     City varchar(255),
     Catagory varchar(255) CHECK(
         Catagory = 'ADMIN'
@@ -114,7 +114,8 @@ CREATE TABLE temporaryshifts (
     morning1 varchar(255),
     morning2 varchar(255),
     evening1 varchar(255),
-    evening2 varchar(255)
+    evening2 varchar(255),
+    PRIMARY KEY(temporaryshift)
 );
 CREATE TABLE shift(
     shiftid SERIAL,
@@ -127,6 +128,18 @@ CREATE TABLE shift(
     PRIMARY KEY (shiftid),
     UserName varchar(255) REFERENCES workers (UserName)
 );
+CREATE TABLE shiftTemp(
+    shiftid SERIAL,
+    shiftDate DATE,
+    shiftType varchar(255) CHECK(
+        shiftType = 'MORNING'
+        OR shiftType = 'EVENING'
+        OR shiftType = 'DAYOFF'
+    ),
+    PRIMARY KEY (shiftid),
+    UserName varchar(255) REFERENCES workers (UserName)
+);
+
 INSERT INTO products (
         description,
         price,
@@ -211,7 +224,6 @@ INSERT INTO workers (
         UserName,
         Email,
         Password,
-        Address,
         City,
         Catagory,
         Sunday,
@@ -224,13 +236,12 @@ INSERT INTO workers (
     )
 values(
         1,
-        'hanany',
-        'klara',
+        'חנאני',
+        'קלרה',
         'klarahanany',
         'klarosh.hanany@gmail.com',
         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
-        'maker',
-        'acre',
+        'עכו',
         'WORKER',
         'DAYOFF',
         'MORNING',
@@ -247,7 +258,6 @@ values(
         'raniahanany',
         'rania.hanany@gmail.com',
         '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
-        'maker',
         'acre',
         'WORKER',
         'MORNING',
@@ -266,7 +276,6 @@ values(
         'nadashtewe8@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
         'nazareth',
-        'nazareth',
         'ADMIN',
         'DAYOFF',
         'DAYOFF',
@@ -283,7 +292,6 @@ values(
         'nonashtewe',
         'nonashtewe8@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
-        'nazareth',
         'nazareth',
         'WORKER',
         'MORNING',
@@ -302,7 +310,6 @@ values(
         '---shtewe8@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
         'nazareth',
-        'nazareth',
         'WORKER',
         'EVENING',
         'EVENING',
@@ -319,7 +326,6 @@ values(
         'aaashtewe',
         'aaashtewe8@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
-        'nazareth',
         'nazareth',
         'WORKER',
         'MORNING',

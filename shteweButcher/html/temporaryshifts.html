@@ -39,7 +39,9 @@
         <a href="/temporaryshifts">
             <i class="shifts"> אישור משמרות</i>
         </a>
-
+        <a href="/addnewemployee">
+            <i class="salary"> הוספת עובד חדש</i>
+        </a>
 
     </div>
 
@@ -60,8 +62,45 @@
 
             </tbody>
         </table>
+        <button type="button" class="btn" onclick="updateShift()">עדכון משמרת</button>
+        <button type="button" class="btn" onclick="addAllShifts()">אישור</button>
+
+    </div>
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+
+            <label><b>תבחר יום</b></label>
+            <select form="allDays" id="allDays">
+                <option value="select">תבחר יום</option>
+                <option> יום ראשון</option>
+                <option> יום שני</option>
+                <option> יום שלישי</option>
+                <option> יום רביעי</option>
+                <option> יום חמישי</option>
+                <option> יום שישי</option>
+            </select>
+            <label><b>תבחר סוג משמרת</b></label>
+            <select form="shiftsType" id="shiftsType">
+                <option>תבחר סוג</option>
+                <option>בוקר</option>
+                <option>ערב</option>
+                <option>חופש</option>
+
+            </select>
+            <label><b>תבחר שם עובד שרוצה לשנות</b></label>
+            <select form="workers" id="workers1">
+                <option value="select1">תבחר שם עובד</option>
+            </select>
+            <label><b>תבחר שם עובד חדש</b></label>
+            <select form="workers" id="workers2">
+                <option value="select2">תבחר שם עובד</option>
+            </select>
+            <button type="button" class="btn1" onclick="update()">עדכן</button>
+            <button type="button" class="btn1 cancel" onclick="closeForm()">סגור</button>
+        </form>
     </div>
     <script>
+
         window.onload = async function () {
 
             const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -80,7 +119,7 @@
 
             var dayname = getDayName(today, "en-US");
             console.log(dayname)
-            if (dayname == 'Tuesday' || dayname == 'Wednesday' || dayname == 'Thursday' || dayname == 'Friday') {
+            if (dayname = 'Monday' || dayname == 'Tuesday' || dayname == 'Wednesday' || dayname == 'Thursday' || dayname == 'Friday' || dayname == 'Saturday') {
 
                 const temporaryshifts = await fetch("http://localhost:4000/tem", {
                     method: "POST",
@@ -96,6 +135,7 @@
                         Credentials: "include",
                         headers: { "Content-Type": "application/JSON" },
                     });
+
                     const resultx = await saveddata.json();
                     const element = document.getElementById("tbody")
                     const date = new Date()
@@ -109,6 +149,10 @@
                             var td3 = document.createElement("td");
                             var td4 = document.createElement("td");
                             td4.textContent = getdayname(i)
+                            if (dayname == 'Monday' && x == 0) {
+                                date.setDate(date.getDate() + 6)
+                                x = 1;
+                            }
                             if (dayname == 'Tuesday' && x == 0) {
                                 date.setDate(date.getDate() + 5)
                                 x = 1;
@@ -125,6 +169,12 @@
                                 date.setDate(date.getDate() + 2)
                                 x = 1;
                             }
+                            if (dayname == 'Saturday' && x == 0) {
+                                date.setDate(date.getDate() + 1)
+                                x = 1;
+                            }
+
+
                             string = date.toLocaleString();
                             array = string.split(",")
                             td3.textContent = array[0];
@@ -154,7 +204,7 @@
                                         resultx[0][i].morning2 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
                                         resultx[0][i].evening1 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
                                         resultx[0][i].evening2 == resultx[1][c].firstname + " " + resultx[1][c].lastname) {
-                                            //donothing
+                                        //donothing
                                     }
                                     else {
                                         arrayforshiftoffworkers.push(resultx[1][c])
@@ -166,11 +216,42 @@
                                     td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
                                     td1.textContent = "חופש"
                                 }
-                                else{
+                                else {
                                     td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
                                     td1.textContent = "חופש"
-                                    for(var x=0; x<arrayforshiftoffworkers.length;x++){
-                                        
+                                    for (var x = 1; x < arrayforshiftoffworkers.length; x++) {
+
+                                        var tr = document.createElement("tr");
+                                        var td1 = document.createElement("td");
+                                        var td2 = document.createElement("td");
+                                        var td3 = document.createElement("td");
+                                        var td4 = document.createElement("td");
+                                        td4.textContent = getdayname(i)
+                                        if (dayname == 'Monday' && x == 0) {
+                                            date.setDate(date.getDate() + 6)
+                                            x = 1;
+                                        }
+                                        if (dayname == 'Tuesday' && x == 0) {
+                                            date.setDate(date.getDate() + 5)
+                                            x = 1;
+                                        }
+                                        if (dayname == 'Wednesday' && x == 0) {
+                                            date.setDate(date.getDate() + 4)
+                                            x = 1;
+                                        }
+                                        if (dayname == 'Thursday' && x == 0) {
+                                            date.setDate(date.getDate() + 3)
+                                            x = 1;
+                                        }
+                                        if (dayname == 'Friday' && x == 0) {
+                                            date.setDate(date.getDate() + 2)
+                                            x = 1;
+                                        }
+                                        string = date.toLocaleString();
+                                        array = string.split(",")
+                                        td3.textContent = array[0];
+                                        td2.textContent = arrayforshiftoffworkers[1].firstname + " " + arrayforshiftoffworkers[1].lastname
+                                        td1.textContent = "חופש"
                                     }
                                 }
 
@@ -186,7 +267,27 @@
                         date.setDate(date.getDate() + 1)
 
                     }
-                    console.log(resultx)
+                    // const Allrows = document.querySelectorAll("tr");
+                    // const Allrowsvalue = document.querySelectorAll("td");
+                    // arrayx = []
+                    // lastarray = []
+                    // var y = 1;
+                    // console.log(Allrowsvalue.length)
+                    // for (var z = 0; z < Allrowsvalue.length; z++) {
+                    //     arrayx.push(Allrowsvalue[z].textContent);
+
+                    //     if (y == 4) {
+                    //         // console.log(array)
+                    //         lastarray.push(arrayx)
+                    //         y = 0
+                    //         arrayx = [];
+                    //     }
+                    //     // console.log(Allrowsvalue[z].textContent)
+                    //     y++
+
+                    // }
+                    // body = {lastarray:lastarray}
+
                 }
                 else {
 
@@ -203,6 +304,10 @@
                             var td3 = document.createElement("td");
                             var td4 = document.createElement("td");
                             td4.textContent = getdayname(j);
+                            if (dayname == 'Monday' && x == 0) {
+                                date.setDate(date.getDate() + 6)
+                                x = 1;
+                            }
                             if (dayname == 'Tuesday' && x == 0) {
                                 date.setDate(date.getDate() + 5)
                                 x = 1;
@@ -217,6 +322,10 @@
                             }
                             if (dayname == 'Friday' && x == 0) {
                                 date.setDate(date.getDate() + 2)
+                                x = 1;
+                            }
+                            if (dayname == 'Saturday' && x == 0) {
+                                date.setDate(date.getDate() + 1)
                                 x = 1;
                             }
                             string = date.toLocaleString();
@@ -277,7 +386,9 @@
 
 
                 }
+
             }
+
         }
         function getdayname(j) {
             if (j == 0) {
@@ -297,6 +408,110 @@
             }
             else if (j == 5) {
                 return "שישי";
+            }
+        }
+        async function addAllShifts() {
+            const Allrowsvalue = document.querySelectorAll("td");
+            arrayx = []
+            lastarray = []
+            var y = 1;
+            console.log(Allrowsvalue.length)
+            for (var z = 0; z < Allrowsvalue.length; z++) {
+                arrayx.push(Allrowsvalue[z].textContent);
+
+                if (y == 4) {
+                    // console.log(array)
+                    lastarray.push(arrayx)
+                    y = 0
+                    arrayx = [];
+                }
+                // console.log(Allrowsvalue[z].textContent)
+                y++
+            }
+            for (var w = 0; w < lastarray.length; w++) {
+                if (lastarray[w][0] != "חופש") {
+                    lastarray[w] = []
+                }
+            }
+            console.log(lastarray)
+            body = { lastarray: lastarray }
+            const saveddatainshifts = await fetch("http://localhost:4000/saveddatainshifts", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                body: JSON.stringify(body),
+            });
+            const result = await saveddatainshifts.json();
+            if (result == 'finish') {
+                window.location.reload();
+            }
+
+        }
+        async function updateShift() {
+            const form = document.getElementById("myForm")
+            form.style.display = "block"
+            const allworkers = await fetch("http://localhost:4000/allworkers", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                //   body: JSON.stringify(body),
+            });
+            const result = await allworkers.json();
+            console.log(result)
+            const select1 = document.getElementById("workers1")
+            const select2 = document.getElementById("workers2")
+
+            for (var i = 0; i < result.length; i++) {
+                var option1 = document.createElement("option");
+                option1.textContent = result[i];
+                option1.value = result[i]
+                var option2 = document.createElement("option");
+                option2.textContent = result[i];
+                option2.value = result[i]
+                select1.append(option1)
+                select2.append(option2)
+
+            }
+        }
+        function closeForm() {
+            const form = document.getElementById("myForm")
+            form.style.display = "none"
+        }
+        async function update() {
+            var element1 = document.getElementById("allDays");
+            var element2 = document.getElementById("shiftsType");
+            var element3 = document.getElementById("workers1");
+            var element4 = document.getElementById("workers2");
+            if (element1.value == 'select') {
+                alert("תבחר יום")
+            }
+            else if (element2.value == 'select') {
+                alert("תבחר משמרת")
+            }
+            else if (element3.value == "select1") {
+                alert("תבחר עובד לשינוי")
+            }
+            else if (element4.value == "select2") {
+                alert("תבחר עובד חדש")
+            }
+            else {
+                if (element2.value == 'חופש') {
+
+                }
+                else {
+                    console.log(element1.value)
+                    console.log(element2.value)
+                    console.log(element3.value)
+                    console.log(element4.value)
+                    body = { day: element1.value, shiftType: element2.value, oldEmployee: element3.value, newEmployee: element4.value }
+                    const updateshift = await fetch("http://localhost:4000/updateshift", {
+                        method: "POST",
+                        Credentials: "include",
+                        headers: { "Content-Type": "application/JSON" },
+                        body: JSON.stringify(body),
+                    });
+                    const result = await updateshift.json();
+                }
             }
         }
     </script>

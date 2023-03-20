@@ -173,10 +173,8 @@
         body: JSON.stringify(body),
       });
       const result = await allproducts.json();
-      console.log(result)
-      // < th > header1</th >
-      //   <th>header2</th>
-      //   <th>header3</th>
+ 
+
       var element = document.getElementById("tbody");
       var element2 = document.getElementById("products");
       var element3 = document.getElementById("productsForDelete");
@@ -238,6 +236,8 @@
         });
         const result = await allproducts.json();
         closeForm();
+        window.location.reload();
+
       }
     }
     function onchange() {
@@ -261,6 +261,8 @@
         });
         const result = await allproducts.json();
         closeFormDelete();
+        window.location.reload();
+
       }
     }
     async function updatePrice() {
@@ -282,6 +284,8 @@
         });
         const result = await allproducts.json();
         closeFormForChange();
+        window.location.reload();
+
       }
     }
     async function add() {
@@ -311,6 +315,8 @@
         });
         const result = await addproduct.json();
         closeFormForAdd();
+        window.location.reload();
+
       }
     }
   </script>

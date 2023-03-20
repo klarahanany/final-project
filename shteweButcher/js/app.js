@@ -136,6 +136,7 @@ async function buyButtonClicked() {
             allShoppingList[j].childNodes[1].childNodes[3].textContent + "~" + allShoppingList[j].childNodes[1].childNodes[5].value
         array.push(string)
 
+
     }
     console.log(array)
 

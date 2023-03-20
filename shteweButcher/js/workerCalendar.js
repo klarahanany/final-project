@@ -142,7 +142,9 @@ daysTag.onclick = async () => {
 
         if (result !== " Still Not Determined") {
             console.log("1");
-            document.getElementById('shiftKind').textContent = "you have a " + result.shifttype + " shift in this day";
+            const shift = '';
+            
+            document.getElementById('shiftKind').textContent = "יש לך משמרת" + result.shifttype ;
         }
         else {
             console.log("2");

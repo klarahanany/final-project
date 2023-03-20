@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-</head>
-
-<body>
-    <section class="high">
-
-        <img src="/img/meat.jpg" alt="" class="logo">
-
-    </section>
-    <nav>
-
-        <i class='bx bx-cart-alt' id="cart-icon"></i>
-        <p id="customerName"></p>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="bx bx-list-ul"></i>
-        </label>
-
-        <ul>
-            <li><a class="home" href="home.html">HOME</a></li>
-            <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
-            <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
-            <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
-            <li><a class="logIn" href="/login">LOGIN</a></li>
-            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
-        </ul>
-    </nav>
-
-      
-      <div class="container">
-        <div class="title">
-          <h2 class="title">טופס משוב</h2>
-        </div>
-       
-
-          <form>
-              <div class="row">
-                  <div class="col-25">
-                      <label for="feed_back">משוב</label>
-                  </div>
-                  <div class="col-75">
-                      <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
-                  </div>
-              </div>
-              <div class="row">
-                  <input type="button" onclick="submitfun()" value="שלח">
-              </div>
-          </form>
-      </div>
-
-</body>
-</html>
+  <head>
+    <title>Employees Data</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Employees Data</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Position</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>John Smith</td>
+          <td>IT</td>
+          <td>Software Engineer</td>
+          <td>$90,000</td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>Jane Doe</td>
+          <td>Marketing</td>
+          <td>Marketing Manager</td>
+          <td>$110,000</td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>Bob Johnson</td>
+          <td>Finance</td>
+          <td>Financial Analyst</td>
+          <td>$80,000</td>
+        </tr>
+        <tr>
+          <td>004</td>
+          <td>Samantha Lee</td>
+          <td>HR</td>
+          <td>HR Manager</td>
+          <td>$100,000</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html> 

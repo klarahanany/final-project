@@ -5,21 +5,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Times New Roman", Times, serif;
+
 }
 
 body {
     background-color: #f9f9fa;
-    margin-left: 200px;
+    margin-left: 10px;
 }
 
 .sidenav {
     height: 100%;
-    width: 100px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
-    left: 0;
+    right: 0;
     background-color: #34568b;
     overflow-x: hidden;
     transition: 0.5s;
@@ -27,17 +28,18 @@ body {
 }
 
 .sidenav a {
-    /* border: #aeabab solid 1px; */
+    border: #aeabab solid 1px;
+    text-align: right;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #aeabab;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
-    font-size: 30px;
+    font-size: 21px;
     color: white;
 }
 
@@ -51,7 +53,6 @@ body {
 
 .profile {
     color: white;
-    font-size: 30px;
     left: 0px;
 }
 
@@ -70,6 +71,7 @@ body {
     border: none;
     height: 500px;
     margin-bottom: 30px;
+    margin-right: 200px;
 }
 
 .m-r-0 {
@@ -98,6 +100,8 @@ body {
 
 .m-b-25 {
     margin-bottom: 25px;
+    float: right;
+    margin-right: 20px;
 }
 
 .img-radius {
@@ -152,8 +156,37 @@ h6 {
     border-bottom: 1px solid #e0e0e0;
 }
 
+.f-w-400 {
+    margin-right: 100px;
+    float: right;
+
+}
+
+#information {
+    font-size: large;
+    float: right;
+}
+
+#nameworker {
+    font-size: large;
+}
+
+#c {
+    float: right;
+}
+
+#p {
+    float: right;
+}
+
+#e {
+    float: right;
+}
+
+
 .f-w-600 {
     font-weight: 600;
+    margin-left: 800px;
 }
 
 .m-b-20 {

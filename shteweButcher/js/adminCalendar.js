@@ -79,7 +79,7 @@ daysTag.onclick = async () => {
     var x = 0;
     var y = 0;
     if (selected !== "") {
-        
+
 
         var dateStr = '03/11/2023';
         var dayname = getDayName(dateStr, "en-US");
@@ -109,14 +109,31 @@ daysTag.onclick = async () => {
         });
         const resultx = await fetchForCheckIfShiftDetermined.json();
         if (resultx !== 'still not determined') {
-            array = resultx.split(" ");
-            eveningWorker = array[0]
-            morningWorker = array[1]
-            console.log(array[0] + " " + array[1])
-            emp1 = document.getElementById('morn');
-            emp2 = document.getElementById('even');
-            emp1.textContent = "morning employee " + morningWorker;
-            emp2.textContent = "evening employee " + eveningWorker;
+            elementmorn = document.getElementById("morn")
+            elementmorn.innerHTML='';
+            // array = resultx.split(" ");
+            // eveningWorker = array[0]
+            // morningWorker = array[1]
+            // console.log(array[0] + " " + array[1])
+  
+            elementeven = document.getElementById("even")
+            elementeven.innerHTML=''
+            for (var i = 0; i < resultx[0].length; i++) {
+                var p = document.createElement("p")
+                p.id="shiftss"
+                p.textContent = resultx[0][i]
+                elementmorn.append(p)
+            }
+            for (var i = 0; i < resultx[1].length; i++) {
+                var p = document.createElement("p")
+                p.id="shiftss"
+                p.textContent = resultx[1][i]
+                elementeven.append(p)
+            }
+            // emp1 = document.getElementById('morn');
+            // emp2 = document.getElementById('even');
+            // emp1.textContent = "morning employee " + morningWorker;
+            // emp2.textContent = "evening employee " + eveningWorker;
             alreadyAdded1 = document.getElementById("alreadyAdded")
             alreadyAdded1.style.visibility = 'visible';
             box1 = document.getElementById("box1")

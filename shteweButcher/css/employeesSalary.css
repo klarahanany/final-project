@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#worker {
+  border-radius: 5px;
+  border: 3px solid #34568b;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background: linear-gradient(to right, #f8bac6, #7d9ccf);
+  display: flex;
+  margin-top: 10px;
+  margin-right: 100px;
+  padding: 0 10px;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f2f2f2;
+  height: 1000px;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #34568b;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  border: #aeabab solid 1px;
+  text-align: right;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #aeabab;
+  display: block;
+  transition: 0.3s;
+
+}
+.sidenav a i{
+  font-family: "Times New Roman", Times, serif;
+}
+
+.sidenav a:hover {
+  font-size: 21px;
+  color: white;
+}
+
+.feedback {
+
+  color: white;
+  font-size: 20px;
+  left: 0px;
+}
+#feedback{
+  display: inline-block;
+  margin-right: 10px;
+  margin-top:20px ;
+  border: #34568b 2px solid;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  width: 500px;
+  font-family: sans-serif;
+  /* min-width: 400px; */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  /* right: 50px; */
+  margin-right: 150px;
+}
+
+.styled-table thead tr {
+  background-color: #34568b;
+  color: #ffffff;
+  text-align: right;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 12px;
+  text-align: right;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #34568b;
+}
+
+.title {
+  color: #34568b;
+  text-align: right;
+  margin-right: 150px;
+}
+
+.table {
+  margin: 2% 50% 0 100%;
+  padding: 10px 10px;
+  text-align: center;
+}

@@ -148,15 +148,24 @@ app.post("/adminCalendar", async (req, res) => {
             const { x, Day, Month, Year } = req.body;
             month = getMonth(Month);
             date = Year + "-" + month + "-" + Day;
-            const result1 = db.query(`SELECT * FROM shift where shiftType = 'EVENING' and shiftdate='${date}';`)
-            const result2 = db.query(`SELECT * FROM shift where shiftType = 'MORNING' and shiftdate='${date}';`)
+            const result1 = await db.query(`SELECT * FROM shift where shiftType = 'EVENING' and shiftdate='${date}';`)
+            const result2 = await db.query(`SELECT * FROM shift where shiftType = 'MORNING' and shiftdate='${date}';`)
 
-            if ((await result1).rows.length == 0 && (await result2).rows.length == 0) {
+            if (result1.rows.length == 0 && result2.rows.length == 0) {
                 res.json('still not determined')
             }
             else {
-                const result = (await result1).rows[0].username + " " + (await result2).rows[0].username;
-                res.json(result)
+                array = [];
+                array2 = [];
+                for (var i = 0; i < result2.rows.length; i++) {
+                    const result = await db.query(`SELECT * FROM workers where username = '${result2.rows[i].username}';`)
+                    array.push(result.rows[0].firstname + " " + result.rows[0].lastname)
+                }
+                for (var i = 0; i < result1.rows.length; i++) {
+                    const result = await db.query(`SELECT * FROM workers where username = '${result1.rows[i].username}';`)
+                    array2.push(result.rows[0].firstname + " " + result.rows[0].lastname)
+                }
+                res.json([array, array2])
             }
         }
         else if (req.body.num === '1') {
@@ -459,8 +468,117 @@ app.post("/customerfeedback", async (req, res) => {
 app.post("/saveddata", async (req, res) => {
     const result = await db.query(`select * from temporaryshifts;`)
     const result2 = await db.query(`select * from workers where Catagory='WORKER';`)
-    res.json([result.rows , result2.rows] );
-    
+    res.json([result.rows, result2.rows]);
+
+});
+app.post("/allworkers", async (req, res) => {
+    const result2 = await db.query(`select * from workers where Catagory='WORKER';`)
+    allworkers = [];
+    for (var i = 0; i < result2.rows.length; i++) {
+        string = result2.rows[i].firstname + " " + result2.rows[i].lastname;
+        allworkers.push(string)
+    }
+    res.json(allworkers);
+
+});
+app.post("/updateshift", async (req, res) => {
+    if (req.body.shiftType == 'בוקר') {
+        if (req.body.day == "יום ראשון") {
+            sql = `UPDATE temporaryshifts SET morning1 = '${req.body.newEmployee}' WHERE temporaryshift='1' ;`
+            db.query(sql)
+            sql1 = `CLUSTER temporaryshifts USING 1;`
+            db.query(sql1)
+        }
+    }
+    res.json("gg")
+});
+app.post("/deleteWorker", async (req, res) => {
+    const result = await db.query(`SELECT employeeid FROM workers where firstname='${req.body.firstname}' and lastname = '${req.body.lastname}' ;`)
+    sql = `DELETE FROM workers WHERE employeeid='${result.rows[0].employeeid}' ;`
+    db.query(sql);
+    res.json("--")
+
+});
+app.post("/saveddatainshifts", async (req, res) => {
+    array = req.body.lastarray
+    for (var j = 0; j < array.length; j++) {
+        if (array[j][0] == "חופש") {
+            arrayname = array[j][1].split(" ")
+            arraydate = array[j][2].split(".")
+            datex = arraydate[2] + "-" + arraydate[1] + "-" + arraydate[0]
+            const result = await db.query(`select username from workers where firstname = '${arrayname[0]}' and lastname = '${arrayname[1]}'`)
+            sql2 = await `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${datex}','DAYOFF','${result.rows[0].username}');`
+            db.query(sql2)
+        }
+
+    }
+    const result = await db.query(`select * from temporaryshifts;`)
+    function getDayName(dateStr, locale) {
+        var date = new Date(dateStr);
+        return date.toLocaleDateString(locale, { weekday: 'long' });
+    }
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+    var dayname = getDayName(today, "en-US");
+    const date = new Date();
+    var x = 0
+    for (var i = 0; i < result.rows.length; i++) {
+        if (dayname == 'Monday' && x == 0) {
+            date.setDate(date.getDate() + 6)
+            x = 1;
+        }
+        if (dayname == 'Tuesday' && x == 0) {
+            date.setDate(date.getDate() + 5)
+            x = 1;
+        }
+        if (dayname == 'Wednesday' && x == 0) {
+            date.setDate(date.getDate() + 4)
+            x = 1;
+        }
+        if (dayname == 'Thursday' && x == 0) {
+            date.setDate(date.getDate() + 3)
+            x = 1;
+        }
+        if (dayname == 'Friday' && x == 0) {
+            date.setDate(date.getDate() + 2)
+            x = 1;
+        }
+        if (dayname == 'Saturday' && x == 0) {
+            date.setDate(date.getDate() + 1)
+            x = 1;
+        }
+        console.log(dayname)
+        string = date.toLocaleString();
+        array = string.split(",")
+        const dayDate = array[0];
+        console.log(dayDate + " whatttttttt")
+        arayfornamemor1 = result.rows[i].morning1.split(" ")
+        const result1 = await db.query(`select username from workers where FirstName='${arayfornamemor1[0]}' AND LastName='${arayfornamemor1[1]}';`)
+        sql1 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${dayDate}','MORNING','${result1.rows[0].username}');`
+        arayfornamemor2 = result.rows[i].morning2.split(" ")
+        const result2 = await db.query(`select username from workers where FirstName='${arayfornamemor2[0]}' AND LastName='${arayfornamemor2[1]}';`)
+        sql2 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${dayDate}','MORNING','${result2.rows[0].username}');`
+        arayfornamemor3 = result.rows[i].evening1.split(" ")
+        const result3 = await db.query(`select username from workers where FirstName='${arayfornamemor3[0]}' AND LastName='${arayfornamemor3[1]}';`)
+        sql3 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${dayDate}','EVENING','${result3.rows[0].username}');`
+        arayfornamemor4 = result.rows[i].evening2.split(" ")
+        const result4 = await db.query(`select username from workers where FirstName='${arayfornamemor4[0]}' AND LastName='${arayfornamemor4[1]}';`)
+        sql4 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${dayDate}','EVENING','${result4.rows[0].username}');`
+
+        db.query(sql1)
+        db.query(sql2)
+        db.query(sql3)
+        db.query(sql4)
+        date.setDate(date.getDate() + 1)
+
+    }
+    sql = `DELETE FROM temporaryshifts;`
+    db.query(sql)
+    res.json("finish")
 });
 app.post("/tem", async (req, res) => {
     //save in cookies
@@ -610,18 +728,22 @@ app.post("/tem", async (req, res) => {
             eveningshifts[k] = eveningy;
             dayoffshifts[k] = dayoff;
             //add to data base 
-            sql = `INSERT INTO temporaryshifts (morning1,morning2,evening1,evening2) VALUES ('${morning1.firstname+" "+morning1.lastname}','${morning2.firstname+" "+morning2.lastname}','${evening1.firstname+" "+evening1.lastname}','${evening2.firstname+" "+evening2.lastname}');`
+            sql = `INSERT INTO temporaryshifts (morning1,morning2,evening1,evening2) VALUES ('${morning1.firstname + " " + morning1.lastname}','${morning2.firstname + " " + morning2.lastname}','${evening1.firstname + " " + evening1.lastname}','${evening2.firstname + " " + evening2.lastname}');`
             db.query(sql);
         }
-      
+
         res.json([morningshifts, eveningshifts, dayoffshifts])
     }
 });
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
 })
 app.get("/addnewemployee", (req, res) => {
     res.sendFile(__dirname + "/html/addnewemployee.html")
+})
+app.get("/employeesSalary", (req, res) => {
+    res.sendFile(__dirname + "/html/employeesSalary.html")
 })
 app.get("/new", (req, res) => {
     res.sendFile(__dirname + "/html/new.html")

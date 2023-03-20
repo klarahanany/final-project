@@ -1,95 +1,236 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="/css/adminWorkersProfiles.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
-    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="/css/adminWorkersProfiles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+
 </head>
 
 <body>
 
-    <div id="mySidenav" class="sidenav">
-        <a href="/inventory">
-            <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
-        </a>
-        <a href="/adminCalendar">
-            <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
-        </a>
-        <a href="/allEmployes">
-            <i class='bx bx-group profiles '>מידע על העובדים</i>
-        </a>
+  <div id="mySidenav" class="sidenav">
+    <a href="/inventory">
+      <i class="inventory"> ניהול מלאי</i>
+    </a>
+    <a href="/adminCalendar">
+      <i class='calen'>שיבוץ משמרות</i>
+    </a>
+    <a href="/allEmployes">
+      <i class='profiles '>מידע על העובדים</i>
+    </a>
+    <a href="/allorders">
+      <i class="orders">צפייה בכל ההזמנות</i>
+    </a>
+    <a href="/income">
+      <i>צפייה ברווחי העסק</i>
+    </a>
+    <a href="/employeesSalary">
+      <i class="salary">משכורות העובדים</i>
+    </a>
+    <a href="/customerfeedback">
+      <i class="salary"> משובי לקוחות</i>
+    </a>
+    <a href="/temporaryshifts">
+      <i class="salary"> אישור משמרות</i>
+    </a>
+    <a href="/addnewemployee">
+      <i class="salary"> הוספת עובד חדש</i>
+    </a>
+  </div>
 
-        <a href="/allorders">
-            <i>צפייה בכל ההזמנות</i>
-        </a>
-        <a href="/income">
-            <i class="income">צפייה ברווחי העסק</i>
-        </a>
-        <a href="/employeesSalary">
-            <i class="salary">משכורות העובדים</i>
-        </a>
-        <a href="/customersfeedback">
-            <i class="salary"> משובי לקוחות</i>
-        </a>
-
-    </div>
-
-    <div id="allWorkers">
-
-    </div>
-    <script>
-        window.onload = async function startFun() {
-            const fetchProfileWorker = await fetch("http://localhost:4000/allEmployes", {
-                method: "POST",
-                Credentials: "include",
-                headers: { "Content-Type": "application/JSON" },
-            });
-            const result = await fetchProfileWorker.json();
-            var element = document.getElementById("allWorkers");
-            for (i = 0; i < result.length; i++) {
-
-                console.log(result[i]);
-                var tag = document.createElement("div");
-                tag.id = "worker";
-                var img = document.createElement("img");
-                var name = document.createElement("h3");
-                var email = document.createElement("h4");
-                var phone = document.createElement("h4");
-                var city = document.createElement("h4");
-                // var br1 = document.createElement("br");
-                // var br2 = document.createElement("br");
-                // var br3 = document.createElement("br");
-                img.src = "https://img.icons8.com/bubbles/100/000000/user.png"
-                name.textContent = result[i].firstname + " " + result[i].lastname;
-                email.textContent = "Email: " + result[i].email;
-                phone.textContent = "Phone: " + result[i].phone;
-                city.textContent = "City: " + result[i].city;
-                
-                tag.append(img)
-                // tag.append(br1)
-                tag.append(name)
-                tag.append(city)
-                tag.append(phone)
-                tag.append(email)
-                // tag.append(br2)
+  <div class="updateinventory">
+    <input type="button" class="addworker-button" value="הוספת עובד חדש" onclick="openFormForAdd()">
+    <input type="button" class="deleteworker-button" value="מחיקת עובד " onclick="openFormForDelete()">
+  </div><br><br>
+  <div id="allWorkers">
 
 
-                element.appendChild(tag);
-                // element.append(br3)
-                // tag.innerHTML+="email: "+result[i].email
 
-            }
+  </div>
+  <div class="form-foradd" id="form_addNewEmployee">
+    <form class="form-container">
 
+      <label><b> שם משפחה</b></label>
+      <input id="fam" type="text" placeholder="תכניס שם משפחה" required>
+      <label><b>שם פרטי</b></label>
+      <input id="name" type="text" placeholder="תכניס שם פרטי" required>
+      <label><b>שם משתמש</b></label>
+      <input id="username" type="text" placeholder="תכניס שם משתמש" required>
+      <label><b>דואר אלקטרוני</b></label>
+      <br>
+      <input id="email" type="email" placeholder="תכניס דואר אלקטרוני" required>
+      <br><br>
+      <label><b>סיסמה</b></label><br>
+      <input id="pass" type="password" placeholder="תכניס סיסמה" required><br><br>
+      <label><b>עיר מיגורים</b></label>
+      <input id="city" type="text" placeholder="תכניס עיר מיגורים" required>
+      <label><b>תבחר תפקיד</b></label><br>
+      <!-- <input id="worker " type="radio" value="worker" name="category"><label class="radio">עובד</label><br>
+      <input id="admin " type="radio" value="admin" name="category"><label class="radio">מנהל</label>  <span class="checkmark"></span> -->
+      <label for="option1" class="radio">
+        <input type="radio" id="option1" name="options">
+        <span class="checkmark"></span>
+        עובד
+      </label>
+      <label for="option2" class="radio">
+        <input type="radio" id="option2" name="options">
+        <span class="checkmark"></span>
+        מנהל
+      </label>
+      <br><br>
+      <label><b>מספר טלפון</b></label>
+      <input id="number" type="tel" placeholder="תכניס מספר טלפון" required>
+      <!-- type="submit" -->
+      <button type="button" class="btn" onclick="addEmployee()">הוסף עובד</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+    </form>
+  </div>
 
+  <div class="form-fordelete" id="myFormDelete">
+    <form class="form-container">
+
+      <label><b>תבחר עובד למחוק</b></label>
+      <select form="workers" id="workerForDelete">
+        <option value="select">תבחר עובד</option>
+      </select>
+      <button type="button" class="btn" onclick="Delete()">מחק</button>
+      <button type="button" class="btn cancel" onclick="closeFormDelete()">סגור</button>
+    </form>
+  </div>
+  <script>
+    function openFormForAdd() {
+      document.getElementById("form_addNewEmployee").style.display = "block";
+      closeFormDelete();
+    }
+    function openFormForDelete() {
+      document.getElementById("myFormDelete").style.display = "block";
+      closeForm();
+    }
+    function closeForm() {
+      document.getElementById("form_addNewEmployee").style.display = "none";
+    }
+    function closeFormDelete() {
+      document.getElementById("myFormDelete").style.display = "none";
+    }
+    window.onload = async function startFun() {
+      const fetchProfileWorker = await fetch("http://localhost:4000/allEmployes", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+      });
+      const result = await fetchProfileWorker.json();
+      var element = document.getElementById("allWorkers");
+      var workerForDelete = document.getElementById("workerForDelete");
+
+      for (i = 0; i < result.length; i++) {
+        var option = document.createElement("option");
+        option.textContent = result[i].firstname + " " + result[i].lastname;
+        option.value = result[i].firstname + " " + result[i].lastname;
+        workerForDelete.append(option)
+        var tag = document.createElement("div");
+        tag.id = "worker";
+        var img = document.createElement("img");
+        var name = document.createElement("h3");
+        var email = document.createElement("h4");
+        var phone = document.createElement("h4");
+        var city = document.createElement("h4");
+        var title = document.createElement("h4")
+        var list = document.createElement("ol")
+        var li1 = document.createElement("li")
+        var li2 = document.createElement("li")
+        var li3 = document.createElement("li")
+        var li4 = document.createElement("li")
+        var li5 = document.createElement("li")
+        var li6 = document.createElement("li")
+        li1.dir = "rtl"
+        li2.dir = "rtl"
+        li3.dir = "rtl", li4.dir = "rtl", li5.dir = "rtl", li6.dir = "rtl"
+        img.src = "https://img.icons8.com/bubbles/100/000000/user.png"
+        name.textContent = " שם: " + result[i].firstname + " " + result[i].lastname;
+        email.textContent = result[i].email + "  :דואר אלקטרוני";
+        phone.textContent = result[i].phone + "  :מספר טלפון ";
+        city.textContent = result[i].city + "  :עיר מגורים ";
+        title.textContent = " :משמרות מועדפים"
+        if (result[i].sunday == 'MORNING') {
+          li1.textContent = "משמרת בוקר"
+        } if (result[i].sunday == 'EVENING') {
+          li1.textContent = "משמרת ערב"
+        } if (result[i].sunday == 'DAYOFF') {
+          li1.textContent = "חופש"
+        } if (result[i].monday == 'MORNING') {
+          li2.textContent = "משמרת בוקר"
+        } if (result[i].monday == 'EVENING') {
+          li2.textContent = "משמרת ערב"
+        } if (result[i].monday == 'DAYOFF') {
+          li2.textContent = "חופש"
+        } if (result[i].tuesday == 'MORNING') {
+          li3.textContent = "משמרת בוקר"
+        } if (result[i].tuesday == 'EVENING') {
+          li3.textContent = "משמרת ערב"
+        } if (result[i].tuesday == 'DAYOFF') {
+          li3.textContent = "חופש"
+        } if (result[i].wednesday == 'MORNING') {
+          li4.textContent = "משמרת בוקר"
+        } if (result[i].wednesday == 'EVENING') {
+          li4.textContent = "משמרת ערב"
+        } if (result[i].wednesday == 'DAYOFF') {
+          li4.textContent = "חופש"
+        } if (result[i].thursday == 'MORNING') {
+          li5.textContent = "משמרת בוקר"
+        } if (result[i].thursday == 'EVENING') {
+          li5.textContent = "משמרת ערב"
+        } if (result[i].thursday == 'DAYOFF') {
+          li5.textContent = "חופש"
+        } if (result[i].friday == 'MORNING') {
+          li6.textContent = "משמרת בוקר"
+        } if (result[i].friday == 'EVENING') {
+          li6.textContent = "משמרת ערב"
+        } if (result[i].friday == 'DAYOFF') {
+          li6.textContent = "חופש"
         }
-    </script>
+        tag.append(img)
+        tag.append(name)
+        tag.append(city)
+        tag.append(phone)
+        tag.append(email)
+        tag.append(title)
+        tag.append(list)
+        list.append(li1)
+        list.append(li2)
+        list.append(li3)
+        list.append(li4)
+        list.append(li5)
+        list.append(li6)
+        element.appendChild(tag);
+      }
+    }
+    async function Delete() {
+      var workerForDelete = document.getElementById("workerForDelete");
+      name = workerForDelete.value;
+      array = name.split(" ")
+      console.log(array)
+      body = { firstname: array[0], lastname: array[1] }
+      const fetchDeleteWorker = await fetch("http://localhost:4000/deleteWorker", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+
+      });
+      const result = await fetchDeleteWorker.json();
+      window.location.reload()
+    }
+    async function addEmployee(){
+      
+    }
+  </script>
 </body>
 
 </html>

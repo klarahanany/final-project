@@ -17,27 +17,31 @@
 <body>
     <div id="mySidenav" class="sidenav">
         <a href="/inventory">
-            <i class="fa-solid fa-boxes-stacked inventory"> ניהול מלאי</i>
-          </a>
-          <a href="/adminCalendar">
-            <i class='bx bx-calendar calen'>שיבוץ משמרות</i>
-          </a>
-          <a href="/allEmployes">
-            <i class='bx bx-group profiles '>מידע על העובדים</i>
-          </a>
-          <a href="/allorders">
+            <i class="inventory"> ניהול מלאי</i>
+        </a>
+        <a href="/adminCalendar">
+            <i class='calen'>משמרות</i>
+        </a>
+        <a href="/temporaryshifts">
+            <i class="salary"> אישור משמרות</i>
+        </a>
+   
+        <a href="/allEmployes">
+            <i class='profiles '>מידע על העובדים</i>
+        </a>
+        <a href="/allorders">
             <i class="orders">צפייה בכל ההזמנות</i>
-          </a>
-          <a href="/income">
+        </a>
+        <a href="/income">
             <i>צפייה ברווחי העסק</i>
-          </a>
-          <a href="/employeesSalary">
+        </a>
+        <a href="/employeesSalary">
             <i class="salary">משכורות העובדים</i>
-          </a>
-          <a href="/customersfeedback">
+        </a>
+        <a href="/customerfeedback">
             <i class="salary"> משובי לקוחות</i>
-          </a>
-      
+        </a>
+     
     </div>
 
     <div class="wrapper">
@@ -62,26 +66,34 @@
 
             </ul>
             <section class="window">
-                <i class='bx bx-chevron-right' id="close-shiftDetails"></i>
-                
+                <i class='bx bx-chevron-left' id="close-shiftDetails"></i>
+
                 <div class="box" id="box1">
                     <label for="employes" class="choose">Choose Employe for Morning shift:</label>
                     <select id="employes" name="employelist" form="employeform">
-                        <option value="select" >select employe</option>
+                        <option value="select">select employe</option>
                     </select>
                 </div>
                 <div class="box" id="box2">
                     <label for="employes" class="choose">Choose Employe for Evening shift:</label>
                     <select id="employes2" name="employelist" form="employeform">
-                        <option value="select" >select employe</option>
+                        <option value="select">select employe</option>
                     </select>
                 </div>
                 <input id="update" class="submit" type="submit" value="UPDATE SHIFT">
                 <div id="alreadyAdded" class="alreadyAdded">
-                    <label id="label" for="added">You have chosen two employes</label>
-                    <p id="morn"></p>
-                    <p id="even"></p>
-                    <input id="updateshift" class="submit" type="submit" value="UPDATE SHIFT">
+                    <label id="label" for="added"> עובדים למשמרת בוקר</label>
+                    <div id="morn">
+                        <!-- <p id="morn1"></p>
+                        <p id="morn2"></p> -->
+                    </div>
+                    <label id="label" for="added">עובדים למשמרת ערב</label>
+                    <div id="even">
+
+                    </div>
+                    <!-- <p id="even1"></p>
+                    <p id="morn2"></p> -->
+                    <input id="updateshift" class="submit" type="submit" value="עדכון משמרת">
                 </div>
             </section>
         </div>

@@ -7,30 +7,26 @@
   font-family: "Times New Roman", Times, serif;
 
 }
-
-#worker {
-  border-radius: 5px;
-  border: 3px solid #34568b;
-}
-
-h3 {
-
-  color: #f2f2f2;
-}
-
-h4 {
+li{
   color: #ffffff;
+  text-align: right;
+  margin-right: 40px;
 }
+
+h4,h3 {
+  color: #ffffff;
+  text-align: right;
+  margin-right: 10px;
+}
+
 
 body {
   font-family: "Lato", sans-serif;
   background: linear-gradient(to right, #f8bac6, #7d9ccf);
   display: flex;
   margin-top: 10px;
-
   padding: 10px 10px;
   margin-right: 200px;
-  /* justify-content: center; */
   min-height: 100vh;
   background-color: #f2f2f2;
 }
@@ -71,29 +67,207 @@ body {
   left: 0px;
 }
 
-#allworkers {
-   width: 90%;
-  /*display: flex;
-  margin-right: 300px; */
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-  gap: 1rem; */
-  /* display: flex; */
-}
+
 
 #worker {
-  /* background: #ce8888;
-  flex-basis: 100px;
-  height: 250px;
-  width: 250px;
-  margin: 5px; */
-  position:relative;
-  width: 245px;
-  height: 200px;
-  /* padding:10px 15px; */
-  margin-right: 10px;
-  margin-left: 10px;
+  position: relative;
+  height: 320px;
+  /* margin-right: 10px; */
+  margin-left: 60px;
   margin-bottom: 10px;
-  width: 200px;
+  width: 340px;
   display: inline-block;
+  border-radius: 5px;
+  border: 3px solid #34568b;
+  right: 0 ;
+  text-align: right;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.addworker-button {
+  height: 30px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  justify-content: center;
+  display: flex;
+  width: 180px;
+  background: linear-gradient(to right, #f1758d, #34568b);
+  border-radius: 25px;
+  font-size: 15px;
+  margin-left: 55px;
+}
+
+.deleteworker-button {
+  height: 30px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  justify-content: center;
+  display: flex;
+  width: 180px;
+  background: linear-gradient(to right, #f1758d, #34568b);
+  border-radius: 25px;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 55px;
+}
+
+.form-fordelete {
+  display: none;
+  position: fixed;
+  left: 5px;
+  right: 30px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  float: left;
+  position: absolute;
+  width: 300px;
+  margin-top: 70px;
+}
+
+.form-foradd {
+  display: none;
+  position: fixed;
+  height: 400px;
+  left: 5px;
+  right: 30px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  float: left;
+  position: absolute;
+  width: 300px;
+  margin-top: 30px;
+  overflow-y: scroll;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+}
+
+select {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  text-align: right;
+}
+
+/* Full-width input fields */
+.form-container input[type=text],
+.form-container input[type=number],
+.form-container input[type=tel],
+.form-container input[type=password],
+.form-container input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  text-align: right;
+  border: 1px solid #34568b;
+  transition: border 0.3s ease;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=number]:focus,
+.form-container input[type=tel]:focus,
+.form-container input[type=password]:focus,
+.form-container input[type=email]:focus{
+  background-color: #ddd;
+  outline: none;
+  border: 2px solid #f1758d;
+
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #34568b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  border-radius: 25px;
+  font-size: 15px;
+  width: 180px;
+  height: 30px;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: #f1758d;
+  border-radius: 25px;
+  font-size: 15px;
+  width: 180px;
+  height: 30px;
+  /* align-items: center;
+  justify-content: center;
+  display: flex; */
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+.radio {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 50px;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.radio:hover .checkmark {
+  border-color: #34568b;
+}
+
+.radio input:checked ~ .checkmark {
+  background-color: #f1758d;
+  border-color: #34568b;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.radio .checkmark:after {
+  top: 5px;
+  left: 5px;
+  
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
 }
