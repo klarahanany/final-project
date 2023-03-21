@@ -815,6 +815,10 @@ app.get("/feedback", (req, res) => {
 app.get("/customerfeedback", (req, res) => {
     res.sendFile(__dirname + "/html/admincustomerfeedback.html")
 })
+app.get("/updatePersonalInformation", (req, res) => {
+    res.sendFile(__dirname + "/html/updatePersonalInformation.html")
+})
+
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/html', express.static(__dirname + '/html'))
 app.use('/js', express.static(__dirname + '/js'))
