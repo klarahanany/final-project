@@ -124,8 +124,6 @@ body {
     border: none;
     cursor: pointer;
     opacity: 0.8;
-    /* justify-content: center;
-    display: flex; */
     width: 180px;
     background: linear-gradient(to right, #f1758d, #34568b);
     border-radius: 25px;

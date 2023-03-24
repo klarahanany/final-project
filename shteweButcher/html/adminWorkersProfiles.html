@@ -136,7 +136,7 @@
         workerForDelete.append(option)
         var tag = document.createElement("div");
         tag.id = "worker";
-        var img = document.createElement("img");
+      
         var name = document.createElement("h3");
         var email = document.createElement("h4");
         var phone = document.createElement("h4");
@@ -152,7 +152,19 @@
         li1.dir = "rtl"
         li2.dir = "rtl"
         li3.dir = "rtl", li4.dir = "rtl", li5.dir = "rtl", li6.dir = "rtl"
-        img.src = "https://img.icons8.com/bubbles/100/000000/user.png"
+        var img = document.createElement("img");
+        if (result[i].img == result[i].username) {
+          console.log(result[i].img )
+          img.id = 'personalImg'
+          const recentImageDataUrl = localStorage.getItem(result[i].img)
+          img.src = recentImageDataUrl;
+          // document.querySelector("#personalImg").setAttribute("src", recentImageDataUrl);
+        }
+        else {
+          img.id = 'image'
+          img.src = result[i].img
+        }
+        // img.src = "https://img.icons8.com/bubbles/100/000000/user.png"
         name.textContent = " שם: " + result[i].firstname + " " + result[i].lastname;
         email.textContent = result[i].email + "  :דואר אלקטרוני";
         phone.textContent = result[i].phone + "  :מספר טלפון ";

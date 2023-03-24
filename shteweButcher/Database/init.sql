@@ -65,6 +65,7 @@ CREATE TABLE workers (
     Email varchar(255),
     Password varchar(255),
     City varchar(255),
+    img varchar(65535),
     Catagory varchar(255) CHECK(
         Catagory = 'ADMIN'
         OR Catagory = 'WORKER'
@@ -232,7 +233,8 @@ INSERT INTO workers (
         Wednesday,
         Thursday,
         Friday,
-        phone
+        phone,
+        img
     )
 values(
         1,
@@ -249,8 +251,8 @@ values(
         'MORNING',
         'MORNING',
         'EVENING',
-        '0545555555'
-    ),
+        '0545555555',
+        'https://bootdey.com/img/Content/avatar/avatar1.png' ),
     (
         2,
         'hanany',
@@ -266,7 +268,8 @@ values(
         'MORNING',
         'MORNING',
         'EVENING',
-        '0546666666'
+        '0546666666',
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
     (
         3,
@@ -283,7 +286,8 @@ values(
         'DAYOFF',
         'DAYOFF',
         'DAYOFF',
-        '0547777777'
+        '0547777777',
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
     (
         4,
@@ -300,7 +304,8 @@ values(
         'EVENING',
         'EVENING',
         'DAYOFF',
-        '0547777377'
+        '0547777377',
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
 (
         5,
@@ -317,7 +322,8 @@ values(
         'EVENING',
         'DAYOFF',
         'MORNING',
-        '0544977377'
+        '0544977377',
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
 (
         6,
@@ -334,7 +340,8 @@ values(
         'EVENING',
         'DAYOFF',
         'MORNING',
-        '054497337'
+        '054497337',
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
     );
 INSERT INTO customers (
         UserName,

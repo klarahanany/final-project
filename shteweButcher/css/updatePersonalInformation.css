@@ -1,5 +1,6 @@
 /* Import Google font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
 /* 
 * {
     margin: 0;
@@ -9,18 +10,17 @@
 }
 */
 body {
-     /* background: linear-gradient(to right, #f8bac6, #7d9ccf); 
+    /* background: linear-gradient(to right, #f8bac6, #7d9ccf); 
     overflow: hidden;
     font-family: "Lato", sans-serif;
     display: flex;
     align-items: center;
     padding: 0 10px;
     justify-content: center;
-    min-height: 100vh;
-    background-color: #f2f2f2;*/
+    min-height: 100vh;*/
     margin-right: 200px;
     /* float: right; */
-}  
+}
 
 .sidenav {
     height: 100%;
@@ -80,6 +80,50 @@ body {
 .view-account {
     background: #FFFFFF;
     margin-top: 20px;
+
+}
+
+.selectChange {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    background: linear-gradient(to right, #f4b3c0, #92acd5);
+}
+
+.btn {
+    height: 20px;
+    color: white;
+    border: none;
+    width: 100px;
+    background: linear-gradient(to right, #f497aa, #5586d5);
+    border-radius: 25px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+
+.btn:hover {
+    background: linear-gradient(to right, #f1758d, #34568b);
+}
+
+fieldset {
+    background: linear-gradient(to right, #fce7ec, #b7cdf2);
+
+}
+
+.col-md-2 {
+    font-weight: bold;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #f4b3c0, #92acd5);
+
 }
 
 .view-account .pro-label {
@@ -197,7 +241,8 @@ body {
 .view-account .content-panel .title {
     margin-bottom: 15px;
     margin-top: 0;
-    font-size: 18px
+    font-size: 18px;
+    text-align: right;
 }
 
 .view-account .content-panel .fieldset-title {
@@ -205,23 +250,29 @@ body {
     border-bottom: 1px solid #eaeaf1;
     margin-bottom: 30px;
     color: #616670;
-    font-size: 16px
+    font-size: 16px;
+    text-align: right;
 }
 
 .view-account .content-panel .avatar .figure img {
-    float: right;
-    width: 64px
+    /* float: right; */
+
+    width: 100px;
 }
 
 .view-account .content-panel .content-header-wrapper {
     position: relative;
-    margin-bottom: 30px
+    margin-bottom: 30px;
+    text-align: right;
+
 }
 
 .view-account .content-panel .content-header-wrapper .actions {
     position: absolute;
     right: 0;
-    top: 0
+    top: 0;
+
+
 }
 
 .view-account .content-panel .content-utilities {
@@ -231,7 +282,7 @@ body {
 
 .view-account .content-panel .content-utilities .btn-group {
     margin-right: 5px;
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .view-account .content-panel .content-utilities .fa {
@@ -239,21 +290,6 @@ body {
     margin-right: 0
 }
 
-.view-account .content-panel .content-utilities .page-nav {
-    position: absolute;
-    right: 0;
-    top: 0
-}
-
-.view-account .content-panel .content-utilities .page-nav .btn-group {
-    margin-bottom: 0
-}
-
-.view-account .content-panel .content-utilities .page-nav .indicator {
-    color: #a2a6af;
-    margin-right: 5px;
-    display: inline-block
-}
 
 .view-account .content-panel .mails-wrapper .mail-item {
     position: relative;
@@ -539,10 +575,6 @@ body {
         padding: 0
     }
 
-    .view-account .content-panel .content-utilities .page-nav {
-        position: static;
-        margin-bottom: 15px
-    }
 
     .drive-wrapper .drive-item {
         width: 100px;
@@ -684,4 +716,64 @@ body {
         width: 40px;
         display: inline-block
     }
+}
+
+.form-group {
+    text-align: right;
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.form-inline {
+    text-align: right;
+    float: right;
+    margin-bottom: 20px;
+}
+
+.help-block {
+    margin-top: 0%;
+    color: #616670;
+}
+
+input {
+    margin-top: 1rem;
+
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: white;
+    padding: 0.5em;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #f4b3c0, #92acd5);
+}
+
+.btn {
+    margin-right: 30px;
+}
+
+.img-rounded {
+    border-radius: 50%;
+    height: 100px;
+    width: 100%;
+}
+#update {
+    text-align: center;
+    margin-right: 650px;
+}
+#userdiv{
+    text-align: left;
+    /* height: 33px; */
+    width: 190px;
+    margin-top: 16px;
+    font-size: 20px; 
+    border: none;
+    border-radius: 4px;
+    padding: 0.3em;
+    margin-bottom: -20px;    
+
 }

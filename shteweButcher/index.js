@@ -499,6 +499,93 @@ app.post("/deleteWorker", async (req, res) => {
     res.json("--")
 
 });
+app.post("/uploadPhoto", async (req, res) => {
+    var sql = `UPDATE workers SET  img = '${req.body.src}' WHERE username = '${req.cookies.username}';`
+    db.query(sql);
+
+});
+app.post("/updatedata", async (req, res) => {
+    const { firstname, lastname, username, email, password, phone, sunday, monday, tuesday, wednesday, thursday, friday } = req.body
+    var sunday1 = ''; var monday1 = ''; var tuesday1 = ''; var wednesday1 = ''; var thursday1 = ''; var friday1 = '';
+    if (sunday == 'חופש') {
+        sunday1 = 'DAYOFF'
+    }
+    else if (sunday == 'בוקר') {
+        sunday1 = 'MORNING'
+    }
+    else {
+        sunday1 = 'EVENING'
+    }
+    if (monday == 'חופש') {
+        monday1 = 'DAYOFF'
+    }
+    else if (monday == 'בוקר') {
+        monday1 = 'MORNING'
+    }
+    else {
+        monday1 = 'EVENING'
+    }
+    if (tuesday == 'חופש') {
+        tuesday1 = 'DAYOFF'
+    }
+    else if (tuesday == 'בוקר') {
+        tuesday1 = 'MORNING'
+    }
+    else {
+        tuesday1 = 'EVENING'
+    }
+    if (wednesday == 'חופש') {
+        wednesday1 = 'DAYOFF'
+    }
+    else if (wednesday == 'בוקר') {
+        wednesday1 = 'MORNING'
+    }
+    else {
+        wednesday1 = 'EVENING'
+    }
+    if (thursday == 'חופש') {
+        thursday1 = 'DAYOFF'
+    }
+    else if (thursday == 'בוקר') {
+        thursday1 = 'MORNING'
+    }
+    else {
+        thursday1 = 'EVENING'
+    }
+    if (friday == 'חופש') {
+        friday1 = 'DAYOFF'
+    }
+    else if (friday == 'בוקר') {
+        friday1 = 'MORNING'
+    }
+    else {
+        friday1 = 'EVENING'
+    }
+    if (password == '') {
+
+
+        var sql = `UPDATE workers SET   firstname= '${firstname}' , lastname = '${lastname}' ,
+     email = '${email}' , phone = '${phone}' , friday = '${friday1}', thursday = '${thursday1}', wednesday = '${wednesday1}' 
+    , sunday = '${sunday1}', monday = '${monday1}', tuesday = '${tuesday1}' WHERE username = '${req.cookies.username}';`
+        db.query(sql);
+    }
+    else {
+        bcrypt.genSalt(saltRounds, async function (err, salt) {
+            bcrypt.hash(password, salt, async function (err, hash) {
+                var sql1 = `UPDATE workers SET  firstname= '${firstname}' ,  password= '${hash}' , lastname = '${lastname}' , email = '${email}' , phone = '${phone}' , friday = '${friday1}', thursday = '${thursday1}', wednesday = '${wednesday1}' 
+            , sunday = '${sunday1}', monday = '${monday1}', tuesday = '${tuesday1}' WHERE username = '${req.cookies.username}';`
+                db.query(sql1);
+            });
+        });
+
+    }
+});
+app.post("/fillAllDataworker", async (req, res) => {
+    var username = req.cookies.username;
+    const result = await db.query(`select * from workers where UserName ='${username}';`);
+    console.log(result.rows)
+    res.json([result.rows,username])
+});
 app.post("/addWorker", async (req, res) => {
     const result1 = await db.query(`select * from workers where UserName = '${req.body.username}'`)
     console.log("d")
@@ -520,7 +607,7 @@ app.post("/addWorker", async (req, res) => {
         });
         res.json("gg")
     }
-    else{
+    else {
         res.json("failed")
     }
 });

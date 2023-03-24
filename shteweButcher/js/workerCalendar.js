@@ -148,7 +148,7 @@ daysTag.onclick = async () => {
         }
         else {
             console.log("2");
-            document.getElementById('shiftKind').textContent = " Still Not Determined";
+            document.getElementById('shiftKind').textContent = "עדיין לא נקבע";
         }
     }
     else {
@@ -167,6 +167,16 @@ function getMonth(month) {
         console.log("getMonth function")
     }
 
+}
+async function send(){
+    const body = { }
+    const changeDemand = await fetch("http://localhost:4000/changeDemand", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+    });
+    const result = await changeDemand.json();
 }
 // async function shift(){
 //     console.log("etba33");

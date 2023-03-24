@@ -116,9 +116,8 @@
 
             today = mm + '/' + dd + '/' + yyyy;
             console.log(today);
-
             var dayname = getDayName(today, "en-US");
-            console.log(dayname)
+            var daaay = dayname;
             if (dayname = 'Monday' || dayname == 'Tuesday' || dayname == 'Wednesday' || dayname == 'Thursday' || dayname == 'Friday' || dayname == 'Saturday') {
 
                 const temporaryshifts = await fetch("http://localhost:4000/tem", {
@@ -128,7 +127,7 @@
                     //   body: JSON.stringify(body),
                 });
                 const result = await temporaryshifts.json();
-
+                console.log(dayname+ " klara")
                 if (result == 'already done') {
                     const saveddata = await fetch("http://localhost:4000/saveddata", {
                         method: "POST",
@@ -149,27 +148,27 @@
                             var td3 = document.createElement("td");
                             var td4 = document.createElement("td");
                             td4.textContent = getdayname(i)
-                            if (dayname == 'Monday' && x == 0) {
-                                date.setDate(date.getDate() + 6)
-                                x = 1;
-                            }
-                            if (dayname == 'Tuesday' && x == 0) {
+                            // if (daaay == 'Monday' && x == 0) {
+                            //     date.setDate(date.getDate() + 6)
+                            //     x = 1;
+                            // }
+                            if (daaay == 'Tuesday' && x == 0) {
                                 date.setDate(date.getDate() + 5)
                                 x = 1;
                             }
-                            if (dayname == 'Wednesday' && x == 0) {
+                            if (daaay == 'Wednesday' && x == 0) {
                                 date.setDate(date.getDate() + 4)
                                 x = 1;
                             }
-                            if (dayname == 'Thursday' && x == 0) {
+                            if (daaay == 'Thursday' && x == 0) {
                                 date.setDate(date.getDate() + 3)
                                 x = 1;
                             }
-                            if (dayname == 'Friday' && x == 0) {
+                            if (daaay == 'Friday' && x == 0) {
                                 date.setDate(date.getDate() + 2)
                                 x = 1;
                             }
-                            if (dayname == 'Saturday' && x == 0) {
+                            if (daaay == 'Saturday' && x == 0) {
                                 date.setDate(date.getDate() + 1)
                                 x = 1;
                             }
@@ -227,23 +226,23 @@
                                         var td3 = document.createElement("td");
                                         var td4 = document.createElement("td");
                                         td4.textContent = getdayname(i)
-                                        if (dayname == 'Monday' && x == 0) {
-                                            date.setDate(date.getDate() + 6)
-                                            x = 1;
-                                        }
-                                        if (dayname == 'Tuesday' && x == 0) {
+                                        // if (daaay == 'Monday' && x == 0) {
+                                        //     date.setDate(date.getDate() + 6)
+                                        //     x = 1;
+                                        // }
+                                        if (daaay == 'Tuesday' && x == 0) {
                                             date.setDate(date.getDate() + 5)
                                             x = 1;
                                         }
-                                        if (dayname == 'Wednesday' && x == 0) {
+                                        if (daaay == 'Wednesday' && x == 0) {
                                             date.setDate(date.getDate() + 4)
                                             x = 1;
                                         }
-                                        if (dayname == 'Thursday' && x == 0) {
+                                        if (daaay == 'Thursday' && x == 0) {
                                             date.setDate(date.getDate() + 3)
                                             x = 1;
                                         }
-                                        if (dayname == 'Friday' && x == 0) {
+                                        if (daaay == 'Friday' && x == 0) {
                                             date.setDate(date.getDate() + 2)
                                             x = 1;
                                         }
@@ -267,31 +266,11 @@
                         date.setDate(date.getDate() + 1)
 
                     }
-                    // const Allrows = document.querySelectorAll("tr");
-                    // const Allrowsvalue = document.querySelectorAll("td");
-                    // arrayx = []
-                    // lastarray = []
-                    // var y = 1;
-                    // console.log(Allrowsvalue.length)
-                    // for (var z = 0; z < Allrowsvalue.length; z++) {
-                    //     arrayx.push(Allrowsvalue[z].textContent);
-
-                    //     if (y == 4) {
-                    //         // console.log(array)
-                    //         lastarray.push(arrayx)
-                    //         y = 0
-                    //         arrayx = [];
-                    //     }
-                    //     // console.log(Allrowsvalue[z].textContent)
-                    //     y++
-
-                    // }
-                    // body = {lastarray:lastarray}
-
+                    
                 }
                 else {
-
-                    var x = 0;
+                    console.log(daaay+" nbhjknb")
+                    var xy = 0;
                     var addDay = 1;
                     const date = new Date();
                     const element = document.getElementById("tbody")
@@ -304,30 +283,33 @@
                             var td3 = document.createElement("td");
                             var td4 = document.createElement("td");
                             td4.textContent = getdayname(j);
-                            if (dayname == 'Monday' && x == 0) {
-                                date.setDate(date.getDate() + 6)
-                                x = 1;
-                            }
-                            if (dayname == 'Tuesday' && x == 0) {
-                                date.setDate(date.getDate() + 5)
-                                x = 1;
-                            }
-                            if (dayname == 'Wednesday' && x == 0) {
-                                date.setDate(date.getDate() + 4)
-                                x = 1;
-                            }
-                            if (dayname == 'Thursday' && x == 0) {
+                            // if (daaay == 'Monday' && xy == 0) {
+                            //     date.setDate(date.getDate() + 6)
+                            //     xy = 1;
+                            // }
+                            // if (daaay == 'Tuesday' && xy == 0) {
+                            //     date.setDate(date.getDate() + 5)
+                            //     xy = 1;
+                            // }
+                            // if (daaay == 'Wednesday' && xy == 0) {
+                            //     date.setDate(date.getDate() + 4)
+                            //     xy = 1;
+                            // }
+                            if (daaay == 'Thursday' && xy == 0) {
                                 date.setDate(date.getDate() + 3)
-                                x = 1;
+                                xy = 1;
+                                console.log(date )
+                                console.log("vbhnjklahg")
                             }
-                            if (dayname == 'Friday' && x == 0) {
-                                date.setDate(date.getDate() + 2)
-                                x = 1;
-                            }
-                            if (dayname == 'Saturday' && x == 0) {
-                                date.setDate(date.getDate() + 1)
-                                x = 1;
-                            }
+                            console.log(daaay)
+                            // if (daaay == 'Friday' && xy == 0) {
+                            //     date.setDate(date.getDate() + 2)
+                            //     xy = 1;
+                            // }
+                            // if (daaay == 'Saturday' && xy == 0) {
+                            //     date.setDate(date.getDate() + 1)
+                            //     xy = 1;
+                            // }
                             string = date.toLocaleString();
                             array = string.split(",")
                             td3.textContent = array[0];

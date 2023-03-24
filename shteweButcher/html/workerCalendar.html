@@ -16,7 +16,7 @@
 <body>
 
   <div id="mySidenav" class="sidenav">
-   
+
     <a href="/profile" onclick="first()">
       <i class='profile'> פרופיל</i>
     </a>
@@ -51,19 +51,28 @@
       </ul>
       <section class="window">
         <i class='bx bx-chevron-left' id="close-shiftDetails"></i>
-        <div id="shiftKind"></div>
+        <div id="shiftKind" style="font-size: 20px;"></div>
+        <p dir="rtl" style="font-size: 20px;text-align: center;">בקשה לשינוי משמרת</p>
+        <p dir="rtl" style="font-size: 20px;">תבחר ב משמרת :</p>
+        <div id="selectdiv">
+          <select id="selectChange" class="selectChange">
+            <option dir="rtl">בוקר</option>
+            <option dir="rtl">ערב</option>
+            <option dir="rtl">חופש</option>
+          </select>
+        </div>
+
+        <form dir="rtl" style="font-size: 20px;text-align: center;">
+          תכתוב את הסיבה כאן...</br>
+          <input id="ask" type='' text='' name='' placeholder="תכתוב את הסיבה כאן..." style="width: 90%; height: 70px;" />
+        </form>
+        <div id="btn">
+          <input type="button" value="שלח" id="send" onclick="send()">
+        </div>
+        
       </section>
     </div>
   </div>
-  <!-- <script>
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-  }
-  
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
-  </script> -->
 
 </body>
 
