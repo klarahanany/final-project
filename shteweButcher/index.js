@@ -150,7 +150,7 @@ app.post("/adminCalendar", async (req, res) => {
             date = Year + "-" + month + "-" + Day;
             const result1 = await db.query(`SELECT * FROM shift where shiftType = 'EVENING' and shiftdate='${date}';`)
             const result2 = await db.query(`SELECT * FROM shift where shiftType = 'MORNING' and shiftdate='${date}';`)
-
+            const result3 = await db.query(`SELECT * FROM askforchange where dateasked='${date}';`)
             if (result1.rows.length == 0 && result2.rows.length == 0) {
                 res.json('still not determined')
             }
@@ -165,7 +165,7 @@ app.post("/adminCalendar", async (req, res) => {
                     const result = await db.query(`SELECT * FROM workers where username = '${result1.rows[i].username}';`)
                     array2.push(result.rows[0].firstname + " " + result.rows[0].lastname)
                 }
-                res.json([array, array2])
+                res.json([array, array2,result3.rows])
             }
         }
         else if (req.body.num === '1') {
@@ -499,6 +499,13 @@ app.post("/deleteWorker", async (req, res) => {
     res.json("--")
 
 });
+app.post("/changeDemand", async (req, res) => {
+    console.log(req.body)
+    var sql = `INSERT INTO askForChange(dateAsked,shiftType ,reason,username) VALUES ('${req.body.date}','${req.body.shifttype}','${req.body.reason}', '${req.cookies.username}');`
+    db.query(sql);
+    res.json("success")
+
+});
 app.post("/uploadPhoto", async (req, res) => {
     var sql = `UPDATE workers SET  img = '${req.body.src}' WHERE username = '${req.cookies.username}';`
     db.query(sql);
@@ -584,7 +591,7 @@ app.post("/fillAllDataworker", async (req, res) => {
     var username = req.cookies.username;
     const result = await db.query(`select * from workers where UserName ='${username}';`);
     console.log(result.rows)
-    res.json([result.rows,username])
+    res.json([result.rows, username])
 });
 app.post("/addWorker", async (req, res) => {
     const result1 = await db.query(`select * from workers where UserName = '${req.body.username}'`)

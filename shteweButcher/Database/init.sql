@@ -9,7 +9,8 @@ orderdetail,
 cartitems,
 feedback,
 temporaryshifts,
-shiftTemp;
+shiftTemp,
+askForChange;
 CREATE TABLE customers (
     personid SERIAL,
     username varchar(255) UNIQUE,
@@ -40,10 +41,12 @@ CREATE TABLE cartitems(
     productid INT REFERENCES products (productid),
     quantity INT
 );
+
 CREATE TABLE feedback(
-    productid SERIAL UNIQUE,
+    feedbackid SERIAL UNIQUE,
     personid INT REFERENCES customers (personid),
-    feedback VARCHAR(255)
+    feedback VARCHAR(255),
+    PRIMARY KEY(feedbackid)
 );
 CREATE TABLE orders (
     ordersid SERIAL UNIQUE,
@@ -110,6 +113,14 @@ CREATE TABLE workers (
 --     evening1 varchar(255) REFERENCES workers (UserName),
 --     evening2 varchar(255) REFERENCES workers (UserName) 
 -- );
+CREATE TABLE askForChange(
+    askId SERIAL UNIQUE,
+    dateAsked DATE,
+    shiftType varchar(255) ,
+    reason varchar(255),
+    username varchar(255) REFERENCES workers (UserName),
+    PRIMARY KEY(askId)
+);
 CREATE TABLE temporaryshifts (
     temporaryshift SERIAL,
     morning1 varchar(255),
@@ -140,7 +151,6 @@ CREATE TABLE shiftTemp(
     PRIMARY KEY (shiftid),
     UserName varchar(255) REFERENCES workers (UserName)
 );
-
 INSERT INTO products (
         description,
         price,
@@ -176,42 +186,42 @@ values(
         20,
         '/img/ch1.png'
     ),
-(
+    (
         'פילה (1 ק"ג)',
         '5.2ILS',
         'CALF',
         20,
         '/img/phele.jpg'
     ),
-(
+    (
         'שווארמה בשר (1 ק"ג)',
         '5.2ILS',
         'CALF',
         20,
         '/img/shawarma3egel.jpg'
     ),
-(
+    (
         'שווארמה עוף (1 ק"ג)',
         '5.2ILS',
         'CHICKEN',
         20,
         '/img/shawarmachicken.jpg'
     ),
-(
+    (
         'סנטה (1 ק"ג)',
         '5.2ILS',
         'LAMB',
         20,
         '/img/senta3egel.jpg'
     ),
-(
+    (
         'כנפי עוף (1 ק"ג)',
         '5.2ILS',
         'LAMB',
         20,
         '/img/knafe3of.jpg'
     ),
-(
+    (
         'אנטריקות (1 ק"ג)',
         '5.2ILS',
         'LAMB',
@@ -252,7 +262,8 @@ values(
         'MORNING',
         'EVENING',
         '0545555555',
-        'https://bootdey.com/img/Content/avatar/avatar1.png' ),
+        'https://bootdey.com/img/Content/avatar/avatar1.png'
+    ),
     (
         2,
         'hanany',
@@ -307,7 +318,7 @@ values(
         '0547777377',
         'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
-(
+    (
         5,
         'shtewe',
         '---',
@@ -325,7 +336,7 @@ values(
         '0544977377',
         'https://bootdey.com/img/Content/avatar/avatar1.png'
     ),
-(
+    (
         6,
         'shtewe',
         'aaa',

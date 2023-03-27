@@ -130,10 +130,27 @@ daysTag.onclick = async () => {
                 p.textContent = resultx[1][i]
                 elementeven.append(p)
             }
-            // emp1 = document.getElementById('morn');
-            // emp2 = document.getElementById('even');
-            // emp1.textContent = "morning employee " + morningWorker;
-            // emp2.textContent = "evening employee " + eveningWorker;
+            const element = document.getElementById("changeSent")
+            element.innerHTML=''
+            const title = document.createElement("p");
+            title.textContent = "בקשות לשינוי:"
+            title.style.direction="rtl"
+            title.style.marginTop="-50px"
+            element.append(title)
+            for(var i = 0 ; i <resultx[2].length ; i++){
+                const name = document.createElement("p");
+                name.textContent = "שם: "+resultx[2][i].username
+                element.append(name)
+                name.style.direction="rtl"
+                const type = document.createElement("p");
+                type.textContent = "סוג משמרת: "+resultx[2][i].shifttype
+                element.append(type)
+                type.style.direction="rtl"
+                const reason = document.createElement("p");
+                reason.textContent ="סיבה: " +resultx[2][i].reason
+                element.append(reason)
+                reason.style.direction="rtl"
+            }
             alreadyAdded1 = document.getElementById("alreadyAdded")
             alreadyAdded1.style.visibility = 'visible';
             box1 = document.getElementById("box1")

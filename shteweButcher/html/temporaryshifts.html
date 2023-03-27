@@ -283,18 +283,18 @@
                             var td3 = document.createElement("td");
                             var td4 = document.createElement("td");
                             td4.textContent = getdayname(j);
-                            // if (daaay == 'Monday' && xy == 0) {
-                            //     date.setDate(date.getDate() + 6)
-                            //     xy = 1;
-                            // }
-                            // if (daaay == 'Tuesday' && xy == 0) {
-                            //     date.setDate(date.getDate() + 5)
-                            //     xy = 1;
-                            // }
-                            // if (daaay == 'Wednesday' && xy == 0) {
-                            //     date.setDate(date.getDate() + 4)
-                            //     xy = 1;
-                            // }
+                            if (daaay == 'Monday' && xy == 0) {
+                                date.setDate(date.getDate() + 6)
+                                xy = 1;
+                            }
+                            if (daaay == 'Tuesday' && xy == 0) {
+                                date.setDate(date.getDate() + 5)
+                                xy = 1;
+                            }
+                            if (daaay == 'Wednesday' && xy == 0) {
+                                date.setDate(date.getDate() + 4)
+                                xy = 1;
+                            }
                             if (daaay == 'Thursday' && xy == 0) {
                                 date.setDate(date.getDate() + 3)
                                 xy = 1;

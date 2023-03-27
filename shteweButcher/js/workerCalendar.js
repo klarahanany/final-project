@@ -143,8 +143,8 @@ daysTag.onclick = async () => {
         if (result !== " Still Not Determined") {
             console.log("1");
             const shift = '';
-            
-            document.getElementById('shiftKind').textContent = "יש לך משמרת" + result.shifttype ;
+
+            document.getElementById('shiftKind').textContent = "יש לך משמרת" + result.shifttype;
         }
         else {
             console.log("2");
@@ -163,20 +163,66 @@ function getMonth(month) {
     if (month === 'March') {
         return '03';
     }
-    else{
+    else if (month === 'February') {
+        return '02';
+    }
+    else if (month === 'April') {
+        return '04';
+    }
+    else if (month === 'May') {
+        return '05';
+    }
+    else if (month === 'January') {
+        return '01';
+    }
+    else if (month === 'June') {
+        return '06';
+    }
+    else if (month === 'July') {
+        return '07';
+    }
+    else if (month === 'August') {
+        return '08';
+    }
+    else if (month === 'September') {
+        return '09';
+    }
+    else if (month === 'October') {
+        return '10';
+    }
+    else if (month === 'November') {
+        return '11';
+    }
+    else if (month === 'December') {
+        return '12';
+    }
+    else {
         console.log("getMonth function")
     }
 
 }
-async function send(){
-    const body = { }
-    const changeDemand = await fetch("http://localhost:4000/changeDemand", {
-        method: "POST",
-        Credentials: "include",
-        headers: { "Content-Type": "application/JSON" },
-        body: JSON.stringify(body),
-    });
-    const result = await changeDemand.json();
+async function send() {
+    const element1 = document.getElementById("selectChange");
+    const element2 = document.getElementById("ask")
+    
+    console.log(element2.value)
+    if (element2.value == '') {
+        alert("תמלא סיבה")
+    }
+    else {
+         const datexy = year + "-"+getMonth(month)+"-"+day;
+        const body = { shifttype: element1.value, reason: element2.value ,date :datexy}
+        const changeDemand = await fetch("http://localhost:4000/changeDemand", {
+            method: "POST",
+            Credentials: "include",
+            headers: { "Content-Type": "application/JSON" },
+            body: JSON.stringify(body),
+        });
+        const result = await changeDemand.json();
+        if(result=='success'){
+            alert("הבקשה נשלחה")
+        }
+    }
 }
 // async function shift(){
 //     console.log("etba33");
