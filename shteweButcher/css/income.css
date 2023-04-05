@@ -35,7 +35,8 @@ body {
   background-color: #34568b;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 20px;
+  
 }
 
 .sidenav a {
@@ -49,18 +50,77 @@ body {
   transition: 0.3s;
 
 }
-.sidenav a i{
+
+.sidenav a i {
   font-family: "Times New Roman", Times, serif;
 }
 
 .sidenav a:hover {
   font-size: 21px;
   color: white;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+  -webkit-animation: color 0.5s ease-in forwards;
+  -moz-animation: color 0.5s ease-in forwards;
+  -o-animation: color 0.5s ease-in forwards;
+  animation: color 0.5s ease-in forwards;
 }
+
+#allChart{
+  display:block;
+  width: 10000px;
+}
+#firstTwoChart{
+  display: flex;
+  width: 1000px;
+
+}
+@-webkit-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-moz-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-o-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
 
 .income {
-  color: white;
-  font-size: 20px;
-  left: 0px;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+
 }
 
+.income i {
+  color: white;
+  font-size: 20px;
+}

@@ -20,16 +20,19 @@
       <i class="inventory"> ניהול מלאי</i>
     </a>
     <a href="/adminCalendar">
-      <i class='calen'>שיבוץ משמרות</i>
+      <i class='calen'> משמרות</i>
     </a>
-    <a href="/allEmployes">
-      <i class='profiles '>מידע על העובדים</i>
+    <a href="/temporaryshifts">
+      <i class="salary"> אישור משמרות</i>
+    </a>
+    <a href="/allEmployes" class='profiles '>
+      <i >מידע על העובדים</i>
     </a>
     <a href="/allorders">
-      <i class="orders">צפייה בכל ההזמנות</i>
+      <i class="orders">הזמנות</i>
     </a>
-    <a href="/income">
-      <i>צפייה ברווחי העסק</i>
+    <a href="/income" >
+      <i>הכנסות העסק</i>
     </a>
     <a href="/employeesSalary">
       <i class="salary">משכורות העובדים</i>
@@ -37,12 +40,8 @@
     <a href="/customerfeedback">
       <i class="salary"> משובי לקוחות</i>
     </a>
-    <a href="/temporaryshifts">
-      <i class="salary"> אישור משמרות</i>
-    </a>
-    <a href="/addnewemployee">
-      <i class="salary"> הוספת עובד חדש</i>
-    </a>
+
+
   </div>
 
   <div class="updateinventory">
@@ -141,6 +140,7 @@
         var email = document.createElement("h4");
         var phone = document.createElement("h4");
         var city = document.createElement("h4");
+        city.dir='rtl'
         var title = document.createElement("h4")
         var list = document.createElement("ol")
         var li1 = document.createElement("li")
@@ -168,7 +168,7 @@
         name.textContent = " שם: " + result[i].firstname + " " + result[i].lastname;
         email.textContent = result[i].email + "  :דואר אלקטרוני";
         phone.textContent = result[i].phone + "  :מספר טלפון ";
-        city.textContent = result[i].city + "  :עיר מגורים ";
+        city.textContent = "  עיר מגורים: "+ result[i].city ;
         title.textContent = " :משמרות מועדפים"
         if (result[i].sunday == 'MORNING') {
           li1.textContent = "משמרת בוקר"

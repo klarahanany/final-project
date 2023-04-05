@@ -204,14 +204,14 @@ function getMonth(month) {
 async function send() {
     const element1 = document.getElementById("selectChange");
     const element2 = document.getElementById("ask")
-    
+
     console.log(element2.value)
     if (element2.value == '') {
         alert("תמלא סיבה")
     }
     else {
-         const datexy = year + "-"+getMonth(month)+"-"+day;
-        const body = { shifttype: element1.value, reason: element2.value ,date :datexy}
+        const datexy = year + "-" + getMonth(month) + "-" + day;
+        const body = { shifttype: element1.value, reason: element2.value, date: datexy }
         const changeDemand = await fetch("http://localhost:4000/changeDemand", {
             method: "POST",
             Credentials: "include",
@@ -219,7 +219,29 @@ async function send() {
             body: JSON.stringify(body),
         });
         const result = await changeDemand.json();
-        if(result=='success'){
+        if (result == 'success') {
+            const serviceID = "service_9cqsz9a";
+            const templateID = "template_uaoxy81";
+
+            emailjs.send(serviceID, templateID)
+                .then(res => {
+                    // document.getElementById("name").value = "";
+                    // document.getElementById("email").value = "";
+                    // document.getElementById("message").value = "";
+                    console.log(res);
+                    alert("Your message sent successfully!!")
+
+                })
+                .catch(err => console.log(err));
+            // Email.send({
+            //     SecureToken: "token",
+            //     To: 'klarosh.hanany@gmail.com',
+            //     From: "klarosh.hanany@gmail.com",
+            //     Subject: "This is the subject",
+            //     Body: "body content"
+            // }).then(
+            //     message => alert(message)
+            // );
             alert("הבקשה נשלחה")
         }
     }

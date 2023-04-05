@@ -165,7 +165,7 @@ app.post("/adminCalendar", async (req, res) => {
                     const result = await db.query(`SELECT * FROM workers where username = '${result1.rows[i].username}';`)
                     array2.push(result.rows[0].firstname + " " + result.rows[0].lastname)
                 }
-                res.json([array, array2,result3.rows])
+                res.json([array, array2, result3.rows])
             }
         }
         else if (req.body.num === '1') {
@@ -405,52 +405,59 @@ app.post("/income", async (req, res) => {
         const result1 = await db.query(`select extract(year from orderdate) from orders o inner join orderdetail od on o.ordersid = od.ordersid;`);
         const result2 = await db.query(`select extract(month from orderdate) from orders o inner join orderdetail od on o.ordersid = od.ordersid;`);
         const result3 = await db.query(`select extract(day from orderdate) from orders;`);
-
-        console.log(result1.rows)
-        console.log(result2.rows)
-        console.log(result3.rows)
         for (var i = 0; i < result.rows.length; i++) {
             if (result1.rows[i].extract == Year) {
-                if (result2.rows[i].extract == '1') {
-                    monthcount[0]++;
-                }
-                else if (result2.rows[i].extract == '2') {
-                    monthcount[1]++;
-                }
-                else if (result2.rows[i].extract == '3') {
-                    var str = result.rows[i].totalprice
-                    console.log(result.rows[i].totalprice)
-                    var totalprice = str.replace('ILS', '') // str = "this"
-
-                    monthcount[2] += parseFloat(totalprice);
-                }
-                else if (result2.rows[i].extract == '4') {
-                    monthcount[3]++;
-                }
-                else if (result2.rows[i].extract == '5') {
-                    monthcount[4]++;
-                }
-                else if (result2.rows[i].extract == '6') {
-                    monthcount[5]++;
-                }
-                else if (result2.rows[i].extract == '7') {
-                    monthcount[6]++;
-                }
-                else if (result2.rows[i].extract == '8') {
-                    monthcount[7]++;
-                }
-                else if (result2.rows[i].extract == '9') {
-                    monthcount[8]++;
-                }
-                else if (result2.rows[i].extract == '10') {
-                    monthcount[9]++;
-                }
-                else if (result2.rows[i].extract == '11') {
-                    monthcount[10]++;
-                }
-                else if (result2.rows[i].extract == '12') {
-                    monthcount[11]++;
-                }
+                var str = result.rows[i].totalprice
+                var totalprice = str.replace('ILS', '')
+                monthcount[result2.rows[i].extract] += parseFloat(totalprice);
+                // if (result2.rows[i].extract == '1') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[0] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '2') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[1] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '3') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[2] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '4') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[3] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '5') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[4] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '6') {
+                //     var str = result.rows[i].totalprice
+                //     var totalprice = str.replace('ILS', '')
+                //     monthcount[5] += parseFloat(totalprice);
+                // }
+                // else if (result2.rows[i].extract == '7') {
+                //     monthcount[6]++;
+                // }
+                // else if (result2.rows[i].extract == '8') {
+                //     monthcount[7]++;
+                // }
+                // else if (result2.rows[i].extract == '9') {
+                //     monthcount[8]++;
+                // }
+                // else if (result2.rows[i].extract == '10') {
+                //     monthcount[9]++;
+                // }
+                // else if (result2.rows[i].extract == '11') {
+                //     monthcount[10]++;
+                // }
+                // else if (result2.rows[i].extract == '12') {
+                //     monthcount[11]++;
+                // }
             }
         }
         res.json(monthcount)
@@ -482,15 +489,165 @@ app.post("/allworkers", async (req, res) => {
 
 });
 app.post("/updateshift", async (req, res) => {
+
     if (req.body.shiftType == 'בוקר') {
-        if (req.body.day == "יום ראשון") {
-            sql = `UPDATE temporaryshifts SET morning1 = '${req.body.newEmployee}' WHERE temporaryshift='1' ;`
-            db.query(sql)
-            sql1 = `CLUSTER temporaryshifts USING 1;`
+        const morning1 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND morning1 = '${req.body.oldEmployee}' `)
+        const morning2 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND morning2 = '${req.body.oldEmployee}' `)
+        console.log("morning2 row count: " + morning2.rowCount)
+        if (morning1.rowCount > 0) {
+            sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
             db.query(sql1)
+            const result1 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
+            if (result1.rows[0].morning1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result1.rows[0].morning2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result1.rows[0].evening1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result1.rows[0].evening2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+        }
+        else if (morning2.rowCount > 0) {
+            sql2 = `UPDATE temporaryshifts SET morning2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql2)
+            const result2 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
+            if (result2.rows[0].morning1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+            }
+            else if (result2.rows[0].morning2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+            }
+            else if (result2.rows[0].evening1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+            }
+            else if (result2.rows[0].evening2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+            }
+
+        }
+        else if (morning1.rowCount == 0 && morning2.rowCount == 0) {
+            res.json("choose employee already in the morning shift")
+
         }
     }
-    res.json("gg")
+    else if (req.body.shiftType == 'ערב') {
+        const evening1 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND evening1 = '${req.body.oldEmployee}' `)
+        const evening2 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND evening2 = '${req.body.oldEmployee}' `)
+
+        if (evening1.rowCount > 0) {
+            sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
+            const result3 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
+            if (result3.rows[0].morning1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result3.rows[0].morning2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result3.rows[0].evening1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result3.rows[0].evening2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+        }
+        else if (evening2.rowCount > 0) {
+            sql2 = `UPDATE temporaryshifts SET evening2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql2)
+            const result4 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
+            if (result4.rows[0].morning1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result4.rows[0].morning2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET morning2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result4.rows[0].evening1 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+            else if (result4.rows[0].evening2 == req.body.newEmployee) {
+                sql1 = `UPDATE temporaryshifts SET evening2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+                db.query(sql1)
+                res.json("done")
+
+            }
+        }
+        else if (evening1.rowCount == 0 && evening2.rowCount == 0) {
+            res.json("choose employee already in the morning shift")
+
+        }
+    }
+
+    else if (req.body.shiftType == 'חופש') {
+        const result = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' `)
+        console.log(result.rows)
+        if (result.rows[0].morning1 == req.body.newEmployee) {
+            sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
+            res.json(req.body.newEmployee)
+        }
+        else if (result.rows[0].morning2 == req.body.newEmployee) {
+            sql1 = `UPDATE temporaryshifts SET morning2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
+            res.json(req.body.newEmployee)
+        }
+        else if (result.rows[0].evening1 == req.body.newEmployee) {
+            sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
+            res.json(req.body.newEmployee)
+        }
+        else if (result.rows[0].evening2 == req.body.newEmployee) {
+            sql1 = `UPDATE temporaryshifts SET evening2 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
+            res.json(req.body.newEmployee)
+        }
+
+    }
+
 });
 app.post("/deleteWorker", async (req, res) => {
     const result = await db.query(`SELECT employeeid FROM workers where firstname='${req.body.firstname}' and lastname = '${req.body.lastname}' ;`)
@@ -854,7 +1011,33 @@ app.post("/tem", async (req, res) => {
         res.json([morningshifts, eveningshifts, dayoffshifts])
     }
 });
+app.get("/salary", async (req, res) => {
+    try {
 
+        // const result = await db.query(`select * from shift`)
+        const result = await db.query(`SELECT *
+        FROM shift 
+        WHERE shiftdate >= date_trunc('month', current_date - interval '1' month)
+        and shiftdate <date_trunc('day', current_date);`)
+        const result2 = await db.query(`SELECT *
+        FROM workers where catagory = 'WORKER'`)
+
+
+        res.json([result.rows, result2.rows]);
+    } catch (error) {
+        console.log(error);
+    }
+});
+app.get("/customersOrders", async (req, res) => {
+    try {
+
+        const result2 = await db.query(`select * from customers`)
+        const result = await db.query(`SELECT * FROM orders;`)
+        res.json([result.rows, result2.rows]);
+    } catch (error) {
+        console.log(error);
+    }
+});
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
 })
@@ -887,6 +1070,9 @@ app.get("/income", (req, res) => {
 })
 app.get("/inventory", (req, res) => {
     res.sendFile(__dirname + "/html/adminInventory.html")
+})
+app.get("/home", (req, res) => {
+    res.sendFile(__dirname + "/html/home.html")
 })
 app.get("/adminCalendar", (req, res) => {
     res.sendFile(__dirname + "/html/adminCalendar.html")
@@ -965,12 +1151,18 @@ function getMonth(month) {
     }
 
 }
-function reverseInPlace(str) {
-    var words = [];
-    words = str.match(/\S+/g);
-    var result = "";
-    for (var i = words.length - 1; i >= 0; i--) {
-        result += words[i].split('').reverse().join('') + " ";
+function getIdByDayName(str) {
+    if (str == 'יום ראשון') {
+        return 1
+    } else if (str == 'יום שני') {
+        return 2
+    } else if (str == 'יום שלישי') {
+        return 3
+    } else if (str == 'יום רביעי') {
+        return 4
+    } else if (str == 'יום חמישי') {
+        return 5
+    } else if (str == 'יום שישי') {
+        return 6
     }
-    return result
 }

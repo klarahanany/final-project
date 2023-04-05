@@ -47,8 +47,52 @@ body {
 .sidenav a:hover {
   font-size: 21px;
   color: white;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+  -webkit-animation: color 0.5s ease-in forwards;
+  -moz-animation: color 0.5s ease-in forwards;
+  -o-animation: color 0.5s ease-in forwards;
+  animation: color 0.5s ease-in forwards;
 }
 
+@-webkit-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-moz-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-o-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
 
 
 #main {
@@ -258,6 +302,9 @@ header .current-date {
 }
 
 .calen {
+  background: linear-gradient(130deg, #f1758d, #34568b);
+}
+.calen i{
   color: white;
-  left: 0px;
+  font-size: 21px;
 }

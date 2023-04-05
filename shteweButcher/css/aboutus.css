@@ -12,12 +12,24 @@ body {
     color: #F5DFDF;
     background-size: cover;
     background-color: #4A7339;
+    overflow-x: hidden;
 }
 
 .logo {
     width: 50%;
     height: 80px;
     image-rendering: 50%;
+    align-items: center;
+}
+
+section h3 {
+    text-align: center;
+    align-items: center;
+}
+
+.boss {
+    width: 10%;
+    height: 10%;
 }
 
 /* .shop-container {
@@ -37,7 +49,26 @@ nav {
 
 }
 
+footer {
+    display: block;
+    height: 500%;
+    background-color: #D9D9D9;
+    color: black;
+    margin-top: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
 
+}
+
+footer p {
+    text-align: right;
+    margin-right: 10px;
+}
+footer i {
+    padding: 10px 10px 10px 10px;
+    font-size: 30px;
+    color: #090909c5;
+}
 
 label.butcher {
     /* text-align: center; */
@@ -107,7 +138,7 @@ a:hover {
 
 #check {
     display: none;
-    position:relative;
+    position: relative;
 }
 
 @media(max-width: 952px) {
@@ -164,10 +195,9 @@ section h1 {
     margin-top: 10px;
     font-size: 40px;
     color: #F5DFDF;
-    /* line-height: 80px; */
-    text-align: center;
-    margin-left: 500px;
+    /* text-align: center; */
     padding: 0 0 20px 0;
+    margin-left: 42%;
 
 }
 
@@ -176,7 +206,16 @@ section h2 {
     color: white;
     text-align: center;
     padding: 0 0 20px 0;
+}
 
+section p {
+    font-size: 20px;
+    text-decoration: solid;
+    text-align: center;
+}
+
+section div {
+    align-items: center;
 }
 
 .high {

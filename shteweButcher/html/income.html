@@ -20,16 +20,19 @@
             <i> ניהול מלאי</i>
         </a>
         <a href="/adminCalendar">
-            <i>שיבוץ משמרות</i>
+            <i> משמרות</i>
+        </a>
+        <a href="/temporaryshifts">
+            <i class="shifts"> אישור משמרות</i>
         </a>
         <a href="/allEmployes">
             <i>מידע על העובדים</i>
         </a>
         <a href="/allorders">
-            <i class="orders">צפייה בכל ההזמנות</i>
+            <i class="orders">הזמנות</i>
         </a>
-        <a href="/income">
-            <i class="income">צפייה ברווחי העסק</i>
+        <a href="/income" class="income">
+            <i>הכנסות העסק</i>
         </a>
         <a href="/employeesSalary">
             <i class="salary">משכורות העובדים</i>
@@ -37,20 +40,20 @@
         <a href="/customerfeedback">
             <i class="salary"> משובי לקוחות</i>
         </a>
-        <a href="/temporaryshifts">
-            <i class="shifts"> אישור משמרות</i>
-        </a>
-        <a href="/addnewemployee">
-            <i class="salary"> הוספת עובד חדש</i>
-        </a>
 
     </div>
-    <canvas id="myChart" style="width:50%;max-width:500px;height: 300px;"></canvas>
-    <canvas id="myChart2" style="width:50%;max-width:300px;height: 300px;"></canvas>
-
+    <div id="allChart">
+    <div id="firstTwoChart">
+        <canvas id="myChart" style="width:50%;max-width:600px;height: 400px;"></canvas>
+        <canvas id="myChart2" style="width:50%;max-width:400px;height: 400px;"></canvas>
+    </div>
+    <div id="lastChart">
+        <canvas id="myChart3" style="width:50%;max-width:500px;height: 400px;"></canvas>
+    </div>
+</div>
     <script>
         window.onload = async function () {
-            var xValues = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var xValues1 = ['january', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             body = { num: '2' }
             const income = await fetch("http://localhost:4000/income", {
                 method: "POST",
@@ -59,18 +62,18 @@
                 body: JSON.stringify(body),
             });
             const result1 = await income.json();
-            var yValues = [result1[0], result1[1], result1[2], result1[3], result1[4], result1[5], result1[6], result1[7], result1[8], result1[9], result1[10], result1[11]];
+            var yValues1 = [result1[0], result1[1], result1[2], result1[3], result1[4], result1[5], result1[6], result1[7], result1[8], result1[9], result1[10], result1[11]];
 
             new Chart("myChart", {
                 type: "line",
                 data: {
-                    labels: xValues,
+                    labels: xValues1,
                     datasets: [{
                         fill: false,
                         lineTension: 0,
                         backgroundColor: "rgba(0,0,255,1.0)",
                         borderColor: "rgba(0,0,255,0.1)",
-                        data: yValues
+                        data: yValues1
                     }]
                 },
                 options: {
@@ -98,7 +101,7 @@
             const result = await incomepie.json();
             var yValues = [result[0], result[1], result[2]];
             var barColors = [
-                "#b91d47",
+                "#f1758d",
                 "#00aba9",
                 "#2b5797",
                 "#e8c3b9",
@@ -121,6 +124,51 @@
                     }
                 }
             });
+            let response = await fetch("http://localhost:4000/customersOrders", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const resJson = await response.json();
+            var xValues3 = [];
+            var yValues3 = [];
+            for (var j = 0; j < resJson[1].length; j++) {
+                var sum = 0;
+                for (var i = 0; i < resJson[0].length; i++) {
+                    if(resJson[0][i].personid == resJson[1][j].personid){
+                        sum=sum+1;
+                    }
+                }
+                xValues3.push(resJson[1][j].username)
+                yValues3.push(sum)
+                
+            }
+            // if(xValues3.length<4){
+            //     console.log("what")
+            //     document.getElementById("myChart3").style.width="100px"
+            //     document.getElementById("myChart3").style.height="100px"
+            //     document.getElementById("lastChart").style.width = "1000px"
+            // }
+            new Chart("myChart3", {
+                type: "bar",
+                data: {
+                    labels: xValues3,
+                    datasets: [{
+                        backgroundColor: "blue",
+                        data: yValues3
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "כמות ההזמנות שנעשה לפי שם משתמש ללקוח"
+                    }
+                }
+            });
+           
         }
     </script>
 </body>

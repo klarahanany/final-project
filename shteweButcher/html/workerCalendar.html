@@ -11,6 +11,13 @@
   <link rel="stylesheet" href="/css/worker.css">
   <script src="/js/workerCalendar.js" defer></script>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("t6nxwEjbooTsPC4o6");
+    })();
+  </script>
 </head>
 
 <body>
@@ -20,8 +27,8 @@
     <a href="/profile" onclick="first()">
       <i class='profile'> פרופיל</i>
     </a>
-    <a href="/calendar">
-      <i class="calen">משמרות</i>
+    <a href="/calendar" class="calen">
+      <i>משמרות</i>
     </a>
     <a href="/updatePersonalInformation">
       <i class="upPer"> עדכון מידע</i>
@@ -64,12 +71,13 @@
 
         <form dir="rtl" style="font-size: 20px;text-align: center;">
           תכתוב את הסיבה כאן...</br>
-          <input id="ask" type='' text='' name='' placeholder="תכתוב את הסיבה כאן..." style="width: 90%; height: 70px;" />
+          <input id="ask" type='' text='' name='' placeholder="תכתוב את הסיבה כאן..."
+            style="width: 90%; height: 70px;" />
         </form>
         <div id="btn">
           <input type="button" value="שלח" id="send" onclick="send()">
         </div>
-        
+
       </section>
     </div>
   </div>

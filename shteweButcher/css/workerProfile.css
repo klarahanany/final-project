@@ -41,7 +41,53 @@ body {
 .sidenav a:hover {
     font-size: 21px;
     color: white;
-}
+    background: linear-gradient(130deg, #f1758d, #34568b);
+    -webkit-animation: color 0.5s ease-in forwards;
+    -moz-animation: color 0.5s ease-in forwards;
+    -o-animation: color 0.5s ease-in forwards;
+    animation: color 0.5s ease-in forwards;
+  }
+  
+  @-webkit-keyframes color {
+    0% {
+      color: #f8bac6;
+    }
+  
+    100% {
+      color: white;
+    }
+  }
+  
+  @-moz-keyframes color {
+    0% {
+      color: #f8bac6;
+    }
+  
+    100% {
+      color: white;
+    }
+  }
+  
+  @-o-keyframes color {
+    0% {
+      color: #f8bac6;
+    }
+  
+    100% {
+      color: white;
+    }
+  }
+  
+  @keyframes color {
+    0% {
+      color: #f8bac6;
+    }
+  
+    100% {
+      color: white;
+    }
+  }
+  
 
 .sidenav .closebtn {
     position: absolute;
@@ -52,8 +98,12 @@ body {
 }
 
 .profile {
+    background: linear-gradient(130deg, #f1758d, #34568b);
+}
+
+.profile i {
     color: white;
-    left: 0px;
+    font-size: 21px;
 }
 
 .padding {
@@ -182,7 +232,10 @@ h6 {
     color: #f9f9fa;
 }
 
-#c ,#p,#s,#e{
+#c,
+#p,
+#s,
+#e {
     float: right;
     color: #34568b;
     font-weight: bold;
@@ -228,10 +281,11 @@ h6 {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
-li{
-  float: right;
+
+li {
+    float: right;
     margin-right: 60px;
-    color:#7d9ccf;
+    color: #7d9ccf;
     font-weight: bold;
     font-size: 15px;
 }

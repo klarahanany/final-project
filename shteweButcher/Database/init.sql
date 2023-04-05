@@ -41,7 +41,6 @@ CREATE TABLE cartitems(
     productid INT REFERENCES products (productid),
     quantity INT
 );
-
 CREATE TABLE feedback(
     feedbackid SERIAL UNIQUE,
     personid INT REFERENCES customers (personid),
@@ -116,7 +115,7 @@ CREATE TABLE workers (
 CREATE TABLE askForChange(
     askId SERIAL UNIQUE,
     dateAsked DATE,
-    shiftType varchar(255) ,
+    shiftType varchar(255),
     reason varchar(255),
     username varchar(255) REFERENCES workers (UserName),
     PRIMARY KEY(askId)
@@ -248,10 +247,10 @@ INSERT INTO workers (
     )
 values(
         1,
-        'חנאני',
-        'קלרה',
-        'klarahanany',
-        'klarosh.hanany@gmail.com',
+        'שתיווי',
+        'אחמד',
+        'ahmadshtewe',
+        'ahmad.shtewe@gmail.com',
         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
         'עכו',
         'WORKER',
@@ -262,14 +261,14 @@ values(
         'MORNING',
         'EVENING',
         '0545555555',
-        'https://bootdey.com/img/Content/avatar/avatar1.png'
+        '/img/ahmad.jpg'
     ),
     (
         2,
-        'hanany',
-        'rania',
-        'raniahanany',
-        'rania.hanany@gmail.com',
+        'שתיווי',
+        'עאטף',
+        'atefshtewe',
+        'atefshtewe@gmail.com',
         '$2a$12$uNGDdGgN4SkqfSNAkOjOMODKzXqzsMpRiRYUWd6kPDKx9nLwN9CtS',
         'acre',
         'WORKER',
@@ -280,15 +279,16 @@ values(
         'MORNING',
         'EVENING',
         '0546666666',
-        'https://bootdey.com/img/Content/avatar/avatar1.png'
+        '/img/atef.jpg'
     ),
     (
         3,
-        'shtewe',
-        'nada',
-        'nadashtewe',
-        'nadashtewe8@gmail.com',
+        'שתיווי',
+        'ריאד',
+        'reyadShtewe',
+        'reyadShtewe@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
+        -- nada
         'nazareth',
         'ADMIN',
         'DAYOFF',
@@ -302,10 +302,10 @@ values(
     ),
     (
         4,
-        'shtewe',
-        'nona',
-        'nonashtewe',
-        'nonashtewe8@gmail.com',
+        'שתיווי',
+        'עלאא',
+        'alaashtewe',
+        'alaashtewe4@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
         'nazareth',
         'WORKER',
@@ -316,14 +316,14 @@ values(
         'EVENING',
         'DAYOFF',
         '0547777377',
-        'https://bootdey.com/img/Content/avatar/avatar1.png'
+        '/img/alaa.jpg'
     ),
     (
         5,
-        'shtewe',
-        '---',
-        '---shtewe',
-        '---shtewe8@gmail.com',
+        'עויד',
+        'שאדי',
+        'shadiawied',
+        'shadiawied@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
         'nazareth',
         'WORKER',
@@ -334,14 +334,14 @@ values(
         'DAYOFF',
         'MORNING',
         '0544977377',
-        'https://bootdey.com/img/Content/avatar/avatar1.png'
+        '/img/profile2.jpeg'
     ),
     (
         6,
-        'shtewe',
-        'aaa',
-        'aaashtewe',
-        'aaashtewe8@gmail.com',
+        'שאמוט',
+        'טאהא',
+        'tahashamot',
+        'tahashamot8@gmail.com',
         '$2a$12$v8msQjDX0u3V2kvEbS10Xu4Gm4WSkWBQbbZRm3luJLlKznZlDdIGC',
         'nazareth',
         'WORKER',
@@ -352,7 +352,7 @@ values(
         'DAYOFF',
         'MORNING',
         '054497337',
-        'https://bootdey.com/img/Content/avatar/avatar1.png'
+        '/img/taha.jpg'
     );
 INSERT INTO customers (
         UserName,

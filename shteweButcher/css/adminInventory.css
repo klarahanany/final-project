@@ -36,7 +36,7 @@ body {
   background-color: #34568b;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 20px;
 }
 
 .sidenav a {
@@ -57,12 +57,35 @@ body {
 .sidenav a:hover {
   font-size: 21px;
   color: white;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+  -webkit-animation: color 0.5s ease-in forwards;
+  -moz-animation: color 0.5s ease-in forwards;
+  -o-animation: color 0.5s ease-in forwards;
+  animation: color 0.5s ease-in forwards;
 }
-
+@-webkit-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@-moz-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@-o-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
 .inventory {
+  background: linear-gradient(130deg, #f1758d, #34568b);
+
+}
+.inventory i{
   color: white;
-  font-size: 20px;
-  left: 0px;
+  font-size: 21px;
 }
 
 .styled-table {
@@ -188,7 +211,7 @@ div.updateinventory {
   /* bottom: 0; */
   left: 200px;
   right: 30px;
-  border: 3px solid #f1f1f1;
+  /* border: 3px solid #f1f1f1; */
   z-index: 9;
   float: left;
   position: absolute;
@@ -196,6 +219,7 @@ div.updateinventory {
   width: 300px;
   margin-top: 95px;
   margin-left: 90px;
+
 }
 .form-fordelete {
   display: none;
@@ -203,7 +227,7 @@ div.updateinventory {
   /* bottom: 0; */
   left: 200px;
   right: 30px;
-  border: 3px solid #f1f1f1;
+  /* border: 3px solid #f1f1f1; */
   z-index: 9;
   float: left;
   position: absolute;
@@ -218,7 +242,7 @@ div.updateinventory {
   /* bottom: 0; */
   left: 200px;
   right: 30px;
-  border: 3px solid #f1f1f1;
+  /* border: 3px solid #f1f1f1; */
   z-index: 9;
   float: left;
   position: absolute;
@@ -233,7 +257,7 @@ div.updateinventory {
   /* bottom: 0; */
   left: 200px;
   right: 30px;
-  border: 3px solid #f1f1f1;
+  /* border: 3px solid #f1f1f1; */
   z-index: 9;
   float: left;
   position: absolute;
@@ -248,6 +272,8 @@ div.updateinventory {
   padding: 10px;
   background-color: white;
   text-align: center;
+  border-radius: 10%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 select {
@@ -306,6 +332,6 @@ select {
 
 /* Add some hover effects to buttons */
 .form-container .btn:hover,
-.open-button:hover {
+.open-button:hover ,.delete-button:hover,.changeprice-button:hover {
   opacity: 1;
 }

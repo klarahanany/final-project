@@ -7,13 +7,15 @@
   font-family: "Times New Roman", Times, serif;
 
 }
-li{
+
+li {
   color: #ffffff;
   text-align: right;
   margin-right: 40px;
 }
 
-h4,h3 {
+h4,
+h3 {
   color: #ffffff;
   text-align: right;
   margin-right: 10px;
@@ -41,7 +43,7 @@ body {
   right: 0;
   background-color: #34568b;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 20px;
   text-align: right;
   margin-left: 300px;
 }
@@ -59,12 +61,61 @@ body {
 .sidenav a:hover {
   font-size: 21px;
   color: white;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+  -webkit-animation: color 0.5s ease-in forwards;
+  -moz-animation: color 0.5s ease-in forwards;
+  -o-animation: color 0.5s ease-in forwards;
+  animation: color 0.5s ease-in forwards;
+}
+
+@-webkit-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-moz-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@-o-keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
+}
+
+@keyframes color {
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
 }
 
 .profiles {
+  background: linear-gradient(130deg, #f1758d, #34568b);
+
+}
+
+.profiles i {
   color: white;
-  font-size: 20px;
-  left: 0px;
+  font-size: 21px;
 }
 
 
@@ -79,7 +130,7 @@ body {
   display: inline-block;
   border-radius: 5px;
   border: 3px solid #34568b;
-  right: 0 ;
+  right: 0;
   text-align: right;
 }
 
@@ -126,6 +177,8 @@ body {
   position: absolute;
   width: 300px;
   margin-top: 70px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
 }
 
 .form-foradd {
@@ -141,6 +194,8 @@ body {
   width: 300px;
   margin-top: 30px;
   overflow-y: scroll;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
 }
 
 .form-container {
@@ -174,7 +229,8 @@ select {
   border: 1px solid #34568b;
   transition: border 0.3s ease;
 }
-#personalImg{
+
+#personalImg {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -183,7 +239,7 @@ select {
   margin-bottom: 10px;
 }
 
-#image{
+#image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -197,7 +253,7 @@ select {
 .form-container input[type=number]:focus,
 .form-container input[type=tel]:focus,
 .form-container input[type=password]:focus,
-.form-container input[type=email]:focus{
+.form-container input[type=email]:focus {
   background-color: #ddd;
   outline: none;
   border: 2px solid #f1758d;
@@ -235,6 +291,7 @@ select {
 .open-button:hover {
   opacity: 1;
 }
+
 .radio {
   display: block;
   position: relative;
@@ -264,7 +321,7 @@ select {
   border-color: #34568b;
 }
 
-.radio input:checked ~ .checkmark {
+.radio input:checked~.checkmark {
   background-color: #f1758d;
   border-color: #34568b;
 }
@@ -275,14 +332,14 @@ select {
   display: none;
 }
 
-.radio input:checked ~ .checkmark:after {
+.radio input:checked~.checkmark:after {
   display: block;
 }
 
 .radio .checkmark:after {
   top: 5px;
   left: 5px;
-  
+
   width: 8px;
   height: 8px;
   border-radius: 50%;

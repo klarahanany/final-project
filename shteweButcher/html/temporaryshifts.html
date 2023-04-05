@@ -19,16 +19,19 @@
             <i> ניהול מלאי</i>
         </a>
         <a href="/adminCalendar">
-            <i>שיבוץ משמרות</i>
+            <i> משמרות</i>
+        </a>
+        <a href="/temporaryshifts" class="shifts">
+            <i> אישור משמרות</i>
         </a>
         <a href="/allEmployes">
             <i>מידע על העובדים</i>
         </a>
         <a href="/allorders">
-            <i class="orders">צפייה בכל ההזמנות</i>
+            <i class="orders">הזמנות</i>
         </a>
         <a href="/income">
-            <i>צפייה ברווחי העסק</i>
+            <i>הכנסות העסק</i>
         </a>
         <a href="/employeesSalary">
             <i class="salary">משכורות העובדים</i>
@@ -36,12 +39,7 @@
         <a href="/customerfeedback">
             <i class="salary"> משובי לקוחות</i>
         </a>
-        <a href="/temporaryshifts">
-            <i class="shifts"> אישור משמרות</i>
-        </a>
-        <a href="/addnewemployee">
-            <i class="salary"> הוספת עובד חדש</i>
-        </a>
+
 
     </div>
 
@@ -127,7 +125,7 @@
                     //   body: JSON.stringify(body),
                 });
                 const result = await temporaryshifts.json();
-                console.log(dayname+ " klara")
+                console.log(daaay + " klara")
                 if (result == 'already done') {
                     const saveddata = await fetch("http://localhost:4000/saveddata", {
                         method: "POST",
@@ -136,140 +134,146 @@
                     });
 
                     const resultx = await saveddata.json();
+                    var num = 1;
                     const element = document.getElementById("tbody")
                     const date = new Date()
                     var x = 0;
-                    for (var i = 0; i < resultx[0].length; i++) {
-                        for (var j = 0; j < 5; j++) {
+                    for (var k = 0; k < resultx[0].length; k++) {
+                        for (var i = 0; i < resultx[0].length; i++) {
+                            console.log(resultx[0][i].temporaryshift)
 
-                            var tr = document.createElement("tr");
-                            var td1 = document.createElement("td");
-                            var td2 = document.createElement("td");
-                            var td3 = document.createElement("td");
-                            var td4 = document.createElement("td");
-                            td4.textContent = getdayname(i)
-                            // if (daaay == 'Monday' && x == 0) {
-                            //     date.setDate(date.getDate() + 6)
-                            //     x = 1;
-                            // }
-                            if (daaay == 'Tuesday' && x == 0) {
-                                date.setDate(date.getDate() + 5)
-                                x = 1;
-                            }
-                            if (daaay == 'Wednesday' && x == 0) {
-                                date.setDate(date.getDate() + 4)
-                                x = 1;
-                            }
-                            if (daaay == 'Thursday' && x == 0) {
-                                date.setDate(date.getDate() + 3)
-                                x = 1;
-                            }
-                            if (daaay == 'Friday' && x == 0) {
-                                date.setDate(date.getDate() + 2)
-                                x = 1;
-                            }
-                            if (daaay == 'Saturday' && x == 0) {
+                            //     console.log(resultx[0][j].temporaryshift+" "+ num)
+
+                            if (parseInt(resultx[0][i].temporaryshift) == num) {
+                                console.log("working...")
+                                for (var j = 0; j < 5; j++) {
+                                    var tr = document.createElement("tr");
+                                    var td1 = document.createElement("td");
+                                    var td2 = document.createElement("td");
+                                    var td3 = document.createElement("td");
+                                    var td4 = document.createElement("td");
+                                    td4.textContent = getdayname(num - 1)
+                                    if (daaay == 'Tuesday' && x == 0) {
+                                        date.setDate(date.getDate() + 5)
+                                        x = 1;
+                                    }
+                                    if (daaay == 'Wednesday' && x == 0) {
+                                        date.setDate(date.getDate() + 4)
+                                        x = 1;
+                                    }
+                                    if (daaay == 'Thursday' && x == 0) {
+                                        date.setDate(date.getDate() + 3)
+                                        x = 1;
+                                    }
+                                    if (daaay == 'Friday' && x == 0) {
+                                        date.setDate(date.getDate() + 2)
+                                        x = 1;
+                                    }
+                                    if (daaay == 'Saturday' && x == 0) {
+                                        date.setDate(date.getDate() + 1)
+                                        x = 1;
+                                    }
+
+
+                                    string = date.toLocaleString();
+                                    array = string.split(",")
+                                    td3.textContent = array[0];
+                                    if (j == 0) {
+                                        td2.textContent = resultx[0][i].morning1;
+                                        td1.textContent = "בוקר"
+                                    }
+                                    else if (j == 1) {
+                                        td2.textContent = resultx[0][i].morning2;
+
+                                        td1.textContent = "בוקר"
+                                    }
+                                    else if (j == 2) {
+                                        td2.textContent = resultx[0][i].evening1;
+
+                                        td1.textContent = "ערב"
+                                    }
+                                    else if (j == 3) {
+                                        td2.textContent = resultx[0][i].evening2;
+
+                                        td1.textContent = "ערב"
+                                    }
+                                    else if (j == 4) {
+                                        arrayforshiftoffworkers = [];
+                                        for (var c = 0; c < resultx[1].length; c++) {
+                                            if (resultx[0][i].morning1 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
+                                                resultx[0][i].morning2 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
+                                                resultx[0][i].evening1 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
+                                                resultx[0][i].evening2 == resultx[1][c].firstname + " " + resultx[1][c].lastname) {
+                                                //donothing
+                                            }
+                                            else {
+                                                arrayforshiftoffworkers.push(resultx[1][c])
+
+                                            }
+                                        }
+                                        console.log(arrayforshiftoffworkers.length)
+                                        if (arrayforshiftoffworkers.length == 1) {
+                                            td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
+                                            td1.textContent = "חופש"
+                                        }
+                                        else {
+                                            td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
+                                            td1.textContent = "חופש"
+                                            for (var x = 1; x < arrayforshiftoffworkers.length; x++) {
+
+                                                var tr = document.createElement("tr");
+                                                var td1 = document.createElement("td");
+                                                var td2 = document.createElement("td");
+                                                var td3 = document.createElement("td");
+                                                var td4 = document.createElement("td");
+                                                td4.textContent = getdayname(num - 1)
+                                                // if (daaay == 'Monday' && x == 0) {
+                                                //     date.setDate(date.getDate() + 6)
+                                                //     x = 1;
+                                                // }
+                                                if (daaay == 'Tuesday' && x == 0) {
+                                                    date.setDate(date.getDate() + 5)
+                                                    x = 1;
+                                                }
+                                                if (daaay == 'Wednesday' && x == 0) {
+                                                    date.setDate(date.getDate() + 4)
+                                                    x = 1;
+                                                }
+                                                if (daaay == 'Thursday' && x == 0) {
+                                                    date.setDate(date.getDate() + 3)
+                                                    x = 1;
+                                                }
+                                                if (daaay == 'Friday' && x == 0) {
+                                                    date.setDate(date.getDate() + 2)
+                                                    x = 1;
+                                                }
+                                                string = date.toLocaleString();
+                                                array = string.split(",")
+                                                td3.textContent = array[0];
+                                                td2.textContent = arrayforshiftoffworkers[1].firstname + " " + arrayforshiftoffworkers[1].lastname
+                                                td1.textContent = "חופש"
+                                            }
+                                        }
+
+                                        arrayforshiftoffworkers.splice(0, arrayforshiftoffworkers.length)
+                                    }
+
+                                    tr.append(td1)
+                                    tr.append(td2)
+                                    tr.append(td3)
+                                    tr.append(td4)
+                                    element.append(tr)
+                                }
                                 date.setDate(date.getDate() + 1)
-                                x = 1;
+                                num += 1
                             }
 
-
-                            string = date.toLocaleString();
-                            array = string.split(",")
-                            td3.textContent = array[0];
-                            if (j == 0) {
-                                td2.textContent = resultx[0][i].morning1;
-                                td1.textContent = "בוקר"
-                            }
-                            else if (j == 1) {
-                                td2.textContent = resultx[0][i].morning2;
-
-                                td1.textContent = "בוקר"
-                            }
-                            else if (j == 2) {
-                                td2.textContent = resultx[0][i].evening1;
-
-                                td1.textContent = "ערב"
-                            }
-                            else if (j == 3) {
-                                td2.textContent = resultx[0][i].evening2;
-
-                                td1.textContent = "ערב"
-                            }
-                            else if (j == 4) {
-                                arrayforshiftoffworkers = [];
-                                for (var c = 0; c < resultx[1].length; c++) {
-                                    if (resultx[0][i].morning1 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
-                                        resultx[0][i].morning2 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
-                                        resultx[0][i].evening1 == resultx[1][c].firstname + " " + resultx[1][c].lastname ||
-                                        resultx[0][i].evening2 == resultx[1][c].firstname + " " + resultx[1][c].lastname) {
-                                        //donothing
-                                    }
-                                    else {
-                                        arrayforshiftoffworkers.push(resultx[1][c])
-
-                                    }
-                                }
-                                console.log(arrayforshiftoffworkers.length)
-                                if (arrayforshiftoffworkers.length == 1) {
-                                    td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
-                                    td1.textContent = "חופש"
-                                }
-                                else {
-                                    td2.textContent = arrayforshiftoffworkers[0].firstname + " " + arrayforshiftoffworkers[0].lastname
-                                    td1.textContent = "חופש"
-                                    for (var x = 1; x < arrayforshiftoffworkers.length; x++) {
-
-                                        var tr = document.createElement("tr");
-                                        var td1 = document.createElement("td");
-                                        var td2 = document.createElement("td");
-                                        var td3 = document.createElement("td");
-                                        var td4 = document.createElement("td");
-                                        td4.textContent = getdayname(i)
-                                        // if (daaay == 'Monday' && x == 0) {
-                                        //     date.setDate(date.getDate() + 6)
-                                        //     x = 1;
-                                        // }
-                                        if (daaay == 'Tuesday' && x == 0) {
-                                            date.setDate(date.getDate() + 5)
-                                            x = 1;
-                                        }
-                                        if (daaay == 'Wednesday' && x == 0) {
-                                            date.setDate(date.getDate() + 4)
-                                            x = 1;
-                                        }
-                                        if (daaay == 'Thursday' && x == 0) {
-                                            date.setDate(date.getDate() + 3)
-                                            x = 1;
-                                        }
-                                        if (daaay == 'Friday' && x == 0) {
-                                            date.setDate(date.getDate() + 2)
-                                            x = 1;
-                                        }
-                                        string = date.toLocaleString();
-                                        array = string.split(",")
-                                        td3.textContent = array[0];
-                                        td2.textContent = arrayforshiftoffworkers[1].firstname + " " + arrayforshiftoffworkers[1].lastname
-                                        td1.textContent = "חופש"
-                                    }
-                                }
-
-                                arrayforshiftoffworkers.splice(0, arrayforshiftoffworkers.length)
-                            }
-
-                            tr.append(td1)
-                            tr.append(td2)
-                            tr.append(td3)
-                            tr.append(td4)
-                            element.append(tr)
                         }
-                        date.setDate(date.getDate() + 1)
-
                     }
-                    
                 }
+
                 else {
-                    console.log(daaay+" nbhjknb")
+                    console.log(daaay + " nbhjknb")
                     var xy = 0;
                     var addDay = 1;
                     const date = new Date();
@@ -298,7 +302,7 @@
                             if (daaay == 'Thursday' && xy == 0) {
                                 date.setDate(date.getDate() + 3)
                                 xy = 1;
-                                console.log(date )
+                                console.log(date)
                                 console.log("vbhnjklahg")
                             }
                             console.log(daaay)
@@ -370,8 +374,8 @@
                 }
 
             }
-
         }
+        // }
         function getdayname(j) {
             if (j == 0) {
                 return "ראשון";
@@ -477,25 +481,32 @@
                 alert("תבחר עובד חדש")
             }
             else {
-                if (element2.value == 'חופש') {
+                // if (element2.value == 'חופש') {
 
+                // }
+                // else {
+
+                body = { day: element1.value, shiftType: element2.value, oldEmployee: element3.value, newEmployee: element4.value }
+                const updateshift = await fetch("http://localhost:4000/updateshift", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result = await updateshift.json();
+                if (result == 'choose employee already in the morning shift') {
+                    document.getElementById("workers1").style = 'red'
+                    alert("תבחר עובד קיים במשמרת בוקר")
+                }
+                else if (result == 'done') {
+                    window.location.reload();
                 }
                 else {
-                    console.log(element1.value)
-                    console.log(element2.value)
-                    console.log(element3.value)
-                    console.log(element4.value)
-                    body = { day: element1.value, shiftType: element2.value, oldEmployee: element3.value, newEmployee: element4.value }
-                    const updateshift = await fetch("http://localhost:4000/updateshift", {
-                        method: "POST",
-                        Credentials: "include",
-                        headers: { "Content-Type": "application/JSON" },
-                        body: JSON.stringify(body),
-                    });
-                    const result = await updateshift.json();
+                    window.location.reload();
                 }
             }
         }
+        // }
     </script>
 
 </body>

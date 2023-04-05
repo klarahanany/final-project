@@ -22,19 +22,19 @@
             <i class='calen'> משמרות</i>
         </a>
         <a href="/temporaryshifts">
-            <i class="salary"> אישור משמרות</i>
+            <i> אישור משמרות</i>
         </a>
         <a href="/allEmployes">
             <i class='profiles '>מידע על העובדים</i>
         </a>
         <a href="/allorders">
-            <i class="orders">צפייה בכל ההזמנות</i>
+            <i class="orders">הזמנות</i>
         </a>
         <a href="/income">
-            <i>צפייה ברווחי העסק</i>
+            <i>הכנסות העסק</i>
         </a>
-        <a href="/employeesSalary">
-            <i class="salary">משכורות העובדים</i>
+        <a href="/employeesSalary" class="salary">
+            <i>משכורות העובדים</i>
         </a>
         <a href="/customerfeedback">
             <i class="feedback"> משובי לקוחות</i>
@@ -56,6 +56,42 @@
             </tbody>
         </table>
     </div>
+    <script>
+        window.onload = async function () {
+            let response = await fetch("http://localhost:4000/salary", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const resJson = await response.json();
+            var element = document.getElementById("tbody");
+            for (var j = 0; j < resJson[1].length; j++) {
+                var salary = 0;
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                td1.textContent = resJson[1][j].firstname + " " + resJson[1][j].lastname
+                for (var i = 0; i < resJson[0].length; i++) {
+                    if(resJson[0][i].username == resJson[1][j].username){
+                        if(resJson[0][i].shifttype != "DAYOFF"){
+                            salary += 280;
+                        }
+                    }
+                }
+                td2.dir="rtl"
+                td2.textContent = salary+"שח";
+                tr.append(td2)
+                tr.append(td1);
+                element.append(tr)
+                
+            }
+            //  for (var i = 0; i < resJson[0].length; i++) {
+            //     console.log(resJson[0][i])
+            // }
+        }
+    </script>
 </body>
 
 </html>

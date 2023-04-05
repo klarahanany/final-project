@@ -37,7 +37,7 @@ body {
   background-color: #34568b;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 20px;
 }
 
 .sidenav a {
@@ -54,12 +54,35 @@ body {
 .sidenav a:hover {
   font-size: 21px;
   color: white;
+  background: linear-gradient(130deg, #f1758d, #34568b);
+  -webkit-animation: color 0.5s ease-in forwards;
+  -moz-animation: color 0.5s ease-in forwards;
+  -o-animation: color 0.5s ease-in forwards;
+  animation: color 0.5s ease-in forwards;
+}
+@-webkit-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@-moz-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@-o-keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+@keyframes color {
+  0%   { color: #f8bac6; }
+  100% { color: white;  }
+}
+.orders{
+  background: linear-gradient(130deg, #f1758d, #34568b);
 }
 
-.orders{
+.orders i{
   color: white;
-  font-size: 20px;
-  left: 0px;
+  font-size: 21px;
 }
 .styled-table {
     border-collapse: collapse;
@@ -100,6 +123,8 @@ body {
     color: #34568b;
     text-align: right;
     margin-right: 150px;
+    text-shadow: 0 0 10px white
+
   }
   
   .table {
