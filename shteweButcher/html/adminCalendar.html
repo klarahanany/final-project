@@ -20,12 +20,12 @@
             <i class="inventory"> ניהול מלאי</i>
         </a>
         <a href="/adminCalendar" class='calen'>
-            <i >משמרות</i>
+            <i>משמרות</i>
         </a>
         <a href="/temporaryshifts">
             <i class="salary"> אישור משמרות</i>
         </a>
-   
+
         <a href="/allEmployes">
             <i class='profiles '>מידע על העובדים</i>
         </a>
@@ -41,7 +41,7 @@
         <a href="/customerfeedback">
             <i class="salary"> משובי לקוחות</i>
         </a>
-     
+
     </div>
 
     <div class="wrapper">
@@ -93,15 +93,47 @@
                     </div>
                     <!-- <p id="even1"></p>
                     <p id="morn2"></p> -->
-                    <input id="updateshift" class="submit" type="submit" value="עדכון משמרת">
+                    <input id="updateshift" class="submit" type="submit" value="עדכון משמרת" onclick="openForm()">
                 </div>
-                <div id="changeSent">
+                <div id="changeSent" dir="rtl">
+                    <h2 class="title">בקשות לשינוי</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>שם</th>
+                                <th>סוג</th>
+                                <th>סיבה</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
 
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </div>
     </div>
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
 
+            <label><b>משמרת בוקר</b></label>
+            <select form="products" class="select" id="workers1">
+                <option value="select"></option>
+            </select>
+            <select form="products" class="select" id="workers2">
+                <option value="select"></option>
+            </select>
+            <label><b>משמרת ערב</b></label>
+            <select form="products" class="select" id="workers3">
+                <option value="select"></option>
+            </select>
+            <select form="products" id="workers4" class="select">
+                <option value="select"></option>
+            </select>
+            <button type="button" class="btn" onclick="update()">עדכן</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+        </form>
+    </div>
 </body>
 
 </html>

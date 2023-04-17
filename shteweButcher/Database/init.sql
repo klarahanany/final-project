@@ -216,7 +216,7 @@ values(
     (
         'כנפי עוף (1 ק"ג)',
         '5.2ILS',
-        'LAMB',
+        'CHICKEN',
         20,
         '/img/knafe3of.jpg'
     ),

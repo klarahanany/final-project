@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="/css/allorders.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -28,7 +32,7 @@
       <i>מידע על העובדים</i>
     </a>
     <a href="/allorders" class="orders">
-      <i >הזמנות</i>
+      <i>הזמנות</i>
     </a>
     <a href="/income">
       <i>הכנסות העסק</i>
@@ -47,6 +51,7 @@
     <table class="styled-table" id="firsttable">
       <thead>
         <tr>
+          <th>פרטי הזמנה</th>
           <th>שם המזמין</th>
           <th>מזהה המזמין</th>
           <th>תאריך הזמנה</th>
@@ -54,12 +59,66 @@
 
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tbody">
 
       </tbody>
     </table>
   </div>
+  <div class="form-popup" id="myForm">
+    <form class="form-container">
+      <div class="tab" dir="rtl">
+        <h2 class="ti"> </h2>
+        <table class="s-table" id="firsttable">
+          <thead>
+            <tr>
+              <th>מוצר</th>
+              <th>כמות</th>
+
+
+            </tr>
+          </thead>
+          <tbody id="tb">
+
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+    </form>
+  </div>
   <script>
+    async function details() {
+      document.getElementById("myForm").style.display="block"
+      arrayx = []
+      $(this).closest('tr').find('td').each(async function () {
+        var textval = $(this).text(); // this will be the text of each <td>
+        array = textval.split("\n")
+        arrayx = array
+      });
+
+      console.log(arrayx)
+      body = { id: arrayx[0] }
+      const orderdetails = await fetch("http://localhost:4000/orderdetails", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+      });
+      const result = await orderdetails.json();
+      const detailsTable = document.getElementById("tb")
+      detailsTable.innerHTML=''
+      console.log(result)
+      for(var i = 0 ; i <result.length ; i++){
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        td1.textContent = result[i].description
+        td2.textContent = result[i].productquantity
+        tr.append(td1)
+        tr.append(td2)
+        detailsTable.append(tr)
+      }
+
+    }
     window.onload = async function () {
       // Some code
       console.log(1)
@@ -71,7 +130,7 @@
         body: JSON.stringify(body),
       });
       const result = await allorders.json();
-      var element = document.getElementById("firsttable");
+      var element = document.getElementById("tbody");
       for (var i = 0; i < result[0].length; i++) {
 
         var tr = document.createElement("tr");
@@ -79,6 +138,19 @@
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
         var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+        var button = document.createElement("button");
+        button.type = "button"
+        button.className = "use-address"
+        button.textContent = "פרטי הזמנה"
+        const buttons = document.querySelector(".use-address")
+
+        // buttons.onclick =  async () => {
+        //   var id =  $(this).closest("tr").find(".nr").text();
+        //   console.log(id)
+        // };
+        button.addEventListener("click", details);
+        td5.append(button)
         for (var j = 0; j < result[1].length; j++) {
           if (result[0][i].personid == result[1][j].personid) {
             td4.textContent = result[1][j].username;
@@ -88,19 +160,21 @@
         td3.textContent = result[0][i].personid;
         td2.textContent = result[0][i].orderdate;
         td1.textContent = result[0][i].ordersid;
+        tr.append(td5)
         tr.append(td4);
         tr.append(td3);
         tr.append(td2);
         tr.append(td1);
         element.append(tr)
       }
-      //   var tr = document.createElement("th");
-      //   var th1 = document.createElement("th");
-      //   var th1 = document.createElement("th");
-
 
     };
+    function closeForm(){
+      document.getElementById("myForm").style.display="none"
+
+    }
   </script>
+
 </body>
 
 </html>

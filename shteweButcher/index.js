@@ -150,7 +150,8 @@ app.post("/adminCalendar", async (req, res) => {
             date = Year + "-" + month + "-" + Day;
             const result1 = await db.query(`SELECT * FROM shift where shiftType = 'EVENING' and shiftdate='${date}';`)
             const result2 = await db.query(`SELECT * FROM shift where shiftType = 'MORNING' and shiftdate='${date}';`)
-            const result3 = await db.query(`SELECT * FROM askforchange where dateasked='${date}';`)
+            const result3 = await db.query(`SELECT * FROM askforchange a inner join workers w on a.username = w.username  where dateasked='${date}';`)
+            const result4 = await db.query(`SELECT * FROM  workers where catagory = 'WORKER';`)
             if (result1.rows.length == 0 && result2.rows.length == 0) {
                 res.json('still not determined')
             }
@@ -165,7 +166,7 @@ app.post("/adminCalendar", async (req, res) => {
                     const result = await db.query(`SELECT * FROM workers where username = '${result1.rows[i].username}';`)
                     array2.push(result.rows[0].firstname + " " + result.rows[0].lastname)
                 }
-                res.json([array, array2, result3.rows])
+                res.json([array, array2, result3.rows, result4.rows])
             }
         }
         else if (req.body.num === '1') {
@@ -213,6 +214,27 @@ app.post("/adminCalendar", async (req, res) => {
         console.log("wrong!!!!")
     }
 })
+app.post("/changeMeatType", async (req, res) => {
+    console.log(req.body.meatType)
+    type = req.body.meatType
+    if(type == 'chicken'){
+        const  result = await db.query(`SELECT * FROM products where type  = 'CHICKEN';`);
+        res.json(result.rows)
+    }
+    else if(type == 'lamb'){
+        const  result = await db.query(`SELECT * FROM products where type  = 'LAMB';`);
+        res.json(result.rows)
+    }
+    else if(type == 'calf'){
+        const  result = await db.query(`SELECT * FROM products where type  = 'CALF';`);
+        res.json(result.rows)
+    }
+    else if(type == 'all'){
+        const  result = await db.query(`SELECT * FROM products;`);
+        res.json(result.rows)
+    }
+})
+
 app.post("/shopnow", async (req, res) => {
     if (req.body.fillcartdependoncustomer == 'fillcartdependoncustomer') {
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
@@ -274,8 +296,15 @@ app.post("/shopnow", async (req, res) => {
     }
     else if (req.body.empty == 'empty') {
         const username2 = req.cookies.customerusername;
-        const result = await db.query(`SELECT * FROM products ;`);
-        res.json([result.rows, username2]);
+        // if(req.body.meatType == "all"){
+           const  result = await db.query(`SELECT * FROM products ;`);
+           res.json([result.rows, username2]);
+
+        // }
+        // else if(req.body.meatType == "calf"){
+        //     const  result = await db.query(`SELECT * FROM products where type = 'CALF';`);
+        //    res.json([result.rows, username2]);
+        // }
     }
     else {
         var result = [];
@@ -750,11 +779,50 @@ app.post("/fillAllDataworker", async (req, res) => {
     console.log(result.rows)
     res.json([result.rows, username])
 });
+app.post("/orderdetails", async (req, res) => {
+    console.log(req.body.id)
+    const result = await db.query(`select * from products p inner join orderdetail od on p.productid=od.productid where ordersid ='${req.body.id}';`);
+
+    res.json(result.rows)
+});
+app.post("/updateshiftadmin", async (req, res) => {
+    month = getMonth(req.body.Month)
+    dayoff = []
+    const result = await db.query(`select * from shift where shiftdate ='${req.body.Year + "-" + month + "-" + req.body.Day}';`);
+    const result1 = await db.query(`select * from workers where catagory ='WORKER';`);
+    for (var i = 0; i < result1.rows.length; i++) {
+        fullname = result1.rows[i].firstname + " " + result1.rows[i].lastname
+        if (fullname != req.body.morning1 && fullname != req.body.morning2 && fullname != req.body.evening1 && fullname != req.body.evening2) {
+            dayoff.push(result1.rows[i].username)
+        }
+    }
+    sql = `DELETE FROM shift WHERE shiftdate ='${req.body.Year + "-" + month + "-" + req.body.Day}';`
+    db.query(sql)
+    arrayname1 = req.body.morning1.split(" ")
+    const name1 = await db.query(`select username from workers where  firstname = '${arrayname1[0]}' and lastname = '${arrayname1[1]}';`);
+    sql1 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${req.body.Year + "-" + month + "-" + req.body.Day}','MORNING','${name1.rows[0].username}');`
+    db.query(sql1)
+    arrayname2 = req.body.morning2.split(" ")
+    const name2 = await db.query(`select username from workers where  firstname = '${arrayname2[0]}' and lastname = '${arrayname2[1]}';`);
+    sql2 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${req.body.Year + "-" + month + "-" + req.body.Day}','MORNING','${name2.rows[0].username}');`
+    db.query(sql2)
+    arrayname3 = req.body.evening1.split(" ")
+    const name3 = await db.query(`select username from workers where  firstname = '${arrayname3[0]}' and lastname = '${arrayname3[1]}';`);
+    sql3 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${req.body.Year + "-" + month + "-" + req.body.Day}','EVENING','${name3.rows[0].username}');`
+    db.query(sql3)
+    arrayname4 = req.body.evening2.split(" ")
+    const name4 = await db.query(`select username from workers where  firstname = '${arrayname4[0]}' and lastname = '${arrayname4[1]}';`);
+    sql4 = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${req.body.Year + "-" + month + "-" + req.body.Day}','EVENING','${name4.rows[0].username}');`
+    db.query(sql4)
+    for (var j = 0; j < dayoff.length; j++) {
+        sql = `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${req.body.Year + "-" + month + "-" + req.body.Day}','DAYOFF','${dayoff[j]}');`
+        db.query(sql)
+    }
+    console.log(dayoff)
+});
 app.post("/addWorker", async (req, res) => {
     const result1 = await db.query(`select * from workers where UserName = '${req.body.username}'`)
-    console.log("d")
     if (result1.rowCount == 0) {
-        console.log("d")
         catagory = '';
         if (req.body.check == 1) {
             catagory = 'WORKER'

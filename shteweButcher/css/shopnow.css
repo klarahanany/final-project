@@ -4,12 +4,14 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    
+
 }
 
 body {
     font-family: montserrat;
     overflow-x: hidden;
+    background-color: #4A7339;
+
 }
 
 nav {
@@ -112,18 +114,23 @@ a:hover {
     cursor: pointer;
     display: none;
 }
-#meatType{
-   margin-left: 85%;
-   margin-bottom: 20px;
-   width: 150px;
-   font-size: 20px;
-   background-color: #4A7339;
-   border: #D9D9D9 1px solid;
-   color: #D9D9D9;
+
+#meatType {
+    /* position: fixed; */
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    width: 150px;
+    font-size: 20px;
+    background-color: #4A7339;
+    border: #D9D9D9 1px solid;
+    color: #D9D9D9;
 }
+
 #check {
     display: none;
-    position:absolute;
+    position: absolute;
     z-index: 10000;
 }
 
@@ -188,7 +195,7 @@ a:hover {
     #cart-icon {
         font-size: 15px;
     }
-    
+
 
     a:hover,
     a.shopNow {
@@ -210,14 +217,11 @@ a:hover {
 .shop-container {
     padding: 4rem 0 3rem;
     color: #F5DFDF;
-    background-color: #4A7339;
-    /* background-image: linear-gradient(#B5D6BB(245, 201, 201, 0.8),rgba(156, 48, 48, 0.8)); */
-    /* background-image: linear-gradient(rgba(0,0,50,0.8),rgba(156, 48, 48, 0.8)),url(/img/meat.jpg); */
-    /* background: url(meat.jpg) no-repeat; */
-
+    width: 1100px;
     height: calc(1000vh - 80px);
 }
-#customerName{
+
+#customerName {
     margin-top: -15px;
     margin-left: 10px;
     font-size: 23px;
@@ -227,6 +231,7 @@ a:hover {
     cursor: pointer;
     pointer-events: none
 }
+
 #cart-icon {
     margin-top: -15px;
     font-size: 23px;
@@ -241,7 +246,7 @@ a:hover {
     font-size: 25px;
 }
 
-.cart { 
+.cart {
     position: fixed;
     top: 0;
     left: -100%;
@@ -371,8 +376,9 @@ a:hover {
     position: relative;
     width: 245px;
     height: 300px;
-    padding:10px 15px
+    padding: 10px 15px
 }
+
 /* div{
     padding:20px 10px
 } */
@@ -415,6 +421,7 @@ a:hover {
 .add-cart:hover {
     background: hsl(249, 32%, 17%);
 }
+
 footer {
     display: block;
     height: 500%;
@@ -429,6 +436,7 @@ footer p {
     text-align: right;
     margin-right: 10px;
 }
+
 footer i {
     padding: 10px 10px 10px 10px;
     font-size: 30px;

@@ -108,49 +108,69 @@ daysTag.onclick = async () => {
             body: JSON.stringify(bodyx),
         });
         const resultx = await fetchForCheckIfShiftDetermined.json();
+        console.log(resultx)
         if (resultx !== 'still not determined') {
             elementmorn = document.getElementById("morn")
-            elementmorn.innerHTML='';
-            // array = resultx.split(" ");
-            // eveningWorker = array[0]
-            // morningWorker = array[1]
-            // console.log(array[0] + " " + array[1])
-  
+            elementmorn.innerHTML = '';
             elementeven = document.getElementById("even")
-            elementeven.innerHTML=''
+            elementeven.innerHTML = ''
+            const element = document.getElementById("tbody")
+            const element1 = document.getElementById("workers1")
+            const element2 = document.getElementById("workers2")
+            const element3 = document.getElementById("workers3")
+            const element4 = document.getElementById("workers4")
+
             for (var i = 0; i < resultx[0].length; i++) {
                 var p = document.createElement("p")
-                p.id="shiftss"
+                p.id = "shiftss"
                 p.textContent = resultx[0][i]
                 elementmorn.append(p)
             }
             for (var i = 0; i < resultx[1].length; i++) {
                 var p = document.createElement("p")
-                p.id="shiftss"
+                p.id = "shiftss"
                 p.textContent = resultx[1][i]
                 elementeven.append(p)
             }
-            const element = document.getElementById("changeSent")
-            element.innerHTML=''
-            const title = document.createElement("p");
-            title.textContent = "בקשות לשינוי:"
-            title.style.direction="rtl"
-            title.style.marginTop="-50px"
-            element.append(title)
-            for(var i = 0 ; i <resultx[2].length ; i++){
-                const name = document.createElement("p");
-                name.textContent = "שם: "+resultx[2][i].username
-                element.append(name)
-                name.style.direction="rtl"
-                const type = document.createElement("p");
-                type.textContent = "סוג משמרת: "+resultx[2][i].shifttype
-                element.append(type)
-                type.style.direction="rtl"
-                const reason = document.createElement("p");
-                reason.textContent ="סיבה: " +resultx[2][i].reason
-                element.append(reason)
-                reason.style.direction="rtl"
+
+            element.innerHTML = ''
+            for (var i = 0; i < resultx[2].length; i++) {
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                var td3 = document.createElement("td");
+                td1.textContent = resultx[2][i].firstname + " " + resultx[2][i].lastname
+                td2.textContent = resultx[2][i].shifttype
+                td3.textContent = resultx[2][i].reason
+                tr.append(td1);
+                tr.append(td2);
+                tr.append(td3);
+                element.append(tr)
             }
+            for (var i = 0; i < resultx[3].length; i++) {
+                var tag = document.createElement("option");
+                tag.value = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                tag.textContent = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                var tag1 = document.createElement("option");
+                tag1.value = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                tag1.textContent = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                var tag2 = document.createElement("option");
+                tag2.value = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                tag2.textContent = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                var tag3 = document.createElement("option");
+                tag3.value = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                tag3.textContent = resultx[3][i].firstname + " " + resultx[3][i].lastname;
+                element1.append(tag)
+                element2.append(tag1)
+                element3.append(tag2)
+                element4.append(tag3)
+            }
+            document.getElementById("workers1").value = resultx[0][0]
+            document.getElementById("workers2").value = resultx[0][1]
+            document.getElementById("workers3").value = resultx[1][0]
+            document.getElementById("workers4").value = resultx[1][1]
+
+
             alreadyAdded1 = document.getElementById("alreadyAdded")
             alreadyAdded1.style.visibility = 'visible';
             box1 = document.getElementById("box1")
@@ -159,8 +179,6 @@ daysTag.onclick = async () => {
             updateshiftButton.style.visibility = 'hidden';
             box1.style.visibility = 'hidden';
             box2.style.visibility = 'hidden';
-
-
         }
         var items = daysTag.getElementsByTagName("li");
         for (var i = 0; i < items.length; ++i) {
@@ -320,4 +338,31 @@ updateshift.onclick = async () => {
 function getDayName(dateStr, locale) {
     var date = new Date(dateStr);
     return date.toLocaleDateString(locale, { weekday: 'long' });
+}
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+}
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+
+}
+async function update() {
+    const element1 = document.getElementById("workers1")
+    const element2 = document.getElementById("workers2")
+    const element3 = document.getElementById("workers3")
+    const element4 = document.getElementById("workers4")
+    //checkif there is to names with same
+    if (element1.value==element2.value || element1.value==element3.value || element1.value==element4.value || element2.value==element3.value|| element2.value==element4.value  || element3.value==element4.value ) {
+        alert("ארבעה העובדים צריכים להיות שונים")
+    }
+    else {
+        const body = { Day: day, Month: month, Year: year, morning1: element1.value, morning2: element2.value, evening1: element3.value, evening2: element4.value }
+        const fetchAddNewShift = await fetch("http://localhost:4000/updateshiftadmin", {
+            method: "POST",
+            Credentials: "include",
+            headers: { "Content-Type": "application/JSON" },
+            body: JSON.stringify(body),
+        });
+        const result = await fetchAddNewShift.json();
+    }
 }

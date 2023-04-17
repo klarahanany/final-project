@@ -15,7 +15,6 @@ async function load() {
     const result = await getallproducts.json();
     const result1 = result[0];
     for (var i = 0; i < result1.length; i++) {
-        console.log(result1[i])
         var tag = document.createElement("div");
         tag.className = 'product-box';
         var img = document.createElement("img");
@@ -39,8 +38,8 @@ async function load() {
         tag.append(carticon)
 
         element.appendChild(tag);
-
     }
+    // }
     var name = document.getElementById("customerName");
     name.textContent = "Hello " + result[1];
 
@@ -99,7 +98,7 @@ async function ready() {
     for (var i = 0; i < quantityInputs.length; i++) {
         var input = quantityInputs[i]
         input.addEventListener('change', quantityChanged);
-        
+
     }
     //add to cart
     var addCart = document.getElementsByClassName('add-cart');
@@ -150,13 +149,12 @@ async function buyButtonClicked() {
         body: JSON.stringify(body),
     });
     const result = await orderDetails.json();
-    // setTimeout(() => {
     while (cartContent.hasChildNodes()) {
 
         cartContent.removeChild(cartContent.firstChild);
     }
     updatetotal();
-    // }, 2000);
+    window.location.reload()
 }
 //removeCartItem function
 async function removeCartItem(event) {
@@ -314,3 +312,47 @@ function signup() {
     location.href = url;
 }
 
+$('#meatType').change(async function(){
+    var element = document.getElementById("shop-content");
+    element.innerHTML=''
+    d = document.getElementById("meatType").value;
+    body = { meatType: d }
+    const getallproducts = await fetch("http://localhost:4000/changeMeatType", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+    });
+    const result = await getallproducts.json();
+    for (var i = 0; i < result.length; i++) {
+        var tag = document.createElement("div");
+        tag.className = 'product-box';
+        var img = document.createElement("img");
+        img.src = result[i].img;
+        img.className = 'product-img'
+        var description = document.createElement("h2");
+        description.dir = "rtl"
+        description.textContent = result[i].description;
+        description.className = 'product-title'
+        var price = document.createElement("span");
+        price.className = 'price'
+        price.textContent = result[i].price;
+
+        var carticon = document.createElement("i");
+        carticon.className = 'bx bx-cart-alt add-cart'
+
+        tag.append(img)
+        tag.append(description)
+        tag.append(price)
+        tag.append(carticon)
+
+        element.appendChild(tag);
+    }
+    var addCart = document.getElementsByClassName('add-cart');
+    setTimeout(() => {
+        for (var i = 0; i < addCart.length; i++) {
+            var button = addCart[i]
+            button.addEventListener('click', addCartClicked);
+        }
+    }, 1000);
+})
