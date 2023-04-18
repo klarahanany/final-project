@@ -1109,6 +1109,9 @@ app.get("/customersOrders", async (req, res) => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
 })
+app.get("/oldOrders", (req, res) => {
+    res.sendFile(__dirname + "/html/oldOrders.html")
+})
 app.get("/addnewemployee", (req, res) => {
     res.sendFile(__dirname + "/html/addnewemployee.html")
 })

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/oldOrders.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <section class="high">
+
+        <img src="/img/meat.jpg" alt="" class="logo">
+
+    </section>
+    <nav>
+
+        <i class='bx bx-cart-alt' id="cart-icon"></i>
+        <p id="customerName"></p>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bx bx-list-ul"></i>
+        </label>
+
+        <ul>
+            <li><a class="home" href="/home">HOME</a></li>
+            <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
+            <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
+            <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
+            <li><a class="logIn" href="/login">LOGIN</a></li>
+            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+        </ul>
+    </nav>
+
+      
+      <div class="container">
+        <div class="table">
+            <h2 class="title"> כל ההזמנות באינטרנט מאטליז</h2>
+            <table class="styled-table" id="firsttable">
+              <thead>
+                <tr>
+                  <th>פרטי הזמנה</th>
+                  <th>שם המזמין</th>
+                  <th>מזהה המזמין</th>
+                  <th>תאריך הזמנה</th>
+                  <th>מזה</th>
+        
+                </tr>
+              </thead>
+              <tbody id="tbody">
+        
+              </tbody>
+            </table>
+          </div>
+      </div>
+    <script>
+        async function submitfun() {
+            const element = document.getElementById('feedback');
+            if (element.value == '') {
+                alert('תמלא משוב לפני שתשלח')
+            }
+            else {
+                body = { feedback: element.value }
+                const feedbackfetch = await fetch("http://localhost:4000/feedback", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result1 = await feedbackfetch.json();
+                if (result1 == 'faild') {
+                    alert('בבקשה תעשה login קודם')
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
