@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/oldOrders.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -32,50 +36,149 @@
             <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
             <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
             <li><a class="logIn" href="/login">LOGIN</a></li>
-            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+            <li><a class="SignUp" href="/signup">SIGNUP</a></li>
         </ul>
     </nav>
 
-      
-      <div class="container">
+
+    <div class="container">
         <div class="table">
-            <h2 class="title"> כל ההזמנות באינטרנט מאטליז</h2>
+            <h2 class="title"> ההזמנות קודמות</h2>
             <table class="styled-table" id="firsttable">
-              <thead>
-                <tr>
-                  <th>פרטי הזמנה</th>
-                  <th>שם המזמין</th>
-                  <th>מזהה המזמין</th>
-                  <th>תאריך הזמנה</th>
-                  <th>מזה</th>
-        
-                </tr>
-              </thead>
-              <tbody id="tbody">
-        
-              </tbody>
+                <thead>
+                    <tr>
+                        <th>פרטי הזמנה</th>
+                        <th>תאריך הזמנה</th>
+                        <th style="display: none;">מזה</th>
+
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
             </table>
-          </div>
-      </div>
+        </div>
+    </div>
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+            <div class="tab" dir="rtl">
+                <h2 class="ti"> </h2>
+                <table class="s-table" id="firsttable">
+                    <thead>
+                        <tr>
+                            <th>מוצר</th>
+                            <th>כמות</th>
+                            \
+                        </tr>
+                    </thead>
+                    <tbody id="tb">
+
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" class="btn" onclick="orderAgain()">הזמן שוב</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+        </form>
+    </div>
     <script>
-        async function submitfun() {
-            const element = document.getElementById('feedback');
-            if (element.value == '') {
-                alert('תמלא משוב לפני שתשלח')
+        window.onload = async function () {
+            let response = await fetch("http://localhost:4000/oldOrders", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const resJson = await response.json();
+            console.log(resJson)
+            var element = document.getElementById("tbody");
+            for (var i = 0; i < resJson.length; i++) {
+
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                var td3 = document.createElement("td");
+                var button = document.createElement("button");
+                button.type = "button"
+                button.className = "use-address"
+                button.textContent = "פרטי הזמנה"
+                const buttons = document.querySelector(".use-address")
+                button.addEventListener("click", details);
+                td1.textContent = resJson[i].ordersid
+                td2.textContent = resJson[i].orderdate
+                td1.style.display = "none"
+                td3.append(button)
+                tr.append(td3);
+                tr.append(td2);
+                tr.append(td1)
+                element.append(tr)
             }
-            else {
-                body = { feedback: element.value }
-                const feedbackfetch = await fetch("http://localhost:4000/feedback", {
-                    method: "POST",
-                    Credentials: "include",
-                    headers: { "Content-Type": "application/JSON" },
-                    body: JSON.stringify(body),
-                });
-                const result1 = await feedbackfetch.json();
-                if (result1 == 'faild') {
-                    alert('בבקשה תעשה login קודם')
+        }
+        async function details() {
+            document.getElementById("myForm").style.display = "block"
+            arrayx = []
+            $(this).closest('tr').find('td').each(async function () {
+                var textval = $(this).text(); // this will be the text of each <td>
+                array = textval.split("\n")
+                arrayx = array
+            });
+            console.log(arrayx)
+            body = { id: arrayx[0] }
+            const orderdetails = await fetch("http://localhost:4000/oldorderdetails", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                body: JSON.stringify(body),
+            });
+            const result = await orderdetails.json();
+            const detailsTable = document.getElementById("tb")
+            detailsTable.innerHTML = ''
+            console.log(result)
+            for (var i = 0; i < result.length; i++) {
+                var tr = document.createElement("tr");
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                td1.textContent = result[i].description
+                td2.textContent = result[i].productquantity
+                tr.append(td1)
+                tr.append(td2)
+                detailsTable.append(tr)
+            }
+
+        }
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none"
+
+        }
+        async function orderAgain() {
+            array = []
+            orders = document.getElementById("tb")
+            orderslength = orders.rows.length
+            for (var i = 0; i < orderslength; i++) {
+                array1 = []
+                var oCells = orders.rows.item(i).cells;
+                //gets amount of cells of current row
+                var cellLength = oCells.length;
+                //loops through each cell in current row
+                for (var j = 0; j < cellLength; j++) {
+
+                    /* get your cell info here */
+                    var cellVal = oCells.item(j).innerHTML;
+                    array1.push(cellVal)
                 }
+                array.push(array1)
             }
+            console.log(array)
+            const date = new Date();
+            body = { details: array, date :date }
+            const orderAgain = await fetch("http://localhost:4000/orderAgain", {
+                method: "POST",
+                Credentials: "include",
+                headers: { "Content-Type": "application/JSON" },
+                body: JSON.stringify(body),
+            });
+            const result = await orderAgain.json();
+
         }
     </script>
 </body>

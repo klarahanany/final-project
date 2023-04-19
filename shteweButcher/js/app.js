@@ -114,47 +114,42 @@ async function ready() {
 }
 //buy Button
 async function buyButtonClicked() {
-    alert('your order is placed')
-    var cartprice = document.getElementById('cart-price')
-    var cartContent = document.getElementsByClassName('cart-content')[0]
-    // var array2=[]
-    // var numb = document.getElementById("cart-content").childNodes;
-    // for (var i = 1; i < numb.length; i++) {
-    //     string = numb[i].firstChild.src;
-    //     toRemove = "http://localhost:4000"
-    //     string = string.replace(toRemove, '');
-    //     array2.push(string)
-    // }
+    value = confirm("אתה בטוח?");
+    if (value == true) {
+        alert('your order is placed')
+        var cartprice = document.getElementById('cart-price')
+        var cartContent = document.getElementsByClassName('cart-content')[0]
 
-    var allShoppingList = document.getElementById("cart-content").childNodes
-    array = [];
-    for (var j = 1; j < allShoppingList.length; j++) {
-        console.log(allShoppingList[j].childNodes[1].childNodes[1].textContent + "what the hell")
+        var allShoppingList = document.getElementById("cart-content").childNodes
+        array = [];
+        for (var j = 1; j < allShoppingList.length; j++) {
+            console.log(allShoppingList[j].childNodes[1].childNodes[1].textContent + "what the hell")
 
-        string = allShoppingList[j].childNodes[1].childNodes[1].textContent + "~" +
-            allShoppingList[j].childNodes[1].childNodes[3].textContent + "~" + allShoppingList[j].childNodes[1].childNodes[5].value
-        array.push(string)
+            string = allShoppingList[j].childNodes[1].childNodes[1].textContent + "~" +
+                allShoppingList[j].childNodes[1].childNodes[3].textContent + "~" + allShoppingList[j].childNodes[1].childNodes[5].value
+            array.push(string)
 
 
+        }
+        console.log(array)
+
+        const date = new Date();
+
+        body = { array: array, date: date }
+        const orderDetails = await fetch("http://localhost:4000/shopnow", {
+            method: "POST",
+            Credentials: "include",
+            headers: { "Content-Type": "application/JSON" },
+            body: JSON.stringify(body),
+        });
+        const result = await orderDetails.json();
+        while (cartContent.hasChildNodes()) {
+
+            cartContent.removeChild(cartContent.firstChild);
+        }
+        updatetotal();
+        window.location.reload()
     }
-    console.log(array)
-
-    const date = new Date();
-
-    body = { array: array, date: date }
-    const orderDetails = await fetch("http://localhost:4000/shopnow", {
-        method: "POST",
-        Credentials: "include",
-        headers: { "Content-Type": "application/JSON" },
-        body: JSON.stringify(body),
-    });
-    const result = await orderDetails.json();
-    while (cartContent.hasChildNodes()) {
-
-        cartContent.removeChild(cartContent.firstChild);
-    }
-    updatetotal();
-    window.location.reload()
 }
 //removeCartItem function
 async function removeCartItem(event) {
@@ -312,9 +307,9 @@ function signup() {
     location.href = url;
 }
 
-$('#meatType').change(async function(){
+$('#meatType').change(async function () {
     var element = document.getElementById("shop-content");
-    element.innerHTML=''
+    element.innerHTML = ''
     d = document.getElementById("meatType").value;
     body = { meatType: d }
     const getallproducts = await fetch("http://localhost:4000/changeMeatType", {

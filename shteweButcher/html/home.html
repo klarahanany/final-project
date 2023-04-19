@@ -14,47 +14,136 @@
 </head>
 
 <body>
-  <!-- <section class="high">
 
-    <img src="/img/meat.jpg" alt="" class="logo">
+  <div class="container">
+    <video src="img/pexels-pressmaster-3128759-3840x2160-25fps.mp4" id="meatVideo" autoplay muted playsinline loop>
+    </video>
+    <div class="overLay2">
+      <nav>
+        <ul>
+          <li><a class="home" href="/home">HOME</a></li>
+          <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+          <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
+         
+        </ul>
+      </nav>
+    </div>
+    <div class="overlay">
+      <p class="cont">Content above your video</p>
+      <form class="cont">
+        <p>Content Below Your Video</p>
+        <label for="input">Form Input Label</label>
+        <button type="button">Submit</button>
+      </form>
+    </div>
+  </div>
 
-  </section> -->
-  <!-- <nav>
-    <input type="checkbox" id="check">
-    <label for="check" class="checkbtn">
-      <i class="bx bx-list-ul"> </i>
-    </label>
-    <label class="butcher">SHTEWE BUTCHER</label>
-    <ul>
+  <div class="dataButcher">
+    <div class="threeImages">
+      <img src="/img/beef1.png" alt="" class="imges">
+      <img src="/img/beef2.png" alt="" class="imges">
+      <img src="/img/ch1.png" alt="" class="imges">
+    </div>
+    <h1>אטליז שתיווי</h1>
 
-      <li><a class="home" href="/home">HOME</a></li>
-      <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
-      <li><a class="aboutUs" href="/aboutUs">ABOUT US</a></li>
-      <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
-      <li><a class="SIGNUP" href="/login">LOGIN</a></li>
-      <li><a class="LOGIN" href="/signup">SIGNUP</a></li>
-    </ul>
-    <i class='cart' id="cart-icon"></i>
-  </nav> -->
-  <div class="bg-image"></div>
-  <!-- <video src="img/pexels-pressmaster-3128759-3840x2160-25fps.mp4" id="meatVideo" autoplay muted playsinline loop> </video> -->
+    <h4 dir="rtl">
+      <br>
+      בחנות או אונליין אנו מבטיחים חווית קניה אחרת, שרות מקצועי ואדיב, המלצות לבחירת נתחי בשר מתאימים.
 
+      <br>
+      "כדי שהעסק יהיה מוצלח, צריך לדאוג לתת ללקוחות שירות אמין והולם, לקבל את הקלינטים בפנים יפות ולדאוג
+      שהם יצאו מרוצים. ולא רק לתת להם בשר טוב"
+    </h4>
+    <div class="orderButton">
+      <button type="button" id="orderB" onClick="location='/login'"> הזמנה לאיסוף עצמי</button>
 
-  <footer>
-    <p dir="rtl">שעות פתיחה:<br>ב'-ו': 8:00-21:00<br>א': 8:00-18:00 </p><br>
-    <p dir="rtl">טלפון: 0505729023</p><br>
-    <p dir="rtl">כתובת: נצרת, אל עומאל אל ערב 5046</p><br>
-    <i class="fa-brands fa-square-instagram"></i>
-    <i class="fa-brands fa-square-facebook"></i>
-    <i class="fa-brands fa-square-whatsapp"></i>
-    <i class="fa-brands fa-tiktok"></i>
-  </footer>
-  <script src="img/pexels-pressmaster-3128759-3840x2160-25fps.mp4"></script>
+    </div>
+  </div>
+  <div>
+    <footer>
+      <h2 dir="rtl">חנות עם מלא בשר...</h2>
+      <p dir="rtl">ניתן לבצע הזמנות איסוף עצמי, וכמובן נשמח לשרת אתכם בחנות</p>
+      <br>
+      <br>
+      <h3 dir="rtl">פרטים ליצירת קשר</h3>
+      <p dir="rtl">טלפון: 0505729023</p><br>
+      <p dir="rtl">כתובת: נצרת, אל עומאל אל ערב 5046</p><br>
+      <!-- <p dir="rtl">שעות פתיחה:<br>א-ו': 8:00-21:00<br></p> -->
+      <section class="openinghours">
+        <div class="openinghourscontent section">
+          <div class="header">
+            <h2 style="border-bottom:white 1px solid ;">שעות פתיחה</h2>
+            <br>
+            <!-- <span id="open-status"><small class="openorclosed"></small></span> -->
 
-  <script>
-    // document.getElementById("meatVideo").play()
+          </div>
+          <table class="opening-hours-table" dir="rtl">
+            <tr id="Sunday" itemprop="openingHours" title="Open Sunday at 11am to 4pm">
+              <td>ראשון</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">16:00</td>
+            </tr>
+            <tr id="Monday" itemprop="openingHours" title="Open Monday at 9am to 6pm">
+              <td>שני</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">18:00</td>
+            </tr>
+            <tr id="Tuesday" itemprop="openingHours" title="Open Tuesday at 9am to 6pm">
+              <td>שלישי</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">18:00</td>
+            </tr>
+            <tr id="Wednesday" itemprop="openingHours" title="Open Wednesday at 9am to 6pm">
+              <td>רביעי</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">18:00</td>
+            </tr>
+            <tr id="Thursday" itemprop="openingHours" title="Open Thursday at 9am to 8pm">
+              <td>חמישי</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">20:00</td>
+            </tr>
+            <tr id="Friday" itemprop="openingHours" title="Open Friday at 9am to 6pm">
+              <td>שישי</td>
+              <td class="opens">08:00</td>
+              <td>-</td>
+              <td class="closes">18:00</td>
+            </tr>
+            <tr id="Saturday" itemprop="openingHours" title="Open Saturday at 10am to 6pm">
+              <td>שבת</td>
 
-  </script>
+              <td>סגור</td>
+
+            </tr>
+
+          </table>
+        </div>
+      </section>
+      <br>
+      <br>
+      <br>
+      <i class="fa-brands fa-square-instagram"></i>
+      <i class="fa-brands fa-square-facebook"></i>
+      <i class="fa-brands fa-square-whatsapp"></i>
+      <i class="fa-brands fa-tiktok"></i>
+    </footer>
+    <script>
+      window.onscroll = function (event) {
+        var nav = document.getElementsByTagName('nav')[0];
+        var scroll = window.pageYOffset;
+        if (scroll < 20) {
+          nav.style.background = '#4A7339';
+        }
+      }
+
+    </script>
+    <!-- <script src="img/pexels-pressmaster-3128759-3840x2160-25fps.mp4"></script>  -->
+
 </body>
 
 </html>

@@ -4,63 +4,299 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    
+
 }
 
 body {
-   
-    font-family: montserrat;
-    display: block;
-    color: #F5DFDF;
+    background-image: url("/img/homeBackGround.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+    font-family: "Times New Roman", Times, serif;
+    /* display: block; */
 
+
+}
+
+nav {
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 10px 10px 10px 10px;
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+}
+
+nav ul {
+    margin-top: -35px;
+    margin-bottom: 30px;
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+nav ul li a {
+    color: #D9D9D9;
+    font-size: 17px;
+    padding: 7px 13px;
+    border: radius 3px;
+    ;
+    text-transform: uppercase;
 }
 
 footer {
     display: block;
-    height: 500%;
     background-color: #D9D9D9;
     color: black;
     margin-top: 19%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     text-align: center;
-    
 }
 
-footer p {
+footer p,
+h2,
+h3 {
     text-align: right;
     margin-right: 10px;
 }
+
 footer i {
     padding: 10px 10px 10px 10px;
     font-size: 30px;
     color: #090909c5;
+    height: 80px;
+    bottom: 0;
 }
 
-#meatVideo{
-    width: 100vw;
-    height: 50vh;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: -1;
-    
-}
-.bg-image {
-    /* The image used */
-    background-image: url("img/homeBackGround.jpg");
-  
-    /* Add the blur effect */
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-  
-    /* Full height */
-    height: 100%;
-  
-    /* Center and scale the image nicely */
+#img {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
+    height: 100%;
+    width: 100%;
+    filter: brightness(20%);
+}
+
+#meatVideo {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 0px;
+    filter: brightness(50%);
+    /* z-index: -1; */
+}
+
+.dataButcher {
+    margin-top: 0px;
+    background-color: white;
+}
+
+.threeImages {
+    display: inline-block;
+}
+
+.imges {
+    padding: 12px 36px 12px;
+    height: 350px;
+}
+
+h1,
+h4 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.orderButton {
+    display: grid;
+    place-items: center
+}
+
+#orderB {
+    padding: 7px;
+    border: #4A7339 2px solid;
+    background-color: #4A7339;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#orderB:hover {
+    background-color: white;
+    border: #4A7339 2px solid;
+    color: #4A7339;
+    font-weight: bold;
+}
+
+.openinghours {
+    font-family: Lucida Console;
+    border-radius: 4px;
+    margin: 10px;
+    box-shadow: 0 0 10px black;
+    padding: 0 10px 0 10px;
+    overflow: hidden;
+    display: inline-block;
+
+}
+
+
+
+.openinghourscontent {
+    box-shadow: 0 0 10px black;
+    padding: 0 10px 0 10px;
+    background-color: #4A7339;
+    /* float: left; */
+    position: absolute;
+    left: 0;
+    margin-left: 10px;
+    color: #eed9d9;
+    bottom: -135%;
+}
+
+.openinghourscontent h2 {
+    display: block;
+    text-align: center;
+    margin-top: .33em;
+}
+
+.openinghourscontent button {
+    color: white;
+    font-family: Courier New;
+    font-size: large;
+    font-weight: bolder;
+    background-color: #4679BD;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.today {
+    color: #8AC007;
+}
+
+.opening-hours-table tr td:first-child {
+    font-weight: bold;
+}
+
+#open-status {
+    display: block;
+    margin-top: -1em;
+    text-align: center;
+    border: dotted lightgrey 3px;
+}
+
+.open {
+    color: green;
+}
+
+.open:after {
+    content: " Open";
+    color: #6C0;
+}
+
+.closed:after {
+    content: " Closed";
+    color: red;
+}
+
+.opening-hours-table tr td {
+    padding: 5px;
+}
+
+.container {
+    position: relative;
+}
+
+.container meatVideo {
+    position: relative;
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    top: 40%;
+    left: 40%;
+    color: #D9D9D9;
+    z-index: 1;
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    -moz-animation: fadeIn 2s;
+    -o-animation: fadeIn 2s;
+    -ms-animation: fadeIn 2s;
+}
+
+.overLay2 {
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    top: 0;
+    left: 0;
+    color: #D9D9D9;
+    z-index: 1;
+    animation: fadeIn 2s;
+    -webkit-animation: fadeIn 2s;
+    -moz-animation: fadeIn 2s;
+    -o-animation: fadeIn 2s;
+    -ms-animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

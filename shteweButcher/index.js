@@ -217,20 +217,20 @@ app.post("/adminCalendar", async (req, res) => {
 app.post("/changeMeatType", async (req, res) => {
     console.log(req.body.meatType)
     type = req.body.meatType
-    if(type == 'chicken'){
-        const  result = await db.query(`SELECT * FROM products where type  = 'CHICKEN';`);
+    if (type == 'chicken') {
+        const result = await db.query(`SELECT * FROM products where type  = 'CHICKEN';`);
         res.json(result.rows)
     }
-    else if(type == 'lamb'){
-        const  result = await db.query(`SELECT * FROM products where type  = 'LAMB';`);
+    else if (type == 'lamb') {
+        const result = await db.query(`SELECT * FROM products where type  = 'LAMB';`);
         res.json(result.rows)
     }
-    else if(type == 'calf'){
-        const  result = await db.query(`SELECT * FROM products where type  = 'CALF';`);
+    else if (type == 'calf') {
+        const result = await db.query(`SELECT * FROM products where type  = 'CALF';`);
         res.json(result.rows)
     }
-    else if(type == 'all'){
-        const  result = await db.query(`SELECT * FROM products;`);
+    else if (type == 'all') {
+        const result = await db.query(`SELECT * FROM products;`);
         res.json(result.rows)
     }
 })
@@ -297,8 +297,8 @@ app.post("/shopnow", async (req, res) => {
     else if (req.body.empty == 'empty') {
         const username2 = req.cookies.customerusername;
         // if(req.body.meatType == "all"){
-           const  result = await db.query(`SELECT * FROM products ;`);
-           res.json([result.rows, username2]);
+        const result = await db.query(`SELECT * FROM products ;`);
+        res.json([result.rows, username2]);
 
         // }
         // else if(req.body.meatType == "calf"){
@@ -313,6 +313,7 @@ app.post("/shopnow", async (req, res) => {
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
         var sql2 = `INSERT INTO orders (orderdate,personid) VALUES ('${req.body.date}','${result1.rows[0].personid}');`
         db.query(sql2);
+        console.log(req.body.date)
         const resultx = await db.query(`SELECT cartid FROM cart where personid='${result1.rows[0].personid}' ;`);
         const resulty = await db.query(`SELECT * FROM orders ORDER BY ordersid DESC LIMIT 1;`);
         for (var i = 0; i < array.length; i++) {
@@ -785,6 +786,37 @@ app.post("/orderdetails", async (req, res) => {
 
     res.json(result.rows)
 });
+app.post("/oldorderdetails", async (req, res) => {
+    console.log(req.body.id)
+    const result = await db.query(`select * from products p inner join orderdetail od on p.productid=od.productid where ordersid ='${req.body.id}';`);
+
+    res.json(result.rows)
+});
+app.post("/orderAgain", async (req, res) => {
+    const date = new Date();
+    console.log(date)
+    username = req.cookies.customerusername
+    const result1 = await db.query(`select * from customers where username= '${username}'`)
+    console.log(result1.rows)
+    var sql2 = `INSERT INTO orders (orderdate,personid) VALUES ('${req.body.date}','${result1.rows[0].personid}');`
+    db.query(await sql2)
+    array = req.body.details
+    setTimeout(async () => {
+        const resulty = await db.query(`SELECT * FROM orders ORDER BY ordersid DESC LIMIT 1;`);
+        for (var i = 0; i < array.length; i++) {
+            const res1 = await db.query(`select * from products where description= '${array[i][0]}' `)
+            price = res1.rows[0].price
+            priceAfter = price.replace('ILS', '')
+            totalprice = array[i][1] * priceAfter
+            console.log(totalprice)
+
+            var sql3 = `INSERT INTO orderdetail (ordersid,productid,totalprice,productquantity) VALUES ('${resulty.rows[0].ordersid}','${res1.rows[0].productid}','${totalprice}','${array[i][1]}');`
+            db.query(sql3);
+        }
+    }, 1000);
+
+    // // res.json(result.rows)
+});
 app.post("/updateshiftadmin", async (req, res) => {
     month = getMonth(req.body.Month)
     dayoff = []
@@ -1106,6 +1138,19 @@ app.get("/customersOrders", async (req, res) => {
         console.log(error);
     }
 });
+app.post("/oldOrders", async (req, res) => {
+    try {
+        const username = req.cookies.customerusername;
+
+        const result1 = await db.query(`select * from customers where username = '${username}';`)
+        const result = await db.query(`select * from orders  where personid = '${result1.rows[0].personid}';`)
+        res.json(result.rows);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/html/workerLogin.html")
 })
