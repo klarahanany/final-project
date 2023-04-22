@@ -219,17 +219,24 @@ async function send() {
             body: JSON.stringify(body),
         });
         const result = await changeDemand.json();
-        if (result == 'success') {
+        if (result[0] == 'success') {
+            var params = {
+                name: result[1].firstname +" "+result[1].lastname,
+                // email: document.getElementById("email").value,
+                date: day+"/"+month+"/" + year,
+                reason: document.getElementById("ask").value,
+                shift: document.getElementById("selectChange").value,
+              };
             const serviceID = "service_9cqsz9a";
             const templateID = "template_uaoxy81";
 
-            emailjs.send(serviceID, templateID)
+            emailjs.send(serviceID, templateID,params)
                 .then(res => {
                     // document.getElementById("name").value = "";
                     // document.getElementById("email").value = "";
                     // document.getElementById("message").value = "";
                     console.log(res);
-                    alert("Your message sent successfully!!")
+                    alert("הבקשה נשלחה")
 
                 })
                 .catch(err => console.log(err));
@@ -242,7 +249,7 @@ async function send() {
             // }).then(
             //     message => alert(message)
             // );
-            alert("הבקשה נשלחה")
+            // alert("הבקשה נשלחה")
         }
     }
 }

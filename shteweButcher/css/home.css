@@ -8,14 +8,18 @@
 }
 
 body {
+
+    font-family: "Times New Roman", Times, serif;
+}
+
+.backGround {
     background-image: url("/img/homeBackGround.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: "Times New Roman", Times, serif;
-    /* display: block; */
-
-
+    height: 100%;
+    width: 100%;
+    position: fixed;
 }
 
 nav {
@@ -50,13 +54,54 @@ nav ul li a {
     text-transform: uppercase;
 }
 
+.divLogo {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.bestMeat {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: white;
+
+}
+
+.bestMeat p {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.bestMeat1 {
+    float: right;
+    padding: 20px 20px;
+}
+.bestMeat1 p{
+    font-size: 20px;
+}
+
+.bestMeat2 {
+    float: right;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-left: 45%;
+    margin-top: 70px;
+}
+
 footer {
     display: block;
     background-color: #D9D9D9;
     color: black;
-    margin-top: 19%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     text-align: center;
+    position: relative;
+    width: 100%;
 }
 
 footer p,
@@ -99,6 +144,13 @@ footer i {
 .dataButcher {
     margin-top: 0px;
     background-color: white;
+    position: relative;
+    width: 100%;
+
+}
+
+.container1 {
+    position: relative;
 }
 
 .threeImages {
@@ -108,6 +160,7 @@ footer i {
 .imges {
     padding: 12px 36px 12px;
     height: 350px;
+    width: 410px;
 }
 
 h1,
@@ -159,8 +212,9 @@ h4 {
     left: 0;
     margin-left: 10px;
     color: #eed9d9;
-    bottom: -135%;
+    bottom: 10px;
 }
+
 
 .openinghourscontent h2 {
     display: block;
@@ -214,18 +268,21 @@ h4 {
 
 .container {
     position: relative;
+    height: 400px;
 }
 
-.container meatVideo {
+.container #meatVideo {
     position: relative;
     z-index: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .overlay {
     position: absolute;
     font-weight: bold;
     font-size: larger;
-    top: 40%;
+    top: 150px;
     left: 40%;
     color: #D9D9D9;
     z-index: 1;
@@ -299,4 +356,97 @@ h4 {
     100% {
         opacity: 1;
     }
+}
+
+.container1 {
+    position: relative;
+    background: black;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+.mySlides img {
+    /* width: 50px; */
+    height: 500px;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.gallery {
+    color: white;
+    font-size: 40px;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 40px;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Six columns side by side */
+.column {
+    float: left;
+    width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
 }

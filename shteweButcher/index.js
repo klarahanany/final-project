@@ -687,10 +687,11 @@ app.post("/deleteWorker", async (req, res) => {
 
 });
 app.post("/changeDemand", async (req, res) => {
+    const result = await db.query(`select * from workers where username = '${req.cookies.username}'`)
     console.log(req.body)
     var sql = `INSERT INTO askForChange(dateAsked,shiftType ,reason,username) VALUES ('${req.body.date}','${req.body.shifttype}','${req.body.reason}', '${req.cookies.username}');`
     db.query(sql);
-    res.json("success")
+    res.json(["success",result.rows[0]])
 
 });
 app.post("/uploadPhoto", async (req, res) => {
