@@ -138,10 +138,9 @@ body {
     right: 30px;
     z-index: 9;
     float: left;
-    position: absolute;
-    left: 30%;
+    left: 17%;
     width: 300px;
-    margin-top: 20%;
+    margin-top: 7%;
   }
   
   .form-container {

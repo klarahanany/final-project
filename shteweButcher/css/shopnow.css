@@ -127,6 +127,18 @@ a:hover {
     border: #D9D9D9 1px solid;
     color: #D9D9D9;
 }
+#sort {
+    /* position: fixed; */
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 150px;
+    margin-bottom: 20px;
+    width: 150px;
+    font-size: 20px;
+    background-color: #4A7339;
+    border: #D9D9D9 1px solid;
+    color: #D9D9D9;
+}
 
 #check {
     display: none;

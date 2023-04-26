@@ -32,6 +32,7 @@
         <ul>
             <li><a class="home" href="/home">HOME</a></li>
             <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="recipes" href="/recipes">RECIPES</a></li>
             <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
             <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
             <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
@@ -105,7 +106,9 @@
                 const buttons = document.querySelector(".use-address")
                 button.addEventListener("click", details);
                 td1.textContent = resJson[i].ordersid
-                td2.textContent = resJson[i].orderdate
+                date = resJson[i].orderdate.split("T")
+                datelast = date[0].split("-")
+                td2.textContent = parseInt(datelast[2]) + 1 + "-" + datelast[1] + "-" + datelast[0]
                 td1.style.display = "none"
                 td3.append(button)
                 tr.append(td3);
@@ -170,7 +173,7 @@
             }
             console.log(array)
             const date = new Date();
-            body = { details: array, date :date }
+            body = { details: array, date: date }
             const orderAgain = await fetch("http://localhost:4000/orderAgain", {
                 method: "POST",
                 Credentials: "include",

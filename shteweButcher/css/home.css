@@ -7,6 +7,7 @@
 
 }
 
+
 body {
 
     font-family: "Times New Roman", Times, serif;
@@ -21,15 +22,66 @@ body {
     width: 100%;
     position: fixed;
 }
+.cont{
+    text-align: center;
+}
+.sideIcons {
+    position: fixed;
+    float: left;
+    top: 40%;
+}
+
+.location {
+    background-color: #4A7339;
+    width: 50px;
+    height: 50px;
+    /* transition: 0.5s; */
+}
+
+.location i {
+    font-size: 30px;
+    padding: 10px 12px;
+    color: white;
+}
+
+.order {
+    background-color: #4A7339;
+    width: 50px;
+    height: 50px;
+    /* transition: 0.5s; */
+}
+
+.order img {
+    padding: 10px 12px;
+    width: 50px;
+    height: 50px;
+    filter: brightness(0) invert(1);
+}
+
+/* .order:hover {
+    width: 120px;
+} */
+
+/* .location:hover {
+    width: 120px;
+} */
+
+.location i a {
+    font-size: 20px;
+}
+
+
+
 
 nav {
     background-repeat: no-repeat;
     background-size: cover;
     padding: 10px 10px 10px 10px;
-    height: 40px;
+    height: 35px;
     width: 100%;
     position: fixed;
     left: 0;
+    transition: .5s;
 }
 
 nav ul {
@@ -43,15 +95,16 @@ nav ul li {
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
+    transition: 0.5s;
 }
 
 nav ul li a {
     color: #D9D9D9;
-    font-size: 17px;
+    font-size: 20px;
     padding: 7px 13px;
     border: radius 3px;
-    ;
     text-transform: uppercase;
+    transition: 0.5s;
 }
 
 .divLogo {
@@ -68,18 +121,26 @@ nav ul li a {
 
 }
 
-.bestMeat p {
+.bestMeat .title2 {
     font-size: 30px;
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
     font-weight: bold;
+    padding: 10px 20px;
 }
 
+/* .title2{
+    margin-top: 30px;
+} */
 .bestMeat1 {
     float: right;
-    padding: 20px 20px;
+    padding: 20px 130px;
 }
-.bestMeat1 p{
+
+.bestMeat1 p {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
     font-size: 20px;
 }
 
@@ -88,10 +149,12 @@ nav ul li a {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
-    margin-left: 45%;
-    margin-top: 70px;
+    width: 200px;
+    height: 200px;
+    margin-left: 40%;
+    margin-top: 60px;
+    filter: sepia(60%);
+    -webkit-filter: sepia(60%);
 }
 
 footer {
@@ -115,7 +178,7 @@ footer i {
     padding: 10px 10px 10px 10px;
     font-size: 30px;
     color: #090909c5;
-    height: 80px;
+    height: 60px;
     bottom: 0;
 }
 
@@ -151,6 +214,7 @@ footer i {
 
 .container1 {
     position: relative;
+    
 }
 
 .threeImages {
@@ -158,9 +222,10 @@ footer i {
 }
 
 .imges {
-    padding: 12px 36px 12px;
+    padding: 12px 30px;
     height: 350px;
     width: 410px;
+    margin-left: 5px;
 }
 
 h1,
@@ -173,18 +238,32 @@ h4 {
     display: grid;
     place-items: center
 }
+#orderB1 {
+    padding: 7px;
+    border: #4A7339 2px solid;
+    background-color: #4A7339;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 
+#orderB1:hover {
+    background: none;
+    border: white 2px solid;
+    color: white;
+    font-weight: bold;
+}
 #orderB {
     padding: 7px;
     border: #4A7339 2px solid;
     background-color: #4A7339;
     color: white;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #orderB:hover {
-    background-color: white;
+    background: none;
     border: #4A7339 2px solid;
     color: #4A7339;
     font-weight: bold;
@@ -209,10 +288,10 @@ h4 {
     background-color: #4A7339;
     /* float: left; */
     position: absolute;
-    left: 0;
+    left: 30px;
     margin-left: 10px;
     color: #eed9d9;
-    bottom: 10px;
+    bottom: 20px;
 }
 
 
@@ -282,8 +361,8 @@ h4 {
     position: absolute;
     font-weight: bold;
     font-size: larger;
-    top: 150px;
-    left: 40%;
+    top: 110px;
+    left: 35%;
     color: #D9D9D9;
     z-index: 1;
     animation: fadeIn 2s;
@@ -366,6 +445,9 @@ h4 {
 /* Hide the images by default */
 .mySlides {
     display: none;
+    width: 80%;
+    /* height: 30%; */
+    margin-left: 120px;
 }
 
 .mySlides img {
@@ -418,7 +500,7 @@ h4 {
     font-size: 15px;
     padding: 8px 12px;
     position: absolute;
-    top: 40px;
+    top: 50px;
 }
 
 /* Container for image text */
@@ -427,6 +509,7 @@ h4 {
     background-color: #222;
     padding: 2px 16px;
     color: white;
+
 }
 
 .row:after {

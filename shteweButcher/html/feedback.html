@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>feedback</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/feedback.css">
@@ -24,10 +25,10 @@
         <label for="check" class="checkbtn">
             <i class="bx bx-list-ul"></i>
         </label>
-
         <ul>
             <li><a class="home" href="/home">HOME</a></li>
             <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="recipes" href="/recipes">RECIPES</a></li>
             <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
             <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
             <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
@@ -36,27 +37,27 @@
         </ul>
     </nav>
 
-      
-      <div class="container">
-        <div class="title">
-          <h2 class="title">טופס משוב</h2>
-        </div>
-       
 
-          <form>
-              <div class="row">
-                  <div class="col-25">
-                      <label for="feed_back">משוב</label>
-                  </div>
-                  <div class="col-75">
-                      <textarea id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
-                  </div>
-              </div>
-              <div class="row">
-                  <input type="button" onclick="submitfun()" value="שלח">
-              </div>
-          </form>
-      </div>
+    <div class="container">
+        <div class="title" dir="rtl">
+            <h2 class="title">טופס משוב</h2>
+        </div>
+
+
+        <form>
+            <div class="row">
+                <div class="col-25" dir="rtl">
+                    <label for="feed_back">כאן אתם יכולים לשתף איתנו את כל מה שאהבתם או לא אהבתם בנסיון שלכם עם האתר</label>
+                </div>
+                <div class="col-75">
+                    <textarea  id="feedback" name="subject" placeholder="תכתוב משהו" style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input type="button" onclick="submitfun()" value="שלח">
+            </div>
+        </form>
+    </div>
     <script>
         async function submitfun() {
             const element = document.getElementById('feedback');

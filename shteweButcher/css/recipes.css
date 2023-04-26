@@ -1,0 +1,205 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: montserrat;
+    /* display: block; */
+    color: #F5DFDF;
+    background-size: cover;
+    background-color: #4A7339;
+}
+
+.logo {
+    width: 100%;
+    height: 80px;
+    image-rendering: 50%;
+}
+
+nav {
+    background: #D9D9D9;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    width: 100%;
+    border: 2px solid gray;
+    overflow: hidden;
+}
+
+nav ul {
+    margin-top: -35px;
+    margin-bottom: 30px;
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+nav ul li a {
+    color: rgb(6, 6, 6);
+    font-size: 17px;
+    padding: 7px 13px;
+    border: radius 3px;
+    text-transform: uppercase;
+}
+
+a.recipes,
+nav ul li a:hover {
+    color: #c33333;
+    transition: .5s;
+    font-size: 21px;
+}
+
+.checkbtn {
+    font-size: 50px;
+    color: rgb(10, 9, 9);
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+
+    cursor: pointer;
+    display: none;
+}
+
+#check {
+    display: none;
+}
+
+@media(max-width: 952px) {
+    label.butcher {
+        font-size: 27px;
+        padding-left: 50px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+
+    }
+}
+
+@media(max-width: 858px) {
+    .checkbtn {
+        display: block;
+        color: #090909;
+    }
+
+    ul {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #F5DFDF;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+    nav ul li a {
+        font-size: 20px;
+    }
+
+    a:hover,
+    a.aboutUs {
+        background: none;
+        color: black;
+    }
+
+    #check:checked~ul {
+        left: 0;
+    }
+}
+
+.high {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+
+.container {
+    border-radius: 5px;
+    margin-right: 0;
+    float: right;
+    width: 80%;
+    margin-top: 30px;
+}
+.container header h4{
+    margin-right: 30px;
+    margin-bottom: 20px;
+    color: white;
+
+}
+.container header h1{
+    margin-right: 30px;
+    margin-bottom: 20px;
+    color: white;
+
+}
+.allRecipes{
+    margin-right: 30px;
+}
+.allRecipes li a{
+    color: white;
+    border-bottom: 1px solid white;
+}
+.allRecipes li a:hover{
+    font-weight: bold;
+}
+.recipeImg {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 8px;
+    margin: 20px 20px 20px ;
+}
+.recipeImg:hover{
+    box-shadow: 0 0 2px 1px rgba(252, 252, 252, 0.5);
+
+}
+.ingredients {
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.ingredients ul {
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.method {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.method ul {
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.recipe {
+    margin-right: 40px;
+    margin-top: 40px;
+    border: #F5DFDF 3px solid;
+    color: white;
+    font-weight: bold;
+}
+.recipe h2{
+    margin-top: 10px;
+}
+header{
+    margin-right: 10px;
+}

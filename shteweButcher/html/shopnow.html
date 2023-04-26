@@ -30,15 +30,15 @@
         <label for="check" class="checkbtn">
             <i class="bx bx-list-ul"></i>
         </label>
-          
-        <ul >
+        <ul>
             <li><a class="home" href="/home">HOME</a></li>
             <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="recipes" href="/recipes">RECIPES</a></li>
             <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
             <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
             <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
             <li><a class="logIn" href="/login">LOGIN</a></li>
-            <li><a class="SignUp" onclick="signup()">SIGNUP</a></li>
+            <li><a class="SignUp" href="/signup">SIGNUP</a></li>
         </ul>
     </nav>
     <div>
@@ -48,6 +48,12 @@
             <option value="calf">עגל</option>
             <option value="lamb">טלה</option>
           </select>
+          <select id="sort" onchange="selectionChange()" dir="rtl"> 
+            <option value="Sort By">סנן המוצרים</option>
+            <option value="Sort By Price" id="price">סנן לפי מחיר</option>
+            <option value="Sort By A-Z" id="az">סנן לפי א-ת</option>
+            <option value="Sort By Z-A" id="az">סנן לפי ת-א</option>
+      </select>
     </div>
     
     <section class="shop-container">

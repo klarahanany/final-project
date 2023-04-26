@@ -691,7 +691,7 @@ app.post("/changeDemand", async (req, res) => {
     console.log(req.body)
     var sql = `INSERT INTO askForChange(dateAsked,shiftType ,reason,username) VALUES ('${req.body.date}','${req.body.shifttype}','${req.body.reason}', '${req.cookies.username}');`
     db.query(sql);
-    res.json(["success",result.rows[0]])
+    res.json(["success", result.rows[0]])
 
 });
 app.post("/uploadPhoto", async (req, res) => {
@@ -809,8 +809,9 @@ app.post("/orderAgain", async (req, res) => {
             price = res1.rows[0].price
             priceAfter = price.replace('ILS', '')
             totalprice = array[i][1] * priceAfter
-            console.log(totalprice)
-
+            q=res1.rows[0].quantity - array[i][1]
+            var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${res1.rows[0].productid};`
+            db.query(sql)
             var sql3 = `INSERT INTO orderdetail (ordersid,productid,totalprice,productquantity) VALUES ('${resulty.rows[0].ordersid}','${res1.rows[0].productid}','${totalprice}','${array[i][1]}');`
             db.query(sql3);
         }
@@ -1208,6 +1209,9 @@ app.get("/allorders", (req, res) => {
 })
 app.get("/feedback", (req, res) => {
     res.sendFile(__dirname + "/html/feedback.html")
+})
+app.get("/recipes", (req, res) => {
+    res.sendFile(__dirname + "/html/recipes.html")
 })
 app.get("/customerfeedback", (req, res) => {
     res.sendFile(__dirname + "/html/admincustomerfeedback.html")

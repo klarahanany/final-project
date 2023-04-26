@@ -145,10 +145,6 @@
         button.textContent = "פרטי הזמנה"
         const buttons = document.querySelector(".use-address")
 
-        // buttons.onclick =  async () => {
-        //   var id =  $(this).closest("tr").find(".nr").text();
-        //   console.log(id)
-        // };
         button.addEventListener("click", details);
         td5.append(button)
         for (var j = 0; j < result[1].length; j++) {
@@ -156,9 +152,11 @@
             td4.textContent = result[1][j].username;
           }
         }
-
+        
+        date = result[0][i].orderdate.split("T")
+        datelast = date[0].split("-")
         td3.textContent = result[0][i].personid;
-        td2.textContent = result[0][i].orderdate;
+        td2.textContent = parseInt(datelast[2])+1 +"-"+ datelast[1]+"-"+datelast[0]
         td1.textContent = result[0][i].ordersid;
         tr.append(td5)
         tr.append(td4);

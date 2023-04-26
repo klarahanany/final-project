@@ -15,35 +15,38 @@
 
 <body>
   <div class="backGround"></div>
+
   <div class="container">
     <video src="/img/video.mp4" id="meatVideo" autoplay muted playsinline loop>
     </video>
 
     <div class="overlay">
-      <p class="cont">Content above your video</p>
+      <h1 style="margin-bottom: 30px;">Shtewe Butcher</h1>
       <form class="cont">
-        <p>Content Below Your Video</p>
-        <label for="input">Form Input Label</label>
-        <button type="button">Submit</button>
+        <p dir="rtl">אנו מתמחים בבשר טרי באיכות גבוהה ובנתחי בשר משובחים. <br> לאוהבי בשר מיושן, אצלנו תמצאו בשר מיושן.
+        </p>
+        <button type="button" onClick="location='/login'" id="orderB1">הזמנה לאיסוף עצמי</button>
       </form>
     </div>
     <div class="overLay2">
-      <nav>
+      <nav dir="rtl">
         <ul>
-          <li><a>HOME</a></li>
-          <li><a>SHOP NOW</a></li>
-          <li><a>OLD ORDERS</a></li>
+          <li><a href="#welcome" class="a">ברוך הבא<i class='bx bxs-star'></i></a></li>
+          <li><a href="#bestMeatt" class="a">מומלצים<i class='bx bxs-star'></i></a></li>
+          <li><a href="#gallery" class="a">גלריה<i class='bx bxs-star'></i></a></li>
+          <li><a href="#contactUs" class="a">צור קשר<i class='bx bxs-star'></i></a></li>
+
 
         </ul>
       </nav>
     </div>
   </div>
 
-  <div class="dataButcher">
+  <div class="dataButcher" id="welcome">
     <div class="threeImages">
-      <img src="/img/img1.jpg" alt="" class="imges">
       <img src="/img/place.jpg" alt="" class="imges">
-      <img src="/img/beef1.png" alt="" class="imges">
+      <img src="/img/img2.jpg" alt="" class="imges">
+      <img src="/img/img3.jpg" alt="" class="imges">
     </div>
     <h1>אטליז שתיווי</h1>
 
@@ -63,23 +66,23 @@
   <div class="divLogo">
     <img class="logo" src="/img/logo.png" alt="">
   </div>
-  <div class="bestMeat">
-    <p>נתחים מומלצים</p>
-    <div class="bestMeat1">
-      <p>dfgh</p>
-      <p>dfgh</p>
-      <p>dfgh</p>
+  <div class="bestMeat" id="bestMeatt">
+    <p class="title2">נתחים מומלצים</p>
+    <div class="bestMeat1" dir="rtl">
+      <p>משוישת---------------------------------------130₪</p>
+      <p>בורגר עוף---------------------------------------50₪</p>
+      <p>קריספי עוף--------------------------------------70₪</p>
 
     </div>
-    <div class="bestMeat1">
-      <p>dfgh</p>
-      <p>dfgh</p>
-      <p>dfgh</p>
+    <div class="bestMeat1" dir="rtl">
+      <p>אנטריקוט מיושנת לפחות 60 יום--------------160₪</p>
+      <p>אסדו מעושן-----------------------------------450₪</p>
+      <p>עוף בגריל---------------------------------------50₪</p>
 
     </div>
   </div>
   <!-- Container for the image gallery -->
-  <div class="container1">
+  <div class="container1" id="gallery">
     <div dir="rtl" style="height: 50px;">
       <h2 class="gallery">גלריה</h2>
     </div>
@@ -87,32 +90,51 @@
     <!-- Full-width images with number text -->
     <div class="mySlides">
       <div class="numbertext">1 / 6</div>
-      <img src="/img/boss.jpg" style="width:100%">
+      <div>
+        <a href="/img/galary1.jpg" target="_blank">
+          <img src="/img/galary1.jpg" style="width:100%">
+        </a>
+      </div>
+
     </div>
 
     <div class="mySlides">
       <div class="numbertext">2 / 6</div>
-      <img src="/img/galary1.jpg" style="width:100%">
+      <a href="/img/galary2.jpg" target="_blank">
+        <img src="/img/galary2.jpg" style="width:100%">
+      </a>
     </div>
 
     <div class="mySlides">
       <div class="numbertext">3 / 6</div>
-      <img src="/img/galary1.jpg" style="width:100%">
+      <a href="/img/galary3.jpg" target="_blank">
+
+        <img src="/img/galary3.jpg" style="width:100%">
+      </a>
     </div>
 
     <div class="mySlides">
       <div class="numbertext">4 / 6</div>
-      <img src="/img/galary1.jpg" style="width:100%">
+      <a href="/img/galary4.jpg" target="_blank">
+
+        <img src="/img/galary4.jpg" style="width:100%">
+      </a>
     </div>
 
     <div class="mySlides">
       <div class="numbertext">5 / 6</div>
-      <img src="/img/galary1.jpg" style="width:100%">
+      <a href="/img/galary5.jpg" target="_blank">
+
+        <img src="/img/galary5.jpg" style="width:100%">
+      </a>
     </div>
 
     <div class="mySlides">
       <div class="numbertext">6 / 6</div>
-      <img src="/img/galary1.jpg" style="width:100%">
+      <a href="/img/galary6.jpg" target="_blank">
+
+        <img src="/img/galary6.jpg" style="width:100%">
+      </a>
     </div>
 
     <!-- Next and previous buttons -->
@@ -127,26 +149,26 @@
     <!-- Thumbnail images -->
     <div class="row">
       <div class="column">
-        <img class="demo cursor" src="/img/boss.jpg" style="width:100%" onclick="currentSlide(1)">
+        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(1)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(2)">
+        <img class="demo cursor" src="/img/galary2.jpg" style="width:100%" onclick="currentSlide(2)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(3)">
+        <img class="demo cursor" src="/img/galary3.jpg" style="width:100%" onclick="currentSlide(3)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(4)">
+        <img class="demo cursor" src="/img/galary4.jpg" style="width:100%" onclick="currentSlide(4)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(5)">
+        <img class="demo cursor" src="/img/galary5.jpg" style="width:100%" onclick="currentSlide(5)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="/img/galary1.jpg" style="width:100%" onclick="currentSlide(6)">
+        <img class="demo cursor" src="/img/galary6.jpg" style="width:100%" onclick="currentSlide(6)">
       </div>
     </div>
   </div>
-  <footer>
+  <footer id="contactUs">
     <h2 dir="rtl">חנות עם מלא בשר...</h2>
     <p dir="rtl">ניתן לבצע הזמנות איסוף עצמי, וכמובן נשמח לשרת אתכם בחנות</p>
     <br>
@@ -168,25 +190,25 @@
             <td>ראשון</td>
             <td class="opens">08:00</td>
             <td>-</td>
-            <td class="closes">16:00</td>
+            <td class="closes">20:00</td>
           </tr>
           <tr id="Monday" itemprop="openingHours" title="Open Monday at 9am to 6pm">
             <td>שני</td>
             <td class="opens">08:00</td>
             <td>-</td>
-            <td class="closes">18:00</td>
+            <td class="closes">20:00</td>
           </tr>
           <tr id="Tuesday" itemprop="openingHours" title="Open Tuesday at 9am to 6pm">
             <td>שלישי</td>
             <td class="opens">08:00</td>
             <td>-</td>
-            <td class="closes">18:00</td>
+            <td class="closes">20:00</td>
           </tr>
           <tr id="Wednesday" itemprop="openingHours" title="Open Wednesday at 9am to 6pm">
             <td>רביעי</td>
             <td class="opens">08:00</td>
             <td>-</td>
-            <td class="closes">18:00</td>
+            <td class="closes">20:00</td>
           </tr>
           <tr id="Thursday" itemprop="openingHours" title="Open Thursday at 9am to 8pm">
             <td>חמישי</td>
@@ -198,7 +220,7 @@
             <td>שישי</td>
             <td class="opens">08:00</td>
             <td>-</td>
-            <td class="closes">18:00</td>
+            <td class="closes">20:00</td>
           </tr>
           <tr id="Saturday" itemprop="openingHours" title="Open Saturday at 10am to 6pm">
             <td>שבת</td>
@@ -216,14 +238,35 @@
     <i class="fa-brands fa-square-instagram"></i>
     <i class="fa-brands fa-square-facebook"></i>
     <i class="fa-brands fa-square-whatsapp"></i>
-    <i class="fa-brands fa-tiktok"></i>
+    <i class="fa-brands fa-tiktok"><a href=""></a></i>
   </footer>
+  <div class="sideIcons">
+    <div class="location" dir="rtl" title="מיקום"
+      onClick="location.href='https://www.google.com/maps/place/%D7%90%D7%98%D7%9C%D7%99%D7%96+%D7%A9%D7%AA%D7%99%D7%95%D7%95%D7%99+%D7%A9%D7%A0%D7%9C%D7%A8%E2%80%AD/@32.7025222,35.2885818,15z/data=!4m6!3m5!1s0x151c4d3052f98a9b:0xc09fecdf365f3fa4!8m2!3d32.7025222!4d35.2885818!16s%2Fg%2F11rdggp9kr?hl=he-il';">
+     <a href="https://www.google.com/maps/place/%D7%90%D7%98%D7%9C%D7%99%D7%96+%D7%A9%D7%AA%D7%99%D7%95%D7%95%D7%99+%D7%A9%D7%A0%D7%9C%D7%A8%E2%80%AD/@32.7025222,35.2885818,15z/data=!4m6!3m5!1s0x151c4d3052f98a9b:0xc09fecdf365f3fa4!8m2!3d32.7025222!4d35.2885818!16s%2Fg%2F11rdggp9kr?hl=he-il"> <i class="fa-solid fa-location-dot locIcon" title="מיקום">
+      </i></a>
+    </div>
+    <div onClick="location.href='/login';" class="order" dir="rtl" title="הזמנה לאיסוף עצמי ">
+      <a href="/login'"><img src="/img/order.png" alt=""  title="הזמנה לאיסוף עצמי"></a>
+    </div>
+  </div>
   <script>
     window.onscroll = function (event) {
       var nav = document.getElementsByTagName('nav')[0];
+      var a = document.getElementsByClassName('a')
       var scroll = window.pageYOffset;
-      if (scroll < 20) {
+      if (scroll > 20) {
         nav.style.background = '#4A7339';
+        for (var i = 0; i < a.length; i++) {
+          a[i].style.fontSize = '15px';
+        }
+
+      }
+      else if (scroll < 20) {
+        nav.style.background = 'none';
+        for (var i = 0; i < a.length; i++) {
+          a[i].style.fontSize = '20px';
+        }
       }
     }
     let slideIndex = 1;
@@ -260,7 +303,9 @@
       plusSlides(1)
     }, 5000);
 
-
+//     function chbg(color) {
+//     document.getElementById('aElement').style.display= 'block';
+// }   
   </script>
   <!-- <script src="img/pexels-pressmaster-3128759-3840x2160-25fps.mp4"></script>  -->
 

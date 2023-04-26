@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/recipes.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <section class="high">
+
+        <img src="/img/meat.jpg" alt="" class="logo">
+
+    </section>
+    <nav>
+
+        <i class='bx bx-cart-alt' id="cart-icon"></i>
+        <p id="customerName"></p>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bx bx-list-ul"></i>
+        </label>
+
+        <ul>
+            <li><a class="home" href="/home">HOME</a></li>
+            <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
+            <li><a class="recipes" href="/recipes">RECIPES</a></li>
+            <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
+            <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
+            <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
+            <li><a class="logIn" href="/login">LOGIN</a></li>
+            <li><a class="SignUp" href="/signup">SIGNUP</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <header dir="rtl">
+            <h1>כאן תמצאו המתכונים הכי טעימים שניתן לבשל בבשר שלנו</h1>
+            <h4>לחץ על כותרת המתכון כדי לדלג לאחד מהמתכונים הטעימים הבאים:</h4>
+            <ul class="allRecipes">
+                <li><a href="#recipe1"> פילה עם רוטב שמנת פטריות</a></li>
+                <li><a href="#recipe2">סושי קבב</a></li>
+                <li><a href="#recipe3">סטייק בשר ברוטב שום וחריסה</a></li>
+                <li><a href="#recipe4">תאקו עוף</a></li>
+            </ul>
+        </header>
+        <div dir="rtl" class="recipe" id="recipe1">
+            <header>
+                <section>
+                    <h2> פילה עם רוטב שמנת פטריות</h2>
+                    <a href="/img/firstRecipe.jpg">
+                        <img src="/img/firstRecipe.jpg" alt="" class="recipeImg">
+                    </a>
+                </section>
+            </header>
+            <article>
+                <section class="ingredients">
+                    <h3>מצרכים:</h3>
+                    <ul>
+                        <li> 1.5 ק״ג פילה טרי </li>
+                        <li>300-400 גרם פטריות שלמות </li>
+                        <li>1 שמנת מתוקה (250 מ״ל)</li>
+                        <li>2 שמנת לבישול (500 מ״ל)</li>
+                        <li>50 גרם חמאה </li>
+                        <li>כף שמן זית </li>
+                        <li>מלח</li>
+                        <li>פלפל שחור גרוס</li>
+                        <li>כפית מרק עוף</li>
+                        <li>2 כפיות מרק פטריות</li>
+                    </ul>
+                </section>
+                <section class="method">
+                    <h3>אופן הכנה:</h3>
+                    <ul>
+                        <li>חותכים את נתח הפילה לפרוסות בעובי 2.5 ס"מ לפחות. </li>
+                        <li>מחממים את החמאה והשמן יחד על מחבת כבד ומניחים את הבשר. </li>
+                        <li>מוסיפים פלפל שחור ומטגנים את הנתחים 2 דקות מכל צד. </li>
+                        <li>מוציאים מהמחבת את הנתחים ושומרים אותם מכוסים במקום מחומם.</li>
+                        <li>למחבת מוסיפים את הפטריות ומטגנים 2 דקות.</li>
+                        <li>מוסיפים את השמנת, מצמצמים על רתיחה עדינה ומוסיפים מלח, מרק עוף, מרק פטריות.</li>
+                        <li>בודקים את הטעם ומתקנים בהתאם. </li>
+                        <li>כעת מחזירים את הבשר לצלייה של דקה מכל צד. </li>
+                        <li>מגישים על צלחת ומיד אוכלים, אפשר להוסיף רוטב בצד.</li>
+                    </ul>
+                </section>
+            </article>
+
+        </div>
+        <div dir="rtl" class="recipe" id="recipe2">
+            <header>
+                <section>
+                    <h2>סושי קבב</h2>
+                    <a href="/img/secondRecipe.jpg">
+                        <img src="/img/secondRecipe.jpg" alt="" class="recipeImg">
+
+                    </a>
+
+                </section>
+            </header>
+            <article>
+                <section class="ingredients">
+                    <h3>מצרכים:</h3>
+                    <ul>
+                        <li>מגש קבב</li>
+                        <li>טורטיות</li>
+                        <li>כף עמבה</li>
+                        <li>צנובר</li>
+                        <li>טחינה</li>
+                        <li>כוס מים</li>
+                        <li>מיץ לימון</li>
+                        <li>כפית מלח</li>
+                    </ul>
+                </section>
+                <section class="method">
+                    <h3>אופן הכנה:</h3>
+                    <ul>
+                        <li>בצלחת מוסיפים הקבב, העמבה והצנובר ומערבבים עד שיוצא לנו תערובת אחידה.</li>
+                        <li>מוסיפים הקבב על הטורטיות ומפזרים אותו בצורה אחידה על כל הטורטיה</li>
+                        <li>מגלגלים הטורטיה לרול וחותכים הרול בעובי שווה</li>
+                        <li>מוסיפים החתיכות למקל האש, ומעבירים אותו לאש</li>
+                        <li>מחממים כל צד למשך 2 דקות עד שמתקבל צבע זהב</li>
+                        <li>בצד מסננים טחינה עם המים והמלח והלימון</li>
+                        <li>מגישים הסושי עם הטחינה</li>
+                    </ul>
+                </section>
+            </article>
+
+        </div>
+        <div dir="rtl" class="recipe" id="recipe3">
+            <header>
+                <section>
+                    <h2>סטייק בשר ברוטב שום וחריסה</h2>
+                    <a href="/img/thirdRecipe.jpg">
+                        <img src="/img/thirdRecipe.jpg" alt="" class="recipeImg">
+
+                    </a>
+
+                </section>
+            </header>
+            <article>
+                <section class="ingredients">
+                    <h3>מצרכים:</h3>
+                    <ul>
+                        <li>מגש סטייק בשר</li>
+                        <li>שמן זית</li>
+                        <li>מלח</li>
+                        <li>פלפל גרוס</li>
+                        <li>2 לימון</li>
+                        <li>4 חתיכות שום</li>
+                        <li>2 כף חריסה</li>
+                        <li>1 פלפל ירוק חריף</li>
+                    </ul>
+                </section>
+                <section class="method">
+                    <h3>אופן הכנה:</h3>
+                    <ul>
+                        <li>מוסיפים את הסטייק על האש עם שמן זית עד שהצבע שלו משתנה, מוסיפים מלח ופלפל שחור.</li>
+                        <li>מעבירים לתנור על חם גבוה (250 מעלות) ומוסיפים מים עד שהבשר מתבשל, בערך לוקח שעה וחצי (לפי כל
+                            תנור)</li>
+                        <li>כשהבשר מתבשל, בצד מכינים הרוטב:</li>
+                        <li>מוסיפים מיץ 2 לימון עם 2 כף חריסה, 4 שום וחותכים הפלפל החריף, מערבבים ביחד ומוסיפים על הבשר
+                        </li>
+                        <li>משארים בתנור עד רבע שעה ומוצאים ומגישים.</li>
+                    </ul>
+                </section>
+            </article>
+
+        </div>
+        <div dir="rtl" class="recipe" id="recipe4">
+            <header>
+                <section>
+                    <h2>תאקו עוף</h2>
+                    <a href="/img/fourthRecipe.jpg">
+                        <img src="/img/fourthRecipe.jpg" alt="" class="recipeImg">
+                    </a>
+                </section>
+            </header>
+            <article>
+                <section class="ingredients">
+                    <h3>מצרכים:</h3>
+                    <ul>
+                        <li>שווארמה עוף </li>
+                        <li>שמן זית</li>
+                        <li>גמבה (בצבע אדום, צהוב וכתום)</li>
+                        <li>תירס</li>
+                        <li>זיתים</li>
+                        <li>תבלין עוף</li>
+                        <li>פפריקה אדומה</li>
+                        <li>פלפל שחור</li>
+                        <li>רוטב סויה</li>
+                        <li>רוטב צ׳ילי מתוק</li>
+                        <li>רוטב טריאקי</li>
+                        <li>טורטיות</li>
+                        <li>גבינה צהובה</li>
+                    </ul>
+                </section>
+                <section class="method">
+                    <h3>אופן הכנה:</h3>
+                    <ul>
+                        <li>מוסיפים את השווארמה על האש עם שמן זית, ומערבבים עד שהעוף מקבל צבע לבן, מוסיפים את התבלינים
+                        </li>
+                        <li>חותכים את הגמבה לקוביות קטנות ומוסיפים אותה לעוף</li>
+                        <li>אחרי שהגמבה מתבשלת מוסיפים את התירס והזיתים</li>
+                        <li>מוסיפים את הרוטבים ומשאירים על האש בערך 5 דקות</li>
+                        <li>חותכים את הטורטיות בצורת עיגול ומסדרים אותה בבירקס בצורת תאקו</li>
+                        <li>ממלאים כל טורטיה בשווארמה</li>
+                        <li>מפזרים למעלה גבינה צהובה </li>
+                        <li>מכניסים לתנור עם חם 250 מעלות עד שהגבינה מקבלת צבע זהב</li>
+                    </ul>
+                </section>
+            </article>
+
+        </div>
+    </div>
+</body>
+
+</html>
