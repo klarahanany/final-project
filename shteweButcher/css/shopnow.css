@@ -36,6 +36,7 @@ label.butcher {
     width: 50%;
     height: 80px;
     image-rendering: 50%;
+    opacity: 60%;
 }
 
 .high {
@@ -119,7 +120,7 @@ a:hover {
     /* position: fixed; */
     position: absolute;
     margin-left: 70%;
-    margin-top: 100px;
+    margin-top: 200px;
     margin-bottom: 20px;
     width: 150px;
     font-size: 20px;
@@ -131,7 +132,7 @@ a:hover {
     /* position: fixed; */
     position: absolute;
     margin-left: 70%;
-    margin-top: 150px;
+    margin-top: 155px;
     margin-bottom: 20px;
     width: 150px;
     font-size: 20px;
