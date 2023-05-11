@@ -1,20 +1,133 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
+
+</head>
+
 <body>
+  <div class="carousel">
+    <button class='flt-left' onclick="slideRight(this);"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+    <div class="row flt-left">
 
-<h1>The Window Object</h1>
-<h2>The confirm() Method</h2>
+      <div class="row-container">
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
 
-<p>Click the button to display a confirm box.</p>
+          </div>
+        </div>
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
 
-<button onclick="myFunction()">Try it</button>
+          </div>
+        </div>
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
 
-<script>
-function myFunction() {
-  value =confirm("Press a button!");
-  console.log(value)
-}
-</script>
+          </div>
+        </div>
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
+
+          </div>
+        </div>
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
+
+          </div>
+        </div>
+        <div class="container">
+          <div class="product-box">
+            <img src="/img/beef1.png" alt="" class="product-img">
+            <h2 class="product-title">Beef Rump Steaks x4</h2>
+            <span class="price">7$</span>
+            <i class='bx bx-cart-alt add-cart'></i>
+
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+    </div>
+    <button class='flt-left' onclick="slideLeft(this);"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+    <div class="clear"></div>
+  </div>
+  <script>
+
+    var right = 0;
+    var maxMargin;
+    var jumpMargin = 150;
+
+    function setWidth() {
+      var boxwidth = document.querySelector(".container").offsetWidth;
+      var displaywidth = document.querySelector(".row").offsetWidth;
+      var displayheight = document.querySelector(".row").offsetHeight;
+      var children = document.querySelectorAll(".row-container > .container").length;
+      var outerboxwidth = children * boxwidth + (children * 10);
+      document.querySelector(".row-container").style.width = outerboxwidth + "px";
+      document.querySelectorAll("button")[0].style.height = displayheight + "px";
+      document.querySelectorAll("button")[1].style.height = displayheight + "px";
+      maxMargin = outerboxwidth - displaywidth;
+    }
+
+    function slideLeft(event) {
+      var rowcont = document.querySelector(".row-container");
+      if (right <= -maxMargin) {
+        event.preventDefault();
+      }
+      else {
+        right -= jumpMargin;
+      }
+      rowcont.style.marginLeft = right + "px";
+    }
+
+    function slideRight(event) {
+      var rowcont = document.querySelector(".row-container");
+      if (right == 0) {
+        event.preventDefault();
+      }
+      else if (right >= maxMargin) {
+        event.preventDefault();
+      }
+      else {
+        right += jumpMargin;
+      }
+      rowcont.style.marginLeft = right + "px";
+    }
+
+    window.onload = setWidth;
+  </script>
 
 </body>
+
 </html>
