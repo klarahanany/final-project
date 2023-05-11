@@ -31,8 +31,7 @@
             <i class="orders">הזמנות</i>
         </a>
         <a href="/income">
-            <i>הכנסות העסק</i>
-        </a>
+            <i>דוחות</i> </a>
         <a href="/employeesSalary" class="salary">
             <i>משכורות העובדים</i>
         </a>
@@ -74,18 +73,18 @@
                 var td2 = document.createElement("td");
                 td1.textContent = resJson[1][j].firstname + " " + resJson[1][j].lastname
                 for (var i = 0; i < resJson[0].length; i++) {
-                    if(resJson[0][i].username == resJson[1][j].username){
-                        if(resJson[0][i].shifttype != "DAYOFF"){
+                    if (resJson[0][i].username == resJson[1][j].username) {
+                        if (resJson[0][i].shifttype != "DAYOFF") {
                             salary += 280;
                         }
                     }
                 }
-                td2.dir="rtl"
-                td2.textContent = salary+"שח";
+                td2.dir = "rtl"
+                td2.textContent = salary + "שח";
                 tr.append(td2)
                 tr.append(td1);
                 element.append(tr)
-                
+
             }
             //  for (var i = 0; i < resJson[0].length; i++) {
             //     console.log(resJson[0][i])

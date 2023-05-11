@@ -31,7 +31,7 @@
             <i class="orders">הזמנות</i>
         </a>
         <a href="/income">
-            <i>הכנסות העסק</i>
+            <i>דוחות</i>
         </a>
         <a href="/employeesSalary">
             <i class="salary">משכורות העובדים</i>
@@ -306,14 +306,14 @@
                                 console.log("vbhnjklahg")
                             }
                             console.log(daaay)
-                            // if (daaay == 'Friday' && xy == 0) {
-                            //     date.setDate(date.getDate() + 2)
-                            //     xy = 1;
-                            // }
-                            // if (daaay == 'Saturday' && xy == 0) {
-                            //     date.setDate(date.getDate() + 1)
-                            //     xy = 1;
-                            // }
+                            if (daaay == 'Friday' && xy == 0) {
+                                date.setDate(date.getDate() + 2)
+                                xy = 1;
+                            }
+                            if (daaay == 'Saturday' && xy == 0) {
+                                date.setDate(date.getDate() + 1)
+                                xy = 1;
+                            }
                             string = date.toLocaleString();
                             array = string.split(",")
                             td3.textContent = array[0];

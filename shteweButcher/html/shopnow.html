@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +12,22 @@
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  
-   <style>
-        
+
+    <style>
+
     </style>
 </head>
-<body>    
+
+<body>
     <section class="high">
-        
-            <img src="/img/meat.jpg" alt="" class="logo">
-            
+
+        <img src="/img/meat.jpg" alt="" class="logo">
+
     </section>
     <nav>
 
-         <i class='bx bx-cart-alt' id="cart-icon"></i>
-         <p id="customerName">hello klara</p>
+        <i class='bx bx-cart-alt' id="cart-icon"></i>
+        <p id="customerName">hello klara</p>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="bx bx-list-ul"></i>
@@ -47,15 +49,15 @@
             <option value="chicken">עוף</option>
             <option value="calf">עגל</option>
             <option value="lamb">טלה</option>
-          </select>
-          <select id="sort" onchange="selectionChange()" dir="rtl"> 
+        </select>
+        <select id="sort" onchange="selectionChange()" dir="rtl">
             <option value="Sort By">סנן המוצרים</option>
             <option value="Sort By Price" id="price">סנן לפי מחיר</option>
             <option value="Sort By A-Z" id="az">סנן לפי א-ת</option>
             <option value="Sort By Z-A" id="az">סנן לפי ת-א</option>
-      </select>
+        </select>
     </div>
-    
+
     <section class="shop-container">
         <h2 class="section-title"> Shop Product</h2>
         <!-- <select name="meatType" id="meatType" dir="rtl">
@@ -65,7 +67,7 @@
             <option value="">טלה</option>
           </select> -->
         <div class="shop-content" id="shop-content">
-          
+
         </div>
         <div class="cart">
             <h3 class="cart-title"> Shopping List</h3>
@@ -86,17 +88,86 @@
 
         </div>
     </section>
-    
-    <footer >
-        <p dir="rtl">שעות פתיחה:<br>ב'-ו':  8:00-21:00<br>א':  8:00-18:00  </p><br>
-         <p dir="rtl">טלפון: 0505729023</p><br>
-         <p dir="rtl">כתובת: נצרת, אל עומאל אל ערב 5046</p><br>
-         <i class="fa-brands fa-square-instagram"></i>
-         <i class="fa-brands fa-square-facebook"></i>
-         <i class="fa-brands fa-square-whatsapp"></i>
-         <i class="fa-brands fa-tiktok"></i>
-     </footer>
+
+    <footer>
+        <p dir="rtl">שעות פתיחה:<br>ב'-ו': 8:00-21:00<br>א': 8:00-18:00 </p><br>
+        <p dir="rtl">טלפון: 0505729023</p><br>
+        <p dir="rtl">כתובת: נצרת, אל עומאל אל ערב 5046</p><br>
+        <i class="fa-brands fa-square-instagram"></i>
+        <i class="fa-brands fa-square-facebook"></i>
+        <i class="fa-brands fa-square-whatsapp"></i>
+        <i class="fa-brands fa-tiktok"></i>
+    </footer>
     <!-- link to js -->
+    <div class="carousel">
+        <button id="button" class='flt-left' onclick="slideRight(this);"><i class="fa fa-angle-left"
+                aria-hidden="true"></i></button>
+        <div class="row flt-left">
+
+            <div class="row-container">
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-box">
+                        <img src="/img/beef1.png" alt="" class="product-img">
+                        <h2 class="product-title">Beef Rump Steaks x4</h2>
+                        <span class="price">7$</span>
+                        <i class='bx bx-cart-alt add-cart'></i>
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <button id="button" class='flt-left' onclick="slideLeft(this);"><i class="fa fa-angle-right"
+                aria-hidden="true"></i></button>
+        <div class="clear"></div>
+    </div>
     <script src="/js/app.js"></script>
 </body>
-</html> 
+
+</html>
