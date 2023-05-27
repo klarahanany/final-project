@@ -809,7 +809,7 @@ app.post("/orderAgain", async (req, res) => {
             price = res1.rows[0].price
             priceAfter = price.replace('ILS', '')
             totalprice = array[i][1] * priceAfter
-            q=res1.rows[0].quantity - array[i][1]
+            q = res1.rows[0].quantity - array[i][1]
             var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${res1.rows[0].productid};`
             db.query(sql)
             var sql3 = `INSERT INTO orderdetail (ordersid,productid,totalprice,productquantity) VALUES ('${resulty.rows[0].ordersid}','${res1.rows[0].productid}','${totalprice}','${array[i][1]}');`
@@ -1151,6 +1151,35 @@ app.post("/oldOrders", async (req, res) => {
     catch (error) {
         console.log(error);
     }
+});
+app.post("/Relevant", async (req, res) => {
+    try {
+        const username = req.cookies.customerusername;
+        const result1 = await db.query(`select * from customers where username = '${username}';`)
+        const result = await db.query(`select * from orders o inner join orderdetail od on o.ordersid=od.ordersid inner join products p on od.productid = p.productid where personid = '${result1.rows[0].personid}';`)
+        const result2 = await db.query(`select productid from products ;`)
+
+        res.json([result.rows, result2.rows]);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+app.post("/updateLastDay", async (req, res) => {
+    allproducts = req.body.products
+    quantity = req.body.amount
+    for (var i = 0; i < allproducts.length; i++) {
+
+        const result1 = await db.query(`select * from products where description = '${allproducts[i]}'`)
+        q = result1.rows[0].quantity - quantity[i]
+
+        var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${result1.rows[0].productid};`
+        db.query(sql)
+        console.log("what happen")
+       
+    }
+    res.json("done")
+
 });
 
 app.get("/", (req, res) => {

@@ -27,16 +27,13 @@ async function load() {
         var price = document.createElement("span");
         price.className = 'price'
         price.textContent = result1[i].price;
-
         var carticon = document.createElement("i");
         carticon.className = 'bx bx-cart-alt add-cart'
-        // carticon.className = 'add-cart'
         var element = document.getElementById("shop-content");
         tag.append(img)
         tag.append(description)
         tag.append(price)
         tag.append(carticon)
-
         element.appendChild(tag);
     }
     // }
@@ -66,8 +63,77 @@ async function load() {
 
         addProductToCart2(title, price, img, result2[0][i].quantity);
     }
+    const fillRelevanteProducts = await fetch("http://localhost:4000/Relevant", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        // body: JSON.stringify(body),
+    });
+    const resultRe = await fillRelevanteProducts.json();
+    array = []
+    returnArray = []
+    for (var j = 0; j < resultRe[1].length; j++) {
+        if (getOccurrence(resultRe[0], resultRe[1][j].productid) >= 3) {
+            array.push(resultRe[1][j].productid)
+        }
+    }
 
-    // updatetotal();
+    for (var i = 0; i < array.length; i++) {
+        x = 0
+        for (var j = 0; j < resultRe[0].length; j++) {
+            if (x == 0) {
+                if (resultRe[0][j].productid == array[i]) {
+                    returnArray.push(resultRe[0][j])
+                    x = 1
+                }
+            }
+        }
+    }
+    console.log(returnArray)
+    // body = { array: returnArray }
+    // const fillTheRe = await fetch("http://localhost:4000/fillRe", {
+    //     method: "POST",
+    //     Credentials: "include",
+    //     headers: { "Content-Type": "application/JSON" },
+    //     body: JSON.stringify(body),
+    // });
+    // const fillTheRelevant = await fillTheRe.json();
+    for (var i = 0; i < returnArray.length; i++) {
+        var container = document.createElement("div");
+        container.className='container'
+        var tag = document.createElement("div");
+        tag.className = 'product-box';
+        tag.id='product-boxRe'
+        var img = document.createElement("img");
+        img.id='product-imgRe'
+        img.src = returnArray[i].img;
+        img.className = 'product-img'
+        var description = document.createElement("h5");
+        description.dir = "rtl"
+        description.textContent = returnArray[i].description;
+        description.className = 'product-title'
+        description.id='product-titleRe'
+        var price = document.createElement("span");
+        price.className = 'price'
+        price.textContent = returnArray[i].price;
+        price.id= 'priceRe'
+        var carticon = document.createElement("i");
+        carticon.className = 'bx bx-cart-alt add-cart'
+        carticon.id='cartIcon'
+        var element = document.getElementById("row-container");
+        tag.append(img)
+        tag.append(description)
+        tag.append(price)
+        tag.append(carticon)
+        container.append(tag)
+        element.appendChild(container);
+    }
+    var element = document.getElementById("row-container");
+    var tag = document.createElement("div");
+    tag.className= "clear"
+    element.append(tag)
+   
+    updatetotal();
 };
 load();
 //open cart 
@@ -104,7 +170,6 @@ async function ready() {
     var addCart = document.getElementsByClassName('add-cart');
     setTimeout(() => {
         for (var i = 0; i < addCart.length; i++) {
-            console.log("50")
             var button = addCart[i]
             button.addEventListener('click', addCartClicked);
         }
@@ -357,40 +422,44 @@ var maxMargin;
 var jumpMargin = 150;
 
 function setWidth() {
-  var boxwidth = document.querySelector(".container").offsetWidth;
-  var displaywidth = document.querySelector(".row").offsetWidth;
-  var displayheight = document.querySelector(".row").offsetHeight;
-  var children = document.querySelectorAll(".row-container > .container").length;
-  var outerboxwidth = children * boxwidth + (children * 10);
-  document.querySelector(".row-container").style.width = outerboxwidth + "px";
-  document.querySelectorAll("button")[0].style.height = displayheight + "px";
-  document.querySelectorAll("button")[1].style.height = displayheight + "px";
-  maxMargin = outerboxwidth - displaywidth;
+    var boxwidth = document.querySelector(".container").offsetWidth;
+    var displaywidth = document.querySelector(".row").offsetWidth;
+    var displayheight = document.querySelector(".row").offsetHeight;
+    var children = document.querySelectorAll(".row-container > .container").length;
+    var outerboxwidth = children * boxwidth + (children * 10);
+    document.querySelector(".row-container").style.width = outerboxwidth + "px";
+    document.querySelectorAll("button")[0].style.height = displayheight + "px";
+    document.querySelectorAll("button")[1].style.height = displayheight + "px";
+    maxMargin = outerboxwidth - displaywidth;
 }
 
 function slideLeft(event) {
-  var rowcont = document.querySelector(".row-container");
-  if (right <= -maxMargin) {
-    event.preventDefault();
-  }
-  else {
-    right -= jumpMargin;
-  }
-  rowcont.style.marginLeft = right + "px";
+    var rowcont = document.querySelector(".row-container");
+    if (right <= -maxMargin) {
+        event.preventDefault();
+    }
+    else {
+        right -= jumpMargin;
+    }
+    rowcont.style.marginLeft = right + "px";
 }
 
 function slideRight(event) {
-  var rowcont = document.querySelector(".row-container");
-  if (right == 0) {
-    event.preventDefault();
-  }
-  else if (right >= maxMargin) {
-    event.preventDefault();
-  }
-  else {
-    right += jumpMargin;
-  }
-  rowcont.style.marginLeft = right + "px";
+    var rowcont = document.querySelector(".row-container");
+    if (right == 0) {
+        event.preventDefault();
+    }
+    else if (right >= maxMargin) {
+        event.preventDefault();
+    }
+    else {
+        right += jumpMargin;
+    }
+    rowcont.style.marginLeft = right + "px";
 }
-
+function getOccurrence(array, value) {
+    var count = 0;
+    array.forEach((v) => (v.productid === value && count++));
+    return count;
+}
 window.onload = setWidth;

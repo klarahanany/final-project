@@ -16,7 +16,7 @@
 
   <div id="mySidenav" class="sidenav">
     <a href="/inventory" class="inventory">
-      <i > ניהול מלאי</i>
+      <i> ניהול מלאי</i>
     </a>
     <a href="/adminCalendar">
       <i class='calen'> משמרות</i>
@@ -39,7 +39,7 @@
     <a href="/customerfeedback">
       <i class="salary"> משובי לקוחות</i>
     </a>
- 
+
 
 
 
@@ -56,12 +56,16 @@
           <th>תיאור</th>
           <th>מזה</th>
         </tr>
-        
+
       </thead>
       <tbody id="tbody">
 
       </tbody>
     </table>
+  </div>
+  <div class="lastDay">
+    <input type="button" class="updateLastDayButton" value="עדכון כמות בסוף יום" onclick="openToUpdate()">
+
   </div>
 
   <div class="updateinventory">
@@ -128,15 +132,97 @@
       <button type="button" class="btn cancel" onclick="closeFormForAdd()">סגור</button>
     </form>
   </div>
+  <div class="fillEveryLastDay" id="fillEveryLastDay">
+    <form class="form-container1" id="updateLastDay">
+
+      <h4 dir="rtl">עדכון כמות המכירות בסוף יום</h4>
+
+      <table id="customers" dir="rtl">
+        <tr>
+          <th>מוצר</th>
+          <th>כמות המכירות</th>
+        </tr>
+        <tr>
+          <td>
+            <select name="" id="allPro" class="Selected-product">
+            </select>
+          </td>
+          <td><input type="number" value="0" id="sellNum" class="amount"></td>
+        </tr>
+
+      </table>
+      <div>
+        <i class='bx bxs-plus-circle' onclick="addRow()" style="color: #34568b; margin-bottom: 5px;">עדכן עוד מוצר</i>
+
+      </div>
+      <button type="button" class="btn" onclick="lastDayUpdate()">עדכן</button>
+      <button type="button" class="btn cancel" onclick="closeupdate()">סגור</button>
+    </form>
+  </div>
   <!-- <input type="text"> -->
   <!-- <button class="button">עדכון כמות מוצר מסויים</button> -->
   <script>
-    // const body = { UserName: name, password: pass }
+    allproductsArray = []
+    function addRow() {
+      const table = document.getElementById("customers")
+      const row = document.createElement("tr")
+      const td1 = document.createElement("td")
+      const td2 = document.createElement("td")
+      const select = document.createElement("select")
+      select.className = 'Selected-product'
+      const input = document.createElement("input")
+      input.type = 'number'
+      input.id = 'sellNum'
+      input.className='amount'
+      input.value=0
+      td1.append(select)
+      td2.append(input)
+      row.append(td1)
+      row.append(td2)
+      table.append(row)
+       console.log(allproductsArray)
+      for (var i = 0; i < allproductsArray.length; i++) {
+        var tag = document.createElement("option");
+        tag.value = allproductsArray[i].description;
+        tag.textContent = allproductsArray[i].description
+        select.append(tag)
+      }
+    }
+    async function lastDayUpdate() {
+      const selectValue = document.getElementsByClassName("Selected-product")
+      const amount = document.getElementsByClassName("amount")
+      products = []
+      quantity = []
+      for (var i = 0; i < selectValue.length; i++) {
+        products.push(selectValue[i].value)
+        quantity.push(amount[i].value)
+      }
+      console.log(amount.length)
+      body = { products:products , amount:quantity }
+      const updateLastDay = await fetch("http://localhost:4000/updateLastDay", {
+        method: "POST",
+        Credentials: "include",
+        headers: { "Content-Type": "application/JSON" },
+        body: JSON.stringify(body),
+      });
+      const result = await updateLastDay.json();
+      window.location.reload();      // for (var i = 0; i < selectValue.length; i++) {
+      //   console.log(selectValue[i].value)
+      //   console.log(amount[i].value)
+      // }
+    }
     function openForm() {
       document.getElementById("myForm").style.display = "block";
       closeFormDelete();
       closeFormForChange();
       closeFormForAdd();
+    }
+    function openToUpdate(){
+      document.getElementById("fillEveryLastDay").style.display = "block";
+      closeFormDelete();
+      closeFormForChange();
+      closeFormForAdd();
+      closeForm()
     }
     function openFormForDelete() {
       document.getElementById("myFormDelete").style.display = "block";
@@ -152,6 +238,9 @@
     }
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
+    }
+    function closeupdate() {
+      document.getElementById("fillEveryLastDay").style.display = "none";
     }
     function closeFormDelete() {
       document.getElementById("myFormDelete").style.display = "none";
@@ -172,13 +261,14 @@
         body: JSON.stringify(body),
       });
       const result = await allproducts.json();
- 
+
 
       var element = document.getElementById("tbody");
       var element2 = document.getElementById("products");
       var element3 = document.getElementById("productsForDelete");
       var element4 = document.getElementById("productsForChange");
-
+      var element5 = document.getElementById("allPro");
+      allproductsArray = result
       for (var i = 0; i < result.length; i++) {
         var tag = document.createElement("option");
         tag.value = result[i].description;
@@ -189,9 +279,13 @@
         var tag3 = document.createElement("option");
         tag3.value = result[i].description;
         tag3.textContent = result[i].description
+        var tag4 = document.createElement("option");
+        tag4.value = result[i].description;
+        tag4.textContent = result[i].description
         element2.append(tag)
         element3.append(tag2)
         element4.append(tag3)
+        element5.append(tag4)
         var tr = document.createElement("tr");
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");

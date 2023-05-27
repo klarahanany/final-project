@@ -50,7 +50,8 @@ body {
   transition: 0.3s;
 
 }
-.sidenav a i{
+
+.sidenav a i {
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -63,27 +64,53 @@ body {
   -o-animation: color 0.5s ease-in forwards;
   animation: color 0.5s ease-in forwards;
 }
+
 @-webkit-keyframes color {
-  0%   { color: #f8bac6; }
-  100% { color: white;  }
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
 }
+
 @-moz-keyframes color {
-  0%   { color: #f8bac6; }
-  100% { color: white;  }
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
 }
+
 @-o-keyframes color {
-  0%   { color: #f8bac6; }
-  100% { color: white;  }
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
 }
+
 @keyframes color {
-  0%   { color: #f8bac6; }
-  100% { color: white;  }
+  0% {
+    color: #f8bac6;
+  }
+
+  100% {
+    color: white;
+  }
 }
+
 .inventory {
   background: linear-gradient(130deg, #f1758d, #34568b);
 
 }
-.inventory i{
+
+.inventory i {
   color: white;
   font-size: 21px;
 }
@@ -161,6 +188,26 @@ div.updateinventory {
   left: 300px;
   margin-top: 95px
 }
+div.lastDay {
+  position: absolute;
+  left: 100px;
+  margin-top: 40px;
+  
+}
+
+.updateLastDayButton {
+  height: 30px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  justify-content: center;
+  display: flex;
+  width: 180px;
+  background: linear-gradient(to right, #f1758d, #34568b);
+  border-radius: 25px;
+  font-size: 15px;
+}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
@@ -176,6 +223,7 @@ div.updateinventory {
   border-radius: 25px;
   font-size: 15px;
 }
+
 .delete-button {
   height: 30px;
   color: white;
@@ -190,6 +238,7 @@ div.updateinventory {
   font-size: 15px;
   margin-top: 10px;
 }
+
 .changeprice-button {
   height: 30px;
   color: white;
@@ -204,6 +253,7 @@ div.updateinventory {
   font-size: 15px;
   margin-top: 10px;
 }
+
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
@@ -221,6 +271,7 @@ div.updateinventory {
   margin-left: 90px;
 
 }
+
 .form-fordelete {
   display: none;
   position: fixed;
@@ -236,6 +287,7 @@ div.updateinventory {
   margin-top: 130px;
   margin-left: 90px;
 }
+
 .form-forUpdatePrice {
   display: none;
   position: fixed;
@@ -251,7 +303,8 @@ div.updateinventory {
   margin-top: 165px;
   margin-left: 90px;
 }
-.form-foradd{
+
+.form-foradd {
   display: none;
   position: fixed;
   /* bottom: 0; */
@@ -266,6 +319,7 @@ div.updateinventory {
   margin-top: 210px;
   margin-left: 90px;
 }
+
 /* Add styles to the form container */
 .form-container {
   max-width: 300px;
@@ -328,6 +382,115 @@ select {
 
 /* Add some hover effects to buttons */
 .form-container .btn:hover,
-.open-button:hover ,.delete-button:hover,.changeprice-button:hover {
+.open-button:hover,
+.delete-button:hover,
+.changeprice-button:hover {
+  opacity: 1;
+}
+
+.fillEveryLastDay {
+  display: none;
+  right: 30px;
+  z-index: 9;
+  float: left;
+  position: absolute;
+  left: 70px;
+  margin-top: 50px;
+
+  /* margin-left: 90px; */
+
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+
+}
+
+#customers td,
+#customers th {
+  text-align: right;
+  border: 1px solid #ddd;
+  padding: 7px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: right;
+  background-color: #34568b;
+  color: white;
+}
+
+#sellNum {
+  width: 60px;
+}
+
+#allPro {
+  width: 200px;
+}
+.form-container1 {
+  width: 400px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.form-container1 input[type=text],
+.form-container1 input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  text-align: right;
+}
+
+/* When the inputs get focus, do something */
+.form-container1 input[type=text]:focus,
+.form-container1 input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container1 .btn {
+  background-color: #34568b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  border-radius: 25px;
+  font-size: 15px;
+  width: 180px;
+  height: 30px;
+}
+
+/* Add a red background color to the cancel button */
+.form-container1 .cancel {
+  background-color: #f1758d;
+  border-radius: 25px;
+  font-size: 15px;
+  width: 180px;
+  height: 30px;
+}
+
+/* Add some hover effects to buttons */
+.form-container1 .btn:hover,
+.open-button:hover,
+.delete-button:hover,
+.changeprice-button:hover {
   opacity: 1;
 }

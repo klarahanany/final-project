@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 6px 10px;
+      box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <main>
-        <h2>whaaaaaaaat</h2>
-        <div id="data"></div>
-    </main>
-    <script>
-        // const json = localStorage.getItem('form');
-        // const obj = JSON.parse(json);
-
-        // for(Key in obj){
-        //     const markup = '
-        //     <div>
-        //          <span>${key}:${obj[key]} </span> 
-        //     </div>
-        //     ';
-        //     document.getElementById('data').innerHTML+=markup;
-        // }
-    </script>
+  <form>
+    <table>
+      <tr>
+        <th>First Name</th>
+        <td><input type="text" name="fname"></td>
+      </tr>
+      <tr>
+        <th>Last Name</th>
+        <td><input type="text" name="lname"></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><input type="text" name="email"></td>
+      </tr>
+      <tr>
+        <th>Phone Number</th>
+        <td><input type="text" name="phone"></td>
+      </tr>
+    </table>
+    <input type="submit" value="Submit">
+  </form>
 </body>
 </html>
