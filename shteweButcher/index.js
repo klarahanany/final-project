@@ -310,6 +310,7 @@ app.post("/shopnow", async (req, res) => {
         var result = [];
         array = req.body.array;
         var j = 0;
+        smallThan10 = []
         const result1 = await db.query(`SELECT personid FROM customers where username='${req.cookies.customerusername}' ;`);
         var sql2 = `INSERT INTO orders (orderdate,personid) VALUES ('${req.body.date}','${result1.rows[0].personid}');`
         db.query(sql2);
@@ -321,7 +322,6 @@ app.post("/shopnow", async (req, res) => {
             var array_1 = array[i].split("~");
             const result1 = await db.query(`SELECT * FROM products where description='${array_1[0]}';`)
             var q = result1.rows[0].quantity - array_1[2];
-
             var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${result1.rows[0].productid};`
             db.query(sql);
             var price = array_1[1].replace('ILS', '');
@@ -329,11 +329,16 @@ app.post("/shopnow", async (req, res) => {
             totalprice = totalprice.toString() + "ILS"
             var sql3 = `INSERT INTO orderdetail (ordersid,productid,totalprice,productquantity) VALUES ('${resulty.rows[0].ordersid}','${result1.rows[0].productid}','${totalprice}','${array_1[2]}');`
             db.query(await sql3);
-
             var sql5 = `DELETE FROM cartitems WHERE cartid='${resultx.rows[0].cartid}';`
             db.query(await sql5);
+            if(q<=10){
+                smallThan10.push(1)
+            }
+            else{
+                smallThan10.push(0)
+            }
         }
-        res.json("mo2akat")
+        res.json(smallThan10)
     }
 });
 app.post("/inventory", async (req, res) => {
@@ -853,6 +858,7 @@ app.post("/updateshiftadmin", async (req, res) => {
         db.query(sql)
     }
     console.log(dayoff)
+    res.json("what")
 });
 app.post("/addWorker", async (req, res) => {
     const result1 = await db.query(`select * from workers where UserName = '${req.body.username}'`)
@@ -1119,7 +1125,7 @@ app.get("/salary", async (req, res) => {
         // const result = await db.query(`select * from shift`)
         const result = await db.query(`SELECT *
         FROM shift 
-        WHERE shiftdate >= date_trunc('month', current_date - interval '1' month)
+        WHERE shiftdate >= date_trunc('month', now())
         and shiftdate <date_trunc('day', current_date);`)
         const result2 = await db.query(`SELECT *
         FROM workers where catagory = 'WORKER'`)

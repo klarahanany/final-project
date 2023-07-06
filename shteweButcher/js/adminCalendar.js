@@ -81,16 +81,16 @@ daysTag.onclick = async () => {
     if (selected !== "") {
 
 
-        var dateStr = '03/11/2023';
-        var dayname = getDayName(dateStr, "en-US");
-        console.log(dayname)
+        // var dateStr = '03/11/2023';
+        // var dayname = getDayName(dateStr, "en-US");
+        // console.log(dayname)
         alreadyAdded = document.getElementById("alreadyAdded")
-        box1 = document.getElementById("box1")
-        box2 = document.getElementById("box2")
-        updateshiftButton = document.getElementById('update');
-        updateshiftButton.style.visibility = 'visible';
-        box1.style.visibility = 'visible';
-        box2.style.visibility = 'visible';
+        // box1 = document.getElementById("box1")
+        // box2 = document.getElementById("box2")
+        // updateshiftButton = document.getElementById('update');
+        // updateshiftButton.style.visibility = 'visible';
+        // box1.style.visibility = 'visible';
+        // box2.style.visibility = 'visible';
         alreadyAdded.style.visibility = 'hidden'
         num2 = 2
         monthAndYear = document.getElementById("current-date").innerHTML;
@@ -110,6 +110,8 @@ daysTag.onclick = async () => {
         const resultx = await fetchForCheckIfShiftDetermined.json();
         console.log(resultx)
         if (resultx !== 'still not determined') {
+            const askforChange = document.getElementById("changeSent")
+            askforChange.style.display="block"
             elementmorn = document.getElementById("morn")
             elementmorn.innerHTML = '';
             elementeven = document.getElementById("even")
@@ -119,7 +121,9 @@ daysTag.onclick = async () => {
             const element2 = document.getElementById("workers2")
             const element3 = document.getElementById("workers3")
             const element4 = document.getElementById("workers4")
-
+            const element5 = document.getElementById("notDetermined")
+            element5.style.display="none"
+            
             for (var i = 0; i < resultx[0].length; i++) {
                 var p = document.createElement("p")
                 p.id = "shiftss"
@@ -173,12 +177,20 @@ daysTag.onclick = async () => {
 
             alreadyAdded1 = document.getElementById("alreadyAdded")
             alreadyAdded1.style.visibility = 'visible';
-            box1 = document.getElementById("box1")
-            box2 = document.getElementById("box2")
-            updateshiftButton = document.getElementById('update');
-            updateshiftButton.style.visibility = 'hidden';
-            box1.style.visibility = 'hidden';
-            box2.style.visibility = 'hidden';
+           
+        }
+        else{
+            const element5 = document.getElementById("notDetermined")
+            element5.style.display="block"
+            const askforChange = document.getElementById("changeSent")
+            askforChange.style.display="none"
+            element5.textContent = "עדיין לא נקבעה משמרת"
+            var dateStr = getMonth(month)+"/"+day+"/"+year;
+            var dayname = getDayName(dateStr, "en-US");
+            if(dayname =="Saturday"){
+                element5.textContent = "ביום שבת העסק סגור"
+            }
+            
         }
         var items = daysTag.getElementsByTagName("li");
         for (var i = 0; i < items.length; ++i) {
@@ -239,21 +251,21 @@ daysTag.onclick = async () => {
             body: JSON.stringify(body),
         });
         const result = await fetchGetAllEmployes.json();
-        var element = document.getElementById("employes");
-        var element2 = document.getElementById("employes2");
-        if (element.options.length == 1 && element2.options.length == 1) {
-            for (var j = 0; j < result.length; ++j) {
-                var tag = document.createElement("option");
-                var tag2 = document.createElement("option");
-                tag2.textContent = result[j].firstname + " " + result[j].lastname;
-                tag.value = result[j].username;
-                tag2.value = result[j].username;
-                tag.textContent = result[j].firstname + " " + result[j].lastname;
+        // var element = document.getElementById("employes");
+        // var element2 = document.getElementById("employes2");
+        // if (element.options.length == 1 && element2.options.length == 1) {
+        //     for (var j = 0; j < result.length; ++j) {
+        //         var tag = document.createElement("option");
+        //         var tag2 = document.createElement("option");
+        //         tag2.textContent = result[j].firstname + " " + result[j].lastname;
+        //         tag.value = result[j].username;
+        //         tag2.value = result[j].username;
+        //         tag.textContent = result[j].firstname + " " + result[j].lastname;
 
-                element.append(tag);
-                element2.append(tag2);
-            }
-        }
+        //         element.append(tag);
+        //         element2.append(tag2);
+        //     }
+        // }
     }
     else {
         shift.classList.remove('active');
@@ -276,63 +288,87 @@ function getMonth(month) {
     else if (month === 'June') {
         return '06';
     }
+    else if (month === 'July') {
+        return '07';
+    }
+    else if (month === 'August') {
+        return '08';
+    }
+    else if (month === 'September') {
+        return '09';
+    }
+    else if (month === 'October') {
+        return '10';
+    }
+    else if (month === 'November') {
+        return '11';
+    }
+    else if (month === 'December') {
+        return '12';
+    }
+    else if (month === 'January') {
+        return '01';
+    }
+    else if (month === 'February') {
+        return '02';
+    }
     else {
         console.log("getMonth function")
     }
 
 }
-updateshift.onclick = async () => {
-    morningEmploye = document.getElementById("employes");
-    eveningEmploye = document.getElementById("employes2");
-    var valuemorning = morningEmploye.options[morningEmploye.selectedIndex].value;
-    var valueevening = eveningEmploye.options[eveningEmploye.selectedIndex].value;
-    console.log(valuemorning)
-    console.log(valueevening)
-    if (valuemorning === 'select') {
-        alert('choose employee for morning shift')
-    }
-    else if (valueevening === 'select') {
-        alert('choose employee for evening shift')
-    }
-    else if (valueevening === valuemorning) {
-        alert("choose different employes for each shift")
+// updateshift.onclick = async () => {
+//     morningEmploye = document.getElementById("employes");
+//     eveningEmploye = document.getElementById("employes2");
+//     var valuemorning = morningEmploye.options[morningEmploye.selectedIndex].value;
+//     var valueevening = eveningEmploye.options[eveningEmploye.selectedIndex].value;
+//     console.log(valuemorning)
+//     console.log(valueevening)
+//     if (valuemorning === 'select') {
+//         alert('choose employee for morning shift')
+//     }
+//     else if (valueevening === 'select') {
+//         alert('choose employee for evening shift')
+//     }
+//     else if (valueevening === valuemorning) {
+//         alert("choose different employes for each shift")
 
-    } else {
-        console.log("selected is ", selected_1);
-        monthAndYear = document.getElementById("current-date").innerHTML;
-        console.log(monthAndYear);
-        splitArray = monthAndYear.split(" ");
-        day = selected_1;
-        month = splitArray[0];
-        year = splitArray[1];
-        const body = { Day: day, Month: month, Year: year, MorningEmploye: valuemorning, EveningEmploye: valueevening }
-        const fetchAddNewShift = await fetch("http://localhost:4000/adminCalendar", {
-            method: "POST",
-            Credentials: "include",
-            headers: { "Content-Type": "application/JSON" },
-            body: JSON.stringify(body),
-        });
-        const result = await fetchAddNewShift.json();
-        if (result == 'failed') {
-            alert('this shift already determined');
-        }
-        else if (result == 'success') {
-            emp1 = document.getElementById('morn');
-            emp2 = document.getElementById('even');
-            box1 = document.getElementById("box1")
-            box2 = document.getElementById("box2")
-            updateshiftButton = document.getElementById('update');
-            updateshiftButton.style.visibility = 'hidden';
-            box1.style.visibility = 'hidden';
-            box2.style.visibility = 'hidden';
-            alreadyAdded1 = document.getElementById("alreadyAdded")
-            alreadyAdded1.style.visibility = 'visible';
-            emp1.style.visibility = 'visible'
-            emp2.style.visibility = 'visible'
-        }
+//     } else {
+//         console.log("selected is ", selected_1);
+//         monthAndYear = document.getElementById("current-date").innerHTML;
+//         console.log(monthAndYear);
+//         splitArray = monthAndYear.split(" ");
+//         day = selected_1;
+//         month = splitArray[0];
+//         year = splitArray[1];
+//         const body = { Day: day, Month: month, Year: year, MorningEmploye: valuemorning, EveningEmploye: valueevening }
+//         const fetchAddNewShift = await fetch("http://localhost:4000/adminCalendar", {
+//             method: "POST",
+//             Credentials: "include",
+//             headers: { "Content-Type": "application/JSON" },
+//             body: JSON.stringify(body),
+//         });
+//         const result = await fetchAddNewShift.json();
+//         if (result == 'failed') {
+//             alert('this shift already determined');
+//         }
+//         else if (result == 'success') {
+//             emp1 = document.getElementById('morn');
+//             emp2 = document.getElementById('even');
+//             box1 = document.getElementById("box1")
+//             box2 = document.getElementById("box2")
+//             updateshiftButton = document.getElementById('update');
+//             updateshiftButton.style.visibility = 'hidden';
+//             box1.style.visibility = 'hidden';
+//             box2.style.visibility = 'hidden';
+//             alreadyAdded1 = document.getElementById("alreadyAdded")
+//             alreadyAdded1.style.visibility = 'visible';
+//             emp1.style.visibility = 'visible'
+//             emp2.style.visibility = 'visible'
+//         }
 
-    }
-}
+//     }
+// }
 
 
 function getDayName(dateStr, locale) {
@@ -364,5 +400,6 @@ async function update() {
             body: JSON.stringify(body),
         });
         const result = await fetchAddNewShift.json();
+        window.location.reload()
     }
 }

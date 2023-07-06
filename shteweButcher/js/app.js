@@ -188,7 +188,6 @@ async function buyButtonClicked() {
         var allShoppingList = document.getElementById("cart-content").childNodes
         array = [];
         for (var j = 1; j < allShoppingList.length; j++) {
-            console.log(allShoppingList[j].childNodes[1].childNodes[1].textContent + "what the hell")
 
             string = allShoppingList[j].childNodes[1].childNodes[1].textContent + "~" +
                 allShoppingList[j].childNodes[1].childNodes[3].textContent + "~" + allShoppingList[j].childNodes[1].childNodes[5].value
@@ -213,7 +212,32 @@ async function buyButtonClicked() {
             cartContent.removeChild(cartContent.firstChild);
         }
         updatetotal();
-        window.location.reload()
+        for(var i = 0 ; i < array.length ; i++){
+            
+            if(result[i]==1){
+                var myArray = array[i].split("~");
+                var params = {
+                    product: myArray[0],
+                    
+                  };
+                const serviceID = "service_9cqsz9a";
+                const templateID = "template_l0tv9li";
+              await emailjs.send(serviceID, templateID,params)
+                    .then(res => {
+                        // console.log(res);
+                        // alert("הבקשה נשלחה")
+    
+                    })
+                    .catch(err => console.log(err));
+            }
+        }
+        console.log(array)
+        setTimeout(function(){ 
+            window.location.reload()
+        }, 1000);
+       
+
+        
     }
 }
 //removeCartItem function

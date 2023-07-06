@@ -364,6 +364,21 @@ values(
         'klarosh.hanany@gmail.com',
         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi'
     );
+INSERT INTO shift (
+        shiftDate,
+        shiftType,
+        UserName
+    )
+values(
+        '2023-05-18',
+        'MORNING',
+        'ahmadshtewe'
+    ),
+    (
+        '2023-06-18',
+        'MORNING',
+        'ahmadshtewe'
+    );
 INSERT INTO cart (Personid)
 VALUES (1);
 COMMIT;

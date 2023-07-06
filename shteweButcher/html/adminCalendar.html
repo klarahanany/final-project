@@ -67,35 +67,19 @@
             </ul>
             <section class="window">
                 <i class='bx bx-chevron-left' id="close-shiftDetails"></i>
-
-                <div class="box" id="box1">
-                    <label for="employes" class="choose">Choose Employe for Morning shift:</label>
-                    <select id="employes" name="employelist" form="employeform">
-                        <option value="select">select employe</option>
-                    </select>
-                </div>
-                <div class="box" id="box2">
-                    <label for="employes" class="choose">Choose Employe for Evening shift:</label>
-                    <select id="employes2" name="employelist" form="employeform">
-                        <option value="select">select employe</option>
-                    </select>
-                </div>
-                <input id="update" class="submit" type="submit" value="UPDATE SHIFT">
+                <i id="notDetermined" dir="rtl">עדיין לא נקבעה משמרת</i>
                 <div id="alreadyAdded" class="alreadyAdded">
                     <label id="label" for="added"> עובדים למשמרת בוקר</label>
                     <div id="morn">
-                        <!-- <p id="morn1"></p>
-                        <p id="morn2"></p> -->
+            
                     </div>
                     <label id="label" for="added">עובדים למשמרת ערב</label>
                     <div id="even">
 
                     </div>
-                    <!-- <p id="even1"></p>
-                    <p id="morn2"></p> -->
                     <input id="updateshift" class="submit" type="submit" value="עדכון משמרת" onclick="openForm()">
                 </div>
-                <div id="changeSent" dir="rtl">
+                <div id="changeSent" dir="rtl" >
                     <h2 class="title">בקשות לשינוי</h2>
                     <table class="styled-table">
                         <thead>

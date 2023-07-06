@@ -12,7 +12,13 @@
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("t6nxwEjbooTsPC4o6");
+      })();
+    </script>
     <style>
 
     </style>
@@ -33,14 +39,15 @@
             <i class="bx bx-list-ul"></i>
         </label>
         <ul>
-            <li><a class="home" href="/home">HOME</a></li>
+            <!-- <li><a class="home" href="/home">HOME</a></li> -->
             <li><a class="shopNow" href="/shopnow">SHOP NOW</a></li>
             <li><a class="recipes" href="/recipes">RECIPES</a></li>
             <li><a class="oldOrders" href="/oldOrders">OLD ORDERS</a></li>
             <li><a class="aboutUs" href="/aboutus">ABOUT US</a></li>
             <li><a class="feedback" href="/feedback">FEEDBACK</a></li>
-            <li><a class="logIn" href="/login">LOGIN</a></li>
-            <li><a class="SignUp" href="/signup">SIGNUP</a></li>
+            <li><a class="logIn" href="/login">LOGOUT</a></li>
+            <!-- <li><a class="logIn" href="/login">LOGIN</a></li>
+            <li><a class="SignUp" href="/signup">SIGNUP</a></li> -->
         </ul>
     </nav>
     <div>
@@ -50,12 +57,12 @@
             <option value="calf">עגל</option>
             <option value="lamb">טלה</option>
         </select>
-        <select id="sort" onchange="selectionChange()" dir="rtl">
+        <!-- <select id="sort" onchange="selectionChange()" dir="rtl">
             <option value="Sort By">סנן המוצרים</option>
             <option value="Sort By Price" id="price">סנן לפי מחיר</option>
             <option value="Sort By A-Z" id="az">סנן לפי א-ת</option>
             <option value="Sort By Z-A" id="az">סנן לפי ת-א</option>
-        </select>
+        </select> -->
     </div>
 
     <section class="shop-container">
@@ -88,35 +95,12 @@
 
         </div>
     </section>
-
-    <footer>
-        <p dir="rtl">שעות פתיחה:<br>ב'-ו': 8:00-21:00<br>א': 8:00-18:00 </p><br>
-        <p dir="rtl">טלפון: 0505729023</p><br>
-        <p dir="rtl">כתובת: נצרת, אל עומאל אל ערב 5046</p><br>
-        <i class="fa-brands fa-square-instagram"></i>
-        <i class="fa-brands fa-square-facebook"></i>
-        <i class="fa-brands fa-square-whatsapp"></i>
-        <i class="fa-brands fa-tiktok"></i>
-    </footer>
-    <!-- link to js -->
     <div class="carousel">
         <button id="button" class='flt-left' onclick="slideRight(this);"><i class="fa fa-angle-left"
                 aria-hidden="true"></i></button>
         <div class="row flt-left">
 
             <div class="row-container" id="row-container">
-                <!-- <div class="container">
-                    <div class="product-box" id="product-boxRe">
-                        <img src="/img/beef1.png" alt="" class="product-img" id="product-imgRe">
-                        <h5 class="product-title" id="product-titleRe">סטייק בשר בקר x4</h5>
-                        <span class="price" id="priceRe">7ILS</span>
-                        <i class='bx bx-cart-alt add-cart' id="cartIcon"></i>
-
-                    </div>
-                </div> -->
-  
-              
-                <!-- <div class="clear"></div> -->
             </div>
 
         </div>
