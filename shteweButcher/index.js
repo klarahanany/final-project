@@ -822,7 +822,7 @@ app.post("/orderAgain", async (req, res) => {
         }
     }, 1000);
 
-    // // res.json(result.rows)
+    res.json("v")
 });
 app.post("/updateshiftadmin", async (req, res) => {
     month = getMonth(req.body.Month)

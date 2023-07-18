@@ -159,74 +159,149 @@ INSERT INTO products (
     )
 values(
         'סטייק בשר בקר x4',
-        '7ILS',
+        '160ILS',
         'LAMB',
         20,
         '/img/beef1.png'
     ),
     (
         'סטייק בקר חתוך עבה מפולפל',
-        '5.8ILS',
+        '85ILS',
         'LAMB',
         20,
         '/img/beef2.png'
     ),
     (
         'חזה עוף חתוך לקוביות רזה במיוחד',
-        '5.6ILS',
+        '40ILS',
         'CHICKEN',
         20,
         '/img/ch2.png'
     ),
     (
         'ירכי עוף ללא עצמות וללא עור (1 ק"ג)',
-        '5.2ILS',
+        '27ILS',
         'CHICKEN',
         20,
         '/img/ch1.png'
     ),
     (
         'פילה (1 ק"ג)',
-        '5.2ILS',
+        '280ILS',
         'CALF',
         20,
         '/img/phele.jpg'
     ),
     (
         'שווארמה בשר (1 ק"ג)',
-        '5.2ILS',
+        '40ILS',
         'CALF',
         20,
         '/img/shawarma3egel.jpg'
     ),
     (
         'שווארמה עוף (1 ק"ג)',
-        '5.2ILS',
+        '30ILS',
         'CHICKEN',
         20,
         '/img/shawarmachicken.jpg'
     ),
     (
         'סנטה (1 ק"ג)',
-        '5.2ILS',
+        '180ILS',
         'LAMB',
         20,
         '/img/senta3egel.jpg'
     ),
     (
         'כנפי עוף (1 ק"ג)',
-        '5.2ILS',
+        '12ILS',
         'CHICKEN',
         20,
         '/img/knafe3of.jpg'
     ),
     (
         'אנטריקות (1 ק"ג)',
-        '5.2ILS',
+        '230ILS',
         'LAMB',
-        20,
+        100,
         '/img/antrekot.jpg'
-    );
+    ),
+    (
+        'צלעות (1 ק"ג)',
+        '180ILS',
+        'LAMB',
+        100,
+        '/img/tsla3ot.jpg'
+    ),
+    (
+        'פילה מדומה (1 ק"ג)',
+        '80ILS',
+        'LAMB',
+        100,
+        '/img/feleh.jpg'
+    ),
+    (
+        'צלי כתף (1 ק"ג)',
+        '100ILS',
+        'LAMB',
+        100,
+        '/img/tsle.jpg'
+    ),
+    (
+        'קריספי עוף (1 ק"ג)',
+        '70ILS',
+        'CHICKEN',
+        20,
+        '/img/crispy.jpg'
+    )
+    ,
+    (
+        '(1 ק"ג)אנטריקוט מיושנת לפחות 60 יום',
+        '160ILS',
+        'LAMB',
+        100,
+        '/img/meyoshan.jpg'
+    )
+    ,
+    (
+        'אסדו מעושן',
+        '450ILS',
+        'LAMB',
+        100,
+        '/img/asado.jpg'
+    ),
+    (
+        'בורגר עוף',
+        '50ILS',
+        'CHICKEN',
+        100,
+        '/img/3ofBurger.jpg'
+    ),
+    (
+        'משוישת',
+        '130ILS',
+        'LAMB',
+        100,
+        '/img/mshoiesht.jpg'
+    ),
+
+    (
+        '(1 ק"ג)עוף בגריל',
+        '50ILS',
+        'CHICKEN',
+        100,
+        '/img/3ofbgrel.jpg'
+    ),
+     (
+        '(1 ק"ג)חזה עוף',
+        '30ILS',
+        'CHICKEN',
+        100,
+        '/img/haze3of.jpg'
+    )
+    ;
+    
 INSERT INTO workers (
         employeeId,
         LastName,
