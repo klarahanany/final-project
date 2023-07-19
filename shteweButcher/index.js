@@ -343,7 +343,7 @@ app.post("/shopnow", async (req, res) => {
 });
 app.post("/inventory", async (req, res) => {
     if (req.body.num == '1') {
-        const result = await db.query(`select * from products;`)
+        const result = await db.query(`select * from products ORDER BY productid;`)
         res.json(result.rows)
     }
     else if (req.body.num == '2') {
