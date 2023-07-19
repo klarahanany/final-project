@@ -889,7 +889,11 @@ app.post("/saveddatainshifts", async (req, res) => {
         if (array[j][0] == "חופש") {
             arrayname = array[j][1].split(" ")
             arraydate = array[j][2].split(".")
-            datex = arraydate[2] + "-" + arraydate[1] + "-" + arraydate[0]
+            arraydate2 = arraydate[0].split("/")
+            // datex = arraydate[2] + "-" + arraydate[1] + "-" + arraydate[0]
+            // console.log(datex)
+            datex = arraydate2[2] + "-" + arraydate2[0] + "-" + arraydate2[1]
+            console.log(datex)
             const result = await db.query(`select username from workers where firstname = '${arrayname[0]}' and lastname = '${arrayname[1]}'`)
             sql2 = await `INSERT INTO shift (shiftDate,shiftType,UserName) VALUES ('${datex}','DAYOFF','${result.rows[0].username}');`
             db.query(sql2)
@@ -938,7 +942,9 @@ app.post("/saveddatainshifts", async (req, res) => {
         console.log(dayname)
         string = date.toLocaleString();
         array = string.split(",")
-        const dayDate = array[0];
+        arrayx = array[0].split("/")
+        const dayDate = arrayx[2]+"-"+arrayx[1]+"-"+arrayx[0]
+        // const dayDate = array[0];
         console.log(dayDate + " whatttttttt")
         arayfornamemor1 = result.rows[i].morning1.split(" ")
         const result1 = await db.query(`select username from workers where FirstName='${arayfornamemor1[0]}' AND LastName='${arayfornamemor1[1]}';`)

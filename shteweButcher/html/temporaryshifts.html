@@ -137,6 +137,7 @@
                     var num = 1;
                     const element = document.getElementById("tbody")
                     const date = new Date()
+                    console.log(date)
                     var x = 0;
                     for (var k = 0; k < resultx[0].length; k++) {
                         for (var i = 0; i < resultx[0].length; i++) {
@@ -177,6 +178,7 @@
 
                                     string = date.toLocaleString();
                                     array = string.split(",")
+                                    console.log(array)
                                     td3.textContent = array[0];
                                     if (j == 0) {
                                         td2.textContent = resultx[0][i].morning1;
