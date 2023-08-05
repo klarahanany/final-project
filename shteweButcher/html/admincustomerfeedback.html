@@ -7,6 +7,7 @@
   <title>Document</title>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
   <link rel="stylesheet" href="/css/admincustomerfeedback.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css' rel='stylesheet'>
@@ -46,8 +47,10 @@
     <table class="styled-table" id="firsttable">
       <thead>
         <tr>
+          
           <th>משוב</th>
           <th>שם לקוח</th>
+          <!-- <th></th> -->
         </tr>
 
       </thead>
@@ -76,10 +79,17 @@
         var tr = document.createElement("tr");
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
+        // var td3 = document.createElement("td");
+        // var toRemove = document.createElement("i");
+        // toRemove.className = "fa-solid fa-trash"
+        // toRemove.onclick(toRemove())
+        // td3.append(toRemove)
         td1.textContent = result[i].feedback
         td2.textContent = result[i].username
+
         tr.append(td1)
         tr.append(td2)
+        // tr.append(td3)
         element1.append(tr)
         // var tag = document.createElement("div");
         // tag.id = 'feedback';

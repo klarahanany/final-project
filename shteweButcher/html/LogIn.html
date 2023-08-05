@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,14 +8,21 @@
     <title>log in</title>
     <link rel="stylesheet" href="/css/LogIn.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("t6nxwEjbooTsPC4o6");
+        })();
+    </script>
 
-    
-</head>    
+</head>
+
 <body>
     <!-- <a href="/shopnow">
         <i class='bx bx-x' id="close"  ></i>
     </a> -->
-   
+
     <!-- <script>
         function closeMe()
         {
@@ -31,22 +39,32 @@
                 <label>Username</label>
             </div>
             <div class="text_field">
-                <input type="password" id ="pass"required>
+                <input type="password" id="pass" required>
                 <span> </span>
                 <label>Password</label>
             </div>
-            <!-- <div class="pass">Forgot Password?</div> -->
-            <input type="submit" value="Login" >
+            <div class="pass" onclick="forgotPass()">Forgot Password?</div>
+            <input type="submit" value="Login">
             <div class="signup_link">
                 Not a member? <a href="/signup">Signup</a>
             </div>
         </form>
     </div>
-    <div class="login_admin">
-        Admin? <a href="#adminLogIn">click here</a>
+    <div class="form" id="ForgotForm" dir="rtl">
+        <form class="form-container">
+            <label><b>תכניס שם משתמש</b></label>
+            <input id="username" type="text" placeholder="תכניס שם משתמש" required>
+            <label><b>תכניס דואר אלקטרוני</b></label>
+            <input id="email" type="email" placeholder="תכניס דואר אלקטרוני" required>
+            <button type="button" class="btn" onclick="sendEmail()">קבל סיסמה חדשה</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">סגור</button>
+        </form>
     </div>
-   <script>
-     const form = document.getElementById('form');
+    <!-- <div class="login_admin">
+        Admin? <a href="#adminLogIn">click here</a>
+    </div> -->
+    <script>
+        const form = document.getElementById('form');
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
             var name = document.getElementById("name").value
@@ -56,25 +74,106 @@
             }
             else {
                 const body = { UserName: name, password: pass }
-                const fetchWorker=await fetch("http://localhost:4000/login", {
+                const fetchWorker = await fetch("http://localhost:4000/login", {
                     method: "POST",
                     Credentials: "include",
                     headers: { "Content-Type": "application/JSON" },
                     body: JSON.stringify(body),
                 });
-                const result=await fetchWorker.json();
-                if(result==="success"){
+                const result = await fetchWorker.json();
+                if (result === "success") {
                     var url = 'http://localhost:4000/shopnow';
                     location.href = url;
-                    
+
+                }
+                else if (result == "failed") {
+                    alert("סיסמה לא נכונה, בבקשה תנסה שוב.")
+                }
+                else if (result == "wrongUserName") {
+                    alert("שם משתמש לא נכון, בבקשה תנסה שוב.")
                 }
 
-                
+
             }
         });
-       
-   </script>
-     <!-- link to js -->
-    <script src="js/app.js"></script>
+        async function forgotPass() {
+            document.getElementById("ForgotForm").style.display = "block";
+
+        }
+        function closeForm() {
+            document.getElementById("ForgotForm").style.display = "none";
+        }
+        async function sendEmail() {
+            const element1 = document.getElementById("username");
+            const element2 = document.getElementById("email")
+            if (element2.value == '' || element1.value == '') {
+                alert("תמלא הכל")
+            }
+            else {
+                const body = { username: element1.value, email: element2.value }
+                const forgotPass = await fetch("http://localhost:4000/forgotPass", {
+                    method: "POST",
+                    Credentials: "include",
+                    headers: { "Content-Type": "application/JSON" },
+                    body: JSON.stringify(body),
+                });
+                const result = await forgotPass.json();
+                if (result == 'success') {
+                    //generate random password
+                    const alpha = 'abcdefghijklmnopqrstuvwxyz';
+                    const calpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    const num = '1234567890';
+                    const specials = ',.!@#$%^&*';
+                    const options = [alpha, alpha, alpha, calpha, calpha, num, num, specials];
+                    let opt, choose;
+                    let pass = "";
+                    for (let i = 0; i < 8; i++) {
+                        opt = Math.floor(Math.random() * options.length);
+                        choose = Math.floor(Math.random() * (options[opt].length));
+                        pass = pass + options[opt][choose];
+                        options.splice(opt, 1);
+                    }
+                    var params = {
+                        password: pass,
+
+                    };
+                    const serviceID = "service_9cqsz9a";
+                    const templateID = "template_mun9nvl";
+
+                    emailjs.send(serviceID, templateID, params)
+                        .then(res => {
+                            console.log(res);
+                            alert("נשלח לך מייל עם סיסמה חדשה")
+
+                        })
+                        .catch(err => console.log(err));
+
+
+                    const body = { password: pass ,username : element1.value}
+                    const saveNewPass = await fetch("http://localhost:4000/saveNewPass", {
+                        method: "POST",
+                        Credentials: "include",
+                        headers: { "Content-Type": "application/JSON" },
+                        body: JSON.stringify(body),
+                    });
+                    const result1 = await saveNewPass.json();
+                    if(result1=="done"){
+                        document.getElementById("ForgotForm").style.display = "none";
+
+                    }
+
+                }
+                else if (result == 'thereNoUsername') {
+                    alert("אין שם משתמש זש")
+                }
+                else if (result == "yourusernameandEmailDidnotMatch") {
+                    alert(" שם המשתמש ודואר האלקטרוני לא מתואמים")
+                }
+            }
+        }
+    </script>
+    <!-- link to js -->
+    <!-- <script src="js/app.js"></script> -->
 </body>
-</html> 
+
+</html>

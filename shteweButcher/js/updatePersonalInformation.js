@@ -119,6 +119,9 @@ async function update() {
         body: JSON.stringify(body),
     });
     const result = await updatedata.json();
+    if(result=="updatedSuccessfully"){
+        alert("הנתונים שלך עודכנו בהצלחה.")
+    }
 }
 
 document.querySelector("#photo").addEventListener("change", function () {

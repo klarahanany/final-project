@@ -53,13 +53,20 @@
                 const result = await fetchWorker.json();
                 if (result === "successWorker") {
                     
-                    var url = 'http://localhost:4000/profile';
+                    var url = 'http://localhost:4000/updatePersonalInformation';
                     location.href = url;
                 }
                 else if(result === "successAdmin"){
                     var url = 'http://localhost:4000/allEmployes';
                     location.href = url;
                 }
+                else if(result=="failed"){
+                    alert("סיסמה לא נכונה, בבקשה תנסה שוב.")
+                }
+                else if(result=="wrongUserName"){
+                    alert("שם משתמש לא נכון, בבקשה תנסה שוב.")
+                }
+                
 
 
             }

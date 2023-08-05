@@ -27,6 +27,7 @@ app.post("/", async (req, res) => {
 
         await bcrypt.compare(password, result.rows[0].password).then((match) => {
             if (!match) {
+                res.json("failed");
                 console.log("didn`t match !!!!")
             } else {
                 console.log("match");
@@ -48,6 +49,7 @@ app.post("/", async (req, res) => {
     }
     catch (err) {
         console.log("???")
+        res.json("wrongUserName")
     }
 
 })
@@ -56,9 +58,11 @@ app.post("/login", async (req, res) => {
     try {
         const { UserName, password } = req.body;
         const result = await db.query(`SELECT password FROM customers where username = ($1);`, [UserName]);
+        console.log(result.rows[0].password)
+        // if(result.rows[0].password )
         await bcrypt.compare(password, result.rows[0].password).then((match) => {
             if (!match) {
-                console.log("didn`t match !!!!")
+                res.json("failed");
             } else {
                 console.log("match");
                 res.cookie("customerusername", UserName, { maxage: 18000000 });
@@ -68,6 +72,8 @@ app.post("/login", async (req, res) => {
     }
     catch (err) {
         console.log("???")
+        res.json("wrongUserName")
+
     }
 
 })
@@ -99,22 +105,27 @@ app.post("/signup", async (req, res) => {
     try {
 
         const { UserName, password, Email } = req.body;
-        bcrypt.genSalt(saltRounds, async function (err, salt) {
-            bcrypt.hash(password, salt, async function (err, hash) {
-                var sql = `INSERT INTO customers (UserName,Password,Email) VALUES ('${UserName}','${hash}','${Email} ');`
-                db.query(sql);
+        const result = await db.query(`SELECT * FROM customers where username = '${UserName}';`);
+        if (result.length != 0) {
+            res.json("already exist")
+        }
+        else {
+            bcrypt.genSalt(saltRounds, async function (err, salt) {
+                bcrypt.hash(password, salt, async function (err, hash) {
+                    var sql = `INSERT INTO customers (UserName,Password,Email) VALUES ('${UserName}','${hash}','${Email} ');`
+                    db.query(sql);
 
+                });
             });
-        });
-        setTimeout(async () => {
-            const result = await db.query(`SELECT personid FROM customers where username='${UserName}'`)
-            // console.log(result.rows[0].personid + " jdjdj")
-            var sql = `INSERT INTO cart (Personid) VALUES ('${result.rows[0].personid}');`
-            db.query(sql);
-        }, 1000);
+            setTimeout(async () => {
+                const result = await db.query(`SELECT personid FROM customers where username='${UserName}'`)
+                // console.log(result.rows[0].personid + " jdjdj")
+                var sql = `INSERT INTO cart (Personid) VALUES ('${result.rows[0].personid}');`
+                db.query(sql);
+            }, 1000);
 
-        res.json("success");
-
+            res.json("success");
+        }
     }
     catch (err) {
         console.log("!!!!!")
@@ -331,10 +342,10 @@ app.post("/shopnow", async (req, res) => {
             db.query(await sql3);
             var sql5 = `DELETE FROM cartitems WHERE cartid='${resultx.rows[0].cartid}';`
             db.query(await sql5);
-            if(q<=10){
+            if (q <= 10) {
                 smallThan10.push(1)
             }
-            else{
+            else {
                 smallThan10.push(0)
             }
         }
@@ -395,7 +406,7 @@ app.post("/feedback", async (req, res) => {
         console.log('shhs')
         var sql = `INSERT INTO feedback (personid,feedback) VALUES ('${result.rows[0].personid}','${req.body.feedback} ');`
         db.query(sql);
-        res.json("gdg")
+        res.json("success")
     }
     // res.json("gsgsg")
 });
@@ -406,6 +417,21 @@ app.post("/allorders", async (req, res) => {
         const resultx = await db.query(`SELECT * FROM customers;`)
 
         res.json([result.rows, resultx.rows])
+    }
+});
+app.post("/forgotPass", async (req, res) => {
+    const result = await db.query(`select * from customers where username = '${req.body.username}';`)
+    if(result.rowCount == 1){
+        if(result.rows[0].email== req.body.email){
+            res.json("success");
+        }
+        else{
+            res.json("yourusernameandEmailDidnotMatch")
+        }
+
+    }
+    else{
+        res.json("thereNoUsername")
     }
 });
 app.post("/income", async (req, res) => {
@@ -498,6 +524,18 @@ app.post("/income", async (req, res) => {
         res.json(monthcount)
 
     }
+});
+app.post("/saveNewPass", async (req, res) => {
+    bcrypt.genSalt(saltRounds, async function (err, salt) {
+        bcrypt.hash(req.body.password, salt, async function (err, hash) {
+            console.log(hash)
+            var sql1 =await `UPDATE customers SET password= '${hash}' WHERE username = '${req.body.username}';`
+            db.query(await sql1);
+            res.json("done")
+        });
+    });
+   
+
 });
 app.post("/customerfeedback", async (req, res) => {
 
@@ -768,6 +806,8 @@ app.post("/updatedata", async (req, res) => {
      email = '${email}' , phone = '${phone}' , friday = '${friday1}', thursday = '${thursday1}', wednesday = '${wednesday1}' 
     , sunday = '${sunday1}', monday = '${monday1}', tuesday = '${tuesday1}' WHERE username = '${req.cookies.username}';`
         db.query(sql);
+        res.json("updatedSuccessfully")
+
     }
     else {
         bcrypt.genSalt(saltRounds, async function (err, salt) {
@@ -777,6 +817,7 @@ app.post("/updatedata", async (req, res) => {
                 db.query(sql1);
             });
         });
+        res.json("updatedSuccessfully")
 
     }
 });
@@ -943,7 +984,7 @@ app.post("/saveddatainshifts", async (req, res) => {
         string = date.toLocaleString();
         array = string.split(",")
         arrayx = array[0].split("/")
-        const dayDate = arrayx[2]+"-"+arrayx[1]+"-"+arrayx[0]
+        const dayDate = arrayx[2] + "-" + arrayx[1] + "-" + arrayx[0]
         // const dayDate = array[0];
         console.log(dayDate + " whatttttttt")
         arayfornamemor1 = result.rows[i].morning1.split(" ")
@@ -1188,7 +1229,7 @@ app.post("/updateLastDay", async (req, res) => {
         var sql = `UPDATE products SET quantity = '${q}' WHERE productid = ${result1.rows[0].productid};`
         db.query(sql)
         console.log("what happen")
-       
+
     }
     res.json("done")
 
