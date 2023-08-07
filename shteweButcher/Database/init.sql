@@ -325,7 +325,7 @@ values(
         'שתיווי',
         'אחמד',
         'ahmadshtewe',
-        'ahmad.shtewe@gmail.com',
+        'klarosh.hanany@gmail.com',
         '$2a$10$HPJhNJ7H/tSNcGwpsrGycun0lj0hQIfEHHJt6pKCp3Q9cmDKkF/qi',
         'עכו',
         'WORKER',

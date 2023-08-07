@@ -434,6 +434,21 @@ app.post("/forgotPass", async (req, res) => {
         res.json("thereNoUsername")
     }
 });
+app.post("/forgotPass2", async (req, res) => {
+    const result = await db.query(`select * from workers where username = '${req.body.username}';`)
+    if(result.rowCount == 1){
+        if(result.rows[0].email== req.body.email){
+            res.json("success");
+        }
+        else{
+            res.json("yourusernameandEmailDidnotMatch")
+        }
+
+    }
+    else{
+        res.json("thereNoUsername")
+    }
+});
 app.post("/income", async (req, res) => {
     if (req.body.num == '1') {
         var chicken = 0;
@@ -530,6 +545,18 @@ app.post("/saveNewPass", async (req, res) => {
         bcrypt.hash(req.body.password, salt, async function (err, hash) {
             console.log(hash)
             var sql1 =await `UPDATE customers SET password= '${hash}' WHERE username = '${req.body.username}';`
+            db.query(await sql1);
+            res.json("done")
+        });
+    });
+   
+
+});
+app.post("/saveNewPass2", async (req, res) => {
+    bcrypt.genSalt(saltRounds, async function (err, salt) {
+        bcrypt.hash(req.body.password, salt, async function (err, hash) {
+            console.log(hash)
+            var sql1 =await `UPDATE workers SET password= '${hash}' WHERE username = '${req.body.username}';`
             db.query(await sql1);
             res.json("done")
         });
