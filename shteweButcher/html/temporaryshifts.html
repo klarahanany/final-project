@@ -483,11 +483,6 @@
                 alert("תבחר עובד חדש")
             }
             else {
-                // if (element2.value == 'חופש') {
-
-                // }
-                // else {
-
                 body = { day: element1.value, shiftType: element2.value, oldEmployee: element3.value, newEmployee: element4.value }
                 const updateshift = await fetch("http://localhost:4000/updateshift", {
                     method: "POST",

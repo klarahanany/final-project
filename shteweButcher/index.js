@@ -593,10 +593,8 @@ app.post("/updateshift", async (req, res) => {
     if (req.body.shiftType == 'בוקר') {
         const morning1 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND morning1 = '${req.body.oldEmployee}' `)
         const morning2 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND morning2 = '${req.body.oldEmployee}' `)
-        console.log("morning2 row count: " + morning2.rowCount)
         if (morning1.rowCount > 0) {
-            sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
-            db.query(sql1)
+          
             const result1 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
             if (result1.rows[0].morning1 == req.body.newEmployee) {
                 sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
@@ -622,10 +620,11 @@ app.post("/updateshift", async (req, res) => {
                 res.json("done")
 
             }
+            sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
         }
         else if (morning2.rowCount > 0) {
-            sql2 = `UPDATE temporaryshifts SET morning2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
-            db.query(sql2)
+       
             const result2 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
             if (result2.rows[0].morning1 == req.body.newEmployee) {
                 sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
@@ -647,6 +646,8 @@ app.post("/updateshift", async (req, res) => {
                 db.query(sql1)
                 res.json("done")
             }
+            sql2 = `UPDATE temporaryshifts SET morning2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql2)
 
         }
         else if (morning1.rowCount == 0 && morning2.rowCount == 0) {
@@ -659,8 +660,7 @@ app.post("/updateshift", async (req, res) => {
         const evening2 = await db.query(`SELECT * FROM temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}' AND evening2 = '${req.body.oldEmployee}' `)
 
         if (evening1.rowCount > 0) {
-            sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
-            db.query(sql1)
+
             const result3 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
             if (result3.rows[0].morning1 == req.body.newEmployee) {
                 sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
@@ -686,10 +686,11 @@ app.post("/updateshift", async (req, res) => {
                 res.json("done")
 
             }
+            sql1 = `UPDATE temporaryshifts SET evening1 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql1)
         }
         else if (evening2.rowCount > 0) {
-            sql2 = `UPDATE temporaryshifts SET evening2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
-            db.query(sql2)
+          
             const result4 = await db.query(`select * from temporaryshifts WHERE temporaryshift='${getIdByDayName(req.body.day)}'`)
             if (result4.rows[0].morning1 == req.body.newEmployee) {
                 sql1 = `UPDATE temporaryshifts SET morning1 = '${req.body.oldEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
@@ -715,6 +716,8 @@ app.post("/updateshift", async (req, res) => {
                 res.json("done")
 
             }
+            sql2 = `UPDATE temporaryshifts SET evening2 = '${req.body.newEmployee}' WHERE temporaryshift='${getIdByDayName(req.body.day)}' ;`
+            db.query(sql2)
         }
         else if (evening1.rowCount == 0 && evening2.rowCount == 0) {
             res.json("choose employee already in the morning shift")
